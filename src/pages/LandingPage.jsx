@@ -1,9 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowLeft } from 'lucide-react';
+import ProductCard from '../components/ProductCard';
 
 const LandingPage = () => {
     const navigate = useNavigate();
+    const [result, setResult] = useState(null);
+
+    // Mock product data
+    useEffect(() => {
+        const mockResult = {
+            suggestedProducts: [
+                {
+                    name: 'فستان سهره أسود فاخر',
+                    reason: 'يتماشى مع ذوقك الفخم ويبرز قوامك بأناقة',
+                    affiliateLink: 'https://www.noon.com/product/123',
+                    store: 'noon',
+                },
+                {
+                    name: 'حذاء كعب عالي من Shein',
+                    reason: 'يكمل الإطلالة ويضيف لمسة من الرقي',
+                    affiliateLink: 'https://ar.shein.com/product/456',
+                    store: 'shein',
+                },
+                {
+                    name: 'حقيبة يد Aslen مميزة',
+                    reason: 'تصميم عصري يناسب أسلوبك الفريد',
+                    affiliateLink: 'https://mtjr.at/ZKAz8nr-Vm',
+                    store: 'aslen',
+                },
+            ],
+        };
+        setResult(mockResult);
+    }, []);
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#fdf8f6] via-[#f2e8e5] to-[#eaddd7]">
