@@ -50,7 +50,8 @@ const ProductCard = ({ product }) => {
                     <div className="mt-2 p-4 bg-gray-50/80 rounded-2xl border border-gray-100/50 relative group-hover:bg-gray-50 transition-colors">
                         <div className="absolute -top-3 -right-2 text-3xl text-gray-200 font-serif leading-none select-none">"</div>
                         <p className="text-sm text-gray-700 font-arabic leading-relaxed relative z-10 italic">
-                            {product.reason}
+                            {/* Personalized persuasive copy */}
+                            {`حسب مواصفاتك المميزة، اخترنا لك هذا المنتج لتناسب ذوقك وجسمك. ${product.reason || ''}`}
                         </p>
                     </div>
                 </div>
@@ -63,7 +64,7 @@ const ProductCard = ({ product }) => {
                         className={`w-full ${storeColors.button} py-3.5 flex items-center justify-center gap-2 font-arabic shadow-md hover:shadow-lg active:scale-[0.98] transition-all relative overflow-hidden text-center rounded-xl`}
                     >
                         <ShoppingBag className="w-5 h-5 opacity-90" />
-                        <span className="font-bold text-[15px]">عرض وتحجيز على المنتج</span>
+                        <span className="font-bold text-[15px]">عرض الآن</span>
                         <ExternalLink className="w-4 h-4 opacity-70 ml-1" />
                     </a>
                 </div>
