@@ -113,7 +113,7 @@ export const generateTechPackSpecSheet = async (userPreferences) => {
     }
 };
 
-const generateMasterTechPackImage = async (designDescription, preferences) => {
+export const generateMasterTechPackImage = async (designDescription, preferences) => {
     try {
         const hasMeasurements = preferences.measurements && Object.keys(preferences.measurements).length > 0;
         const measurementText = hasMeasurements
