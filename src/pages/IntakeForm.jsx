@@ -222,9 +222,20 @@ const IntakeForm = () => {
             setAnswers({ ...answers, preciseMeasurements: 'skipped' });
         }
 
-        if (currentStep < questions.length - 1) {
+        let nextStep = currentStep + 1;
+
+        // Conditional logic: Skip sleevesStyle if Sleeveless
+        if (currentQ.id === 'sleevesLength' && answers['sleevesLength']?.includes('بدون أكمام')) {
+            // Find index of sleevesStyle
+            const sleevesStyleIndex = questions.findIndex(q => q.id === 'sleevesStyle');
+            if (sleevesStyleIndex !== -1) {
+                nextStep = sleevesStyleIndex + 1;
+            }
+        }
+
+        if (nextStep < questions.length) {
             setDirection(1);
-            setCurrentStep(curr => curr + 1);
+            setCurrentStep(nextStep);
         } else {
             // Save measurements to localStorage for future sessions
             localStorage.setItem('userMeasurements', JSON.stringify(measurements));
@@ -244,9 +255,17 @@ const IntakeForm = () => {
     };
 
     const handleBack = () => {
-        if (currentStep > 0) {
+        let prevStep = currentStep - 1;
+
+        // Conditional logic: Skip back from sleevesStyle's next question directly to sleevesLength
+        // Wait, easier to check if current is after sleevesStyle and we selected sleeveless
+        if (questions[currentStep]?.id !== 'sleevesStyle' && questions[currentStep - 1]?.id === 'sleevesStyle' && answers['sleevesLength']?.includes('بدون أكمام')) {
+            prevStep = currentStep - 2;
+        }
+
+        if (prevStep >= 0) {
             setDirection(-1);
-            setCurrentStep(curr => curr - 1);
+            setCurrentStep(prevStep);
         } else {
             navigate('/');
         }
