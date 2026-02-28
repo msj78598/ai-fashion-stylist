@@ -2,8 +2,10 @@ import React from 'react';
 import { ShoppingBag, Sparkles, ExternalLink, Gift, Tag } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
-    const isShein = product.store?.toLowerCase() === 'shein';
-    const storeName = isShein ? 'شي إن' : 'نون';
+    const storeKey = product.store?.toLowerCase();
+    const isShein = storeKey === 'shein';
+    const isAslen = storeKey === 'aslen';
+    const storeName = isShein ? 'شي إن' : isAslen ? 'أسلين' : 'نون';
     const isMainDress = product.name?.includes('فستان');
 
     // UI Configuration based on Store and Item Type
