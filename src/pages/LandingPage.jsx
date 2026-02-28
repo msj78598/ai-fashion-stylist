@@ -33,9 +33,9 @@ const LandingPage = () => {
                 </button>
 
                 <div className="mt-8 pt-6 border-t border-primary-100 flex justify-center gap-8 text-sm text-gray-500 font-arabic">
-                    <div>متصل بمنتجات نون</div>
+                    <span className="text-gray-600">متصل بمتاجر متعددة</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-primary-300 mt-2"></div>
-                    <div>تصميم مخصص 100%</div>
+                    <span className="font-bold">تصميم مخصص 100%</span>
                 </div>
             </div>
         </div>
@@ -43,3 +43,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
