@@ -1,136 +1,85 @@
 // src/services/affiliateMatcher.js
 
-const STORES = [
-    {
-        id: 'laura',
-        name: 'لورا فاشن',
-        affiliateUrl: 'https://mtjr.at/rY6YOtAGkB',
-        discountCode: null,
-        tags: [
-            'evening dress',
-            'formal dress',
-            'luxury dress',
-            'saudi fashion',
-            'abaya',
-        ],
-    },
-    {
-        id: 'joyce',
-        name: 'فساتين جويس',
-        affiliateUrl: 'https://mtjr.at/Q2_9DITIA6',
-        discountCode: 'F-ZLHNL',
-        discountLabel: 'خصم 100 ر.س',
-        tags: [
-            'evening gown',
-            'wedding dress',
-            'maxi dress',
-            'party dress',
-            'luxury dress',
-        ],
-    },
-    {
-        id: 'nadsh',
-        name: 'فساتين ندش',
-        affiliateUrl: 'https://mtjr.at/5dSA-q_GkV',
-        discountCode: null,
-        tags: [
-            'all occasions',
-            'evening dress',
-            'casual dress',
-            'midi dress',
-        ],
-    },
-    {
-        id: 'shomoukh',
-        name: 'فساتين شموخ',
-        affiliateUrl: 'https://mtjr.at/cwU8lc5q5t',
-        discountCode: null,
-        tags: [
-            'luxury dress',
-            'formal dress',
-            'evening gown',
-            'saudi fashion',
-        ],
-    },
-    {
-        id: 'noof',
-        name: 'بوتيك نوف',
-        affiliateUrl: 'https://mtjr.at/faWBo8or-0',
-        discountCode: 'F-MV9TA',
-        tags: [
-            'soft style',
-            'evening dress',
-            'feminine',
-            'elegant',
-        ],
-    },
-    {
-        id: 'halwa',
-        name: 'فساتين حلوه',
-        affiliateUrl: 'https://mtjr.at/5dAVNxhXWO',
-        discountCode: 'F-4NR7I',
-        tags: [
-            'casual dress',
-            'soft style',
-            'daily wear',
-            'comfortable',
-        ],
-    },
-    {
-        id: 'staylhaven',
-        name: 'Stayl Haven',
-        affiliateUrl: 'https://mtjr.at/fvS7XePT3o',
-        discountCode: 'F-MDU4N',
-        tags: [
-            'modern style',
-            'trendy',
-            'minimal',
-            'fashion forward',
-        ],
-    },
-    {
-        id: 'asleen',
-        name: 'فساتين آسلين',
-        affiliateUrl: 'https://mtjr.at/ZKAz8nr-Vm',
-        discountCode: null,
-        tags: [
-            'evening dress',
-            'feminine',
-            'classic',
-            'soft luxury',
-        ],
-    },
-];
-
 /**
- * مطابقة المنتجات مع اختيارات المستخدم بدقة
- * بدون أي اقتراح أو استنتاج
+ * بناء رابط البحث باستخدام الكلمات المفتاحية لضمان وصول المستخدم لمنتجات مشابهة
  */
+function buildSearchUrl(baseUrl, keywords = []) {
+    if (!keywords.length) return baseUrl;
+
+    // تنظيف الكلمات المفتاحية وتحويلها لنص بحث
+    const query = encodeURIComponent(keywords.join(' '));
+    return `${baseUrl}?q=${query}`;
+}
+
 export function matchAffiliateStores(keywords = [], constraints = {}) {
+    // المتاجر الثمانية المعتمدة
+    const STORES = [
+        {
+            id: 'laura',
+            name: 'لورا فاشن',
+            baseUrl: 'https://mtjr.at/rY6YOtAGkB',
+            discountCode: null,
+        },
+        {
+            id: 'joyce',
+            name: 'فساتين جويس',
+            baseUrl: 'https://mtjr.at/Q2_9DITIA6',
+            discountCode: 'F-ZLHNL',
+            discountLabel: 'خصم 100 ر.س',
+        },
+        {
+            id: 'nadsh',
+            name: 'فساتين ندش',
+            baseUrl: 'https://mtjr.at/5dSA-q_GkV',
+            discountCode: null,
+        },
+        {
+            id: 'shomoukh',
+            name: 'فساتين شموخ',
+            baseUrl: 'https://mtjr.at/cwU8lc5q5t',
+            discountCode: null,
+        },
+        {
+            id: 'noof',
+            name: 'بوتيك نوف',
+            baseUrl: 'https://mtjr.at/faWBo8or-0',
+            discountCode: 'F-MV9TA',
+        },
+        {
+            id: 'halwa',
+            name: 'فساتين حلوه',
+            baseUrl: 'https://mtjr.at/5dAVNxhXWO',
+            discountCode: 'F-4NR7I',
+        },
+        {
+            id: 'staylhaven',
+            name: 'Stayl Haven',
+            baseUrl: 'https://mtjr.at/fvS7XePT3o',
+            discountCode: 'F-MDU4N',
+        },
+        {
+            id: 'asleen',
+            name: 'فساتين آسلين',
+            baseUrl: 'https://mtjr.at/ZKAz8nr-Vm',
+            discountCode: null,
+        },
+    ];
+
     if (constraints?.affiliateOnly === false) return [];
 
-    return STORES
-        .map(store => {
-            const score = store.tags.filter(tag =>
-                keywords.includes(tag)
-            ).length;
+    return STORES.map(store => {
+        const searchUrl = buildSearchUrl(store.baseUrl, keywords);
 
-            return {
-                ...store,
-                score,
-            };
-        })
-        .filter(store => store.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .map(store => ({
+        return {
             id: store.id,
-            store: store.id, // Compatibility with ProductCard styling
+            store: store.id, // للتوافق مع ProductCard styling
             name: store.name,
-            affiliateUrl: store.affiliateUrl,
-            affiliateLink: store.affiliateUrl, // Compatibility alias
+            affiliateUrl: searchUrl,
+            affiliateLink: searchUrl, // للتوافق مع ProductCard
             discountCode: store.discountCode,
             badge: store.discountCode
                 ? `🎁 كود خصم: ${store.discountCode}`
-                : '✨ مختار حسب ذوقك',
-        }));
+                : '✨ مطابق لتصميمك',
+        };
+    });
 }
