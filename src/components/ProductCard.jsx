@@ -1,28 +1,29 @@
 import React from 'react';
 import { ShoppingBag, Sparkles, ExternalLink, Gift, Tag } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ProductCard = ({ product }) => {
     const storeKey = product.store?.toLowerCase();
     const isMainDress = product.name?.includes('فستان');
 
     const storeNames = {
-        'aslen': 'فساتين آسلين',
+        'asleen': 'فساتين آسلين',
         'laura': 'لورا فاشن',
         'joyce': 'فساتين جويس',
         'nadsh': 'فساتين ندش',
-        'shmokh': 'فساتين شموخ',
-        'nouf': 'بوتيك نوف',
-        'hulwah': 'فساتين حلوه',
-        'stayl': 'Stayl Haven',
+        'shomoukh': 'فساتين شموخ',
+        'noof': 'بوتيك نوف',
+        'halwa': 'فساتين حلوه',
+        'staylhaven': 'Stayl Haven',
         'shein': 'شي إن',
         'noon': 'نون'
     };
 
-    const storeName = storeNames[storeKey] || product.store || 'نون';
+    const storeName = storeNames[storeKey] || product.name || 'نون';
 
     // UI Configuration based on Store and Item Type
     const getStoreStyle = () => {
-        if (storeKey === 'aslen' || storeKey === 'laura') {
+        if (storeKey === 'asleen' || storeKey === 'aslen' || storeKey === 'laura') {
             return {
                 bg: 'from-[#f5e6d3] to-white',
                 border: 'border-[#d4af37]/20',
@@ -51,7 +52,7 @@ const ProductCard = ({ product }) => {
 
     const style = getStoreStyle();
     const BadgeIcon = isMainDress ? Sparkles : Gift;
-    const badgeText = isMainDress ? 'الخيار الأقرب للتصميم' : 'قطعة تكمل الإطلالة';
+    const badgeText = product.badge || (isMainDress ? 'الخيار الأقرب للتصميم' : 'قطعة تكمل الإطلالة');
 
     return (
         <div className={`glass-card overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full bg-white relative border ${style.border} hover:border-gray-300 group`}>
@@ -71,7 +72,7 @@ const ProductCard = ({ product }) => {
                 <div className="flex flex-col items-center gap-2 z-10">
                     <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-gray-200">
                         <BadgeIcon className={`w-3.5 h-3.5 ${isMainDress ? 'text-yellow-500' : 'text-gray-500'}`} />
-                        <span className="text-[11px] font-bold text-gray-700">{badgeText}</span>
+                        <span className="text-[11px] font-bold text-gray-700 leading-none">{badgeText}</span>
                     </div>
 
                     {/* Discount Code Section */}
@@ -82,7 +83,7 @@ const ProductCard = ({ product }) => {
                             className="bg-red-50 text-red-600 px-4 py-1.5 rounded-lg border border-red-200 flex items-center gap-2 shadow-sm animate-pulse"
                         >
                             <Gift className="w-4 h-4" />
-                            <span className="text-[12px] font-bold font-arabic">كود الخصم: {product.discountCode}</span>
+                            <span className="text-[12px] font-bold font-arabic leading-none">كود الخصم: {product.discountCode}</span>
                         </motion.div>
                     )}
                 </div>

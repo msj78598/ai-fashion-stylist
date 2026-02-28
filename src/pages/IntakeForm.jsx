@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { generateKeywords } from '../services/keywordMapper';
+import { DESIGN_CONSTRAINTS } from '../services/designConstraints';
 
 const questions = [
     {
@@ -249,8 +251,16 @@ const IntakeForm = () => {
             });
 
             const finalData = { ...processedAnswers, measurements };
-            console.log('Final Data:', finalData);
-            navigate('/chat', { state: { preferences: finalData } });
+
+            // Enrich payload with keywords and constraints
+            const payload = {
+                preferences: finalData,
+                keywords: generateKeywords(processedAnswers),
+                constraints: DESIGN_CONSTRAINTS
+            };
+
+            console.log('Final Payload:', payload);
+            navigate('/chat', { state: payload });
         }
     };
 

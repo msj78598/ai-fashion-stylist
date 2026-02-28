@@ -4,6 +4,7 @@ import { Sparkles, Scissors, Loader2, ArrowRight, ShoppingBag, Image as ImageIco
 import { generateTechPackSpecSheet, generateMasterTechPackImage } from '../services/ai';
 import ProductCard from '../components/ProductCard';
 import { motion } from 'framer-motion';
+import { matchAffiliateStores } from '../services/affiliateMatcher';
 
 const StylistChat = () => {
     const location = useLocation();
@@ -310,11 +311,18 @@ const StylistChat = () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                            {((result?.suggestedProducts) || (result?.noonProducts) || []).map((product, index) => (
-                                <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
-                                    <ProductCard product={product} />
-                                </motion.div>
-                            ))}
+                            {(() => {
+                                const matchedStores = matchAffiliateStores(
+                                    location.state?.keywords || [],
+                                    location.state?.constraints || {}
+                                );
+
+                                return matchedStores.map((product, index) => (
+                                    <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
+                                        <ProductCard product={product} />
+                                    </motion.div>
+                                ));
+                            })()}
                         </div>
                     </motion.div>
 
