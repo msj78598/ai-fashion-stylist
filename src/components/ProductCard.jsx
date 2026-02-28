@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
                         className={`w-full ${storeColors.button} py-3.5 flex items-center justify-center gap-2 font-arabic shadow-md hover:shadow-lg active:scale-[0.98] transition-all relative overflow-hidden text-center rounded-xl`}
                     >
                         <ShoppingBag className="w-5 h-5 opacity-90" />
-                        <span className="font-bold text-[15px]">عرض وتحجيز على {storeName}</span>
+                        <span className="font-bold text-[15px]">عرض وتحجيز على المنتج</span>
                         <ExternalLink className="w-4 h-4 opacity-70 ml-1" />
                     </a>
                 </div>
