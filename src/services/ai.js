@@ -72,21 +72,28 @@ export const generateTechPackSpecSheet = async (userPreferences) => {
       المقاسات الدقيقة (إن وجدت):
       ${JSON.stringify(userPreferences.measurements)}
       
-      المتطلبات الأساسية:
+      المتطلبات الأساسية للتصميم:
+      نوع الإطلالة أو الملابس: ${userPreferences.clothingType || 'فستان سهرة'}
       المناسبة: ${userPreferences.occasion || 'سهرة'}
       الطول المفضل للإطلالة: ${userPreferences.clothingLength || 'غير محدد، اختر الأنسب'}
       القصة العامة (Silhouette): ${userPreferences.silhouette || 'نتركها لإبداعك'}
       قصة الصدر (Neckline): ${userPreferences.neckline || 'نتركها لإبداعك'}
-      الأكمام (Sleeves): ${userPreferences.sleeves || 'نتركها لإبداعك'}
+      تصميم الياقة (Collar): ${userPreferences.collarStyle || 'بدون ياقة محددة'}
+      طول الأكمام: ${userPreferences.sleevesLength || 'نتركها لإبداعك'}
+      قصة الأكمام: ${userPreferences.sleevesStyle || 'نتركها لإبداعك'}
+      تحديد الخصر: ${userPreferences.waistStyle || 'نتركها لإبداعك'}
       تصميم الظهر (Back Design): ${userPreferences.backDesign || 'نتركها لإبداعك'}
+      
+      المواد والخامات:
       خامة القماش الأساسية: ${userPreferences.fabricMaterial || 'غير محدد، اختر خامة راقية'}
+      النقشة أو الطبعة (Pattern): ${userPreferences.fabricPattern || 'سادة'}
       التطريز والإضافات: ${userPreferences.fabricEmbroidery || 'بدون إضافات محددة'}
       الألوان: ${userPreferences.colors || 'غير محدد'}
       لون مخصص بالـ Hex (إن وجد): ${userPreferences.customColorHex || 'لا يوجد'}
       الميزانية: ${userPreferences.budget || 'غير محدد'}
       
       وصف أو إلهام خاص من العميل (Haute Couture Request):
-      ${userPreferences.customDescription || 'لا يوجد وصف خاص، ابدع من خيالك كأفضل مصمم أزياء في العالم وقدم تصميم عصري جداً يواكب أحدث خطوط الموضة العالمية.'}
+      ${userPreferences.customDescription || 'لا يوجد وصف خاص، ابدع من خيالك كأفضل مصمم أزياء في العالم وقدم تصميم عصري جداً يواكب أحدث خطوط الموضة العالمية بناءً على نوع الإطلالة المطلوبة.'}
     `;
 
         const response = await openai.chat.completions.create({
@@ -106,7 +113,7 @@ export const generateTechPackSpecSheet = async (userPreferences) => {
     }
 };
 
-export const generateMasterTechPackImage = async (designDescription, preferences) => {
+const generateMasterTechPackImage = async (designDescription, preferences) => {
     try {
         const hasMeasurements = preferences.measurements && Object.keys(preferences.measurements).length > 0;
         const measurementText = hasMeasurements
@@ -114,27 +121,34 @@ export const generateMasterTechPackImage = async (designDescription, preferences
             : `Keep the CAD sketch clean without exact number annotations.`;
 
         const customInspiration = preferences.customDescription ? `Incorporating specific client request: "${preferences.customDescription}". ` : "";
+        const clothingTypeText = preferences.clothingType ? `Garment Type: ${preferences.clothingType}. ` : "Garment Type: Haute Couture Dress. ";
         const lengthText = preferences.clothingLength ? `Strict Length/Cut Requirement: ${preferences.clothingLength}. ` : "";
         const silhouetteText = preferences.silhouette ? `Silhouette: ${preferences.silhouette}. ` : "";
         const necklineText = preferences.neckline ? `Neckline: ${preferences.neckline}. ` : "";
-        const sleevesText = preferences.sleeves ? `Sleeves Design: ${preferences.sleeves}. ` : "";
+        const collarText = preferences.collarStyle ? `Collar: ${preferences.collarStyle}. ` : "";
+        const sleevesLengthText = preferences.sleevesLength ? `Sleeves Length: ${preferences.sleevesLength}. ` : "";
+        const sleevesStyleText = preferences.sleevesStyle ? `Sleeves Style: ${preferences.sleevesStyle}. ` : "";
+        const waistText = preferences.waistStyle ? `Waist: ${preferences.waistStyle}. ` : "";
         const backDesignText = preferences.backDesign ? `Back Design: ${preferences.backDesign}. ` : "";
 
         const fabricMaterialText = preferences.fabricMaterial ? `Fabric Base Material: ${preferences.fabricMaterial} (Make this texture extremely obvious). ` : "";
+        const fabricPatternText = preferences.fabricPattern ? `Fabric Pattern: ${preferences.fabricPattern}. ` : "";
         const fabricEmbroideryText = preferences.fabricEmbroidery ? `Embroidery/Embellishments: ${preferences.fabricEmbroidery}. ` : "";
-        const customColorText = preferences.customColorHex ? `CRITICAL COLOR REQUIREMENT: The ENTIRE dress MUST be prominently featuring this exact color HEX code: ${preferences.customColorHex}. ` : "";
+        const customColorText = preferences.customColorHex ? `CRITICAL COLOR REQUIREMENT: The ENTIRE garment MUST be prominently featuring this exact color HEX code: ${preferences.customColorHex}. ` : "";
 
-        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections to guarantee exact design consistency.
+        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. CRITICAL INSTRUCTION: The generated image MUST 100% STRICTLY MATCH the user's specifications without any unrequested additions, and the photorealistic section MUST look 100% real as if shot on an ultra-high-end camera. The overall aesthetic MUST be extremely modern, highly elegant, and luxurious, matching the highest standards of contemporary high fashion.
         
-        LEFT SECTION (Photorealistic Model): A stunning, editorial-quality fashion model (${preferences.skinTone} skin, ${preferences.bodyType} body, ${preferences.hairStyle}) wearing the meticulously tailored, luxurious dress. ${customColorText}Show AT LEAST TWO distinct poses/angles of the model (e.g. Front full-body view and Back view) side-by-side in this section to fully display the breathtaking design details, draping, and fabric texture.
+        LEFT SECTION (100% Photorealistic Model): An incredibly realistic, editorial-quality human fashion portrait. A beautiful model (${preferences.skinTone} skin, ${preferences.bodyType} body, ${preferences.hairStyle}) wearing the meticulously tailored garment. ${customColorText}Show AT LEAST TWO distinct poses/angles of the model (e.g. Front full-body view and Back view) side-by-side. 
+        Lighting & Photography Style: Soft, flattering studio lighting, shot on 85mm lens, f/1.8 aperture, 8k resolution, photorealistic masterpiece. 
+        Texture & Elegance: The fabric draping, reflections (like satin/silk), and embellishments (like pearls/beads/feathers) MUST look 100% real, life-like, and physically plausible. The design must exude modern sophistication, neat cuts, and elite elegance.
         
-        RIGHT SECTION (Technical CAD Flat): A precise, black-and-white vector blueprint of the EXACT SAME DRESS shown on the left. Show front and back CAD views with clear seam lines, darts, pleats, and construction guidelines on a pure white background. DO NOT DRAW A HUMAN MODEL IN THIS RIGHT SECTION, ONLY THE DRESS SKETCH.
+        RIGHT SECTION (Technical CAD Flat): A precise, black-and-white vector blueprint of the EXACT SAME GARMENT shown on the left. Show front and back CAD views with clear seam lines, darts, pleats, and construction guidelines on a pure white background. DO NOT DRAW A HUMAN MODEL IN THIS RIGHT SECTION, ONLY THE GARMENT SKETCH.
         
-        Dress description for all sections: ${designDescription}.
-        ${customInspiration}${lengthText}${silhouetteText}${necklineText}${sleevesText}${backDesignText}${fabricMaterialText}${fabricEmbroideryText}
+        Strict Garment Specifications (DO NOT DEVIATE): ${designDescription}.
+        ${clothingTypeText}${customInspiration}${lengthText}${silhouetteText}${necklineText}${collarText}${sleevesLengthText}${sleevesStyleText}${waistText}${backDesignText}${fabricMaterialText}${fabricPatternText}${fabricEmbroideryText}
         ${measurementText}
         
-        This composite image MUST accurately represent the exact same elite haute couture dress in both photorealistic high-fashion photography and technical blueprint formats. Make it look expensive, unique, and masterfully crafted.`;
+        This composite image MUST accurately represent the exact same elite haute couture piece in both 100% photorealistic high-fashion photography and technical blueprint formats. It must perfectly match all the provided specifications, maintaining an aura of ultra-modern, very elegant, and luxurious fashion.`;
 
         const response = await openai.images.generate({
             model: "dall-e-3",
