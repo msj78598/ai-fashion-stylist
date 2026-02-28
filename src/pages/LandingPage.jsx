@@ -6,34 +6,6 @@ import ProductCard from '../components/ProductCard';
 
 const LandingPage = () => {
     const navigate = useNavigate();
-    const [result, setResult] = useState(null);
-
-    // Mock product data
-    useEffect(() => {
-        const mockResult = {
-            suggestedProducts: [
-                {
-                    name: 'فستان سهره أسود فاخر',
-                    reason: 'يتماشى مع ذوقك الفخم ويبرز قوامك بأناقة',
-                    affiliateLink: 'https://www.noon.com/product/123',
-                    store: 'noon',
-                },
-                {
-                    name: 'حذاء كعب عالي من Shein',
-                    reason: 'يكمل الإطلالة ويضيف لمسة من الرقي',
-                    affiliateLink: 'https://ar.shein.com/product/456',
-                    store: 'shein',
-                },
-                {
-                    name: 'حقيبة يد Aslen مميزة',
-                    reason: 'تصميم عصري يناسب أسلوبك الفريد',
-                    affiliateLink: 'https://mtjr.at/ZKAz8nr-Vm',
-                    store: 'aslen',
-                },
-            ],
-        };
-        setResult(mockResult);
-    }, []);
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#fdf8f6] via-[#f2e8e5] to-[#eaddd7]">
@@ -63,23 +35,9 @@ const LandingPage = () => {
                     <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                 </button>
 
-                {/* Persuasive intro for product suggestions */}
-                <p className="text-center text-lg font-arabic text-primary-800 mt-6 mb-4">
-                    حسب مواصفاتك المميزة، اخترنا لك مجموعة من المنتجات التي تناسب ذوقك وجسمك.
-                </p>
-
-                {/* Product suggestions grid – expanded layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                    {((result?.suggestedProducts) || (result?.noonProducts) || []).map((product, index) => (
-                        <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
-                            <ProductCard product={product} />
-                        </motion.div>
-                    ))}
-                </div>
-
                 {/* Footer info */}
                 <div className="mt-8 pt-6 border-t border-primary-100 flex justify-center gap-8 text-sm text-gray-500 font-arabic">
-                    <a href="https://www.noon.com" target="_blank" rel="noopener noreferrer" className="hover:underline">متصل بمتاجر متعددة</a>
+                    <span className="text-gray-600">متصل بمتاجر متعددة</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-primary-300 mt-2"></div>
                     <span className="font-bold">تصميم مخصص 100%</span>
                 </div>
