@@ -11,7 +11,9 @@ const ProductCard = ({ product }) => {
     // UI Configuration based on Store and Item Type
     const storeColors = isShein
         ? { bg: 'from-gray-100 to-white', border: 'border-black/5', iconBg: 'bg-black/5 text-gray-800', button: 'bg-black text-white hover:bg-gray-800' }
-        : { bg: 'from-primary-50 to-white', border: 'border-primary-100', iconBg: 'bg-primary-100 text-primary-600', button: 'btn-primary' };
+        : isAslen
+            ? { bg: 'from-[#f5e6d3] to-white', border: 'border-[#d4af37]/20', iconBg: 'bg-[#d4af37]/10 text-[#a67c00]', button: 'bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-white hover:opacity-90' }
+            : { bg: 'from-primary-50 to-white', border: 'border-primary-100', iconBg: 'bg-primary-100 text-primary-600', button: 'btn-primary' };
 
     const BadgeIcon = isMainDress ? Sparkles : Gift;
     const badgeText = isMainDress ? 'الخيار الأقرب للتصميم' : 'قطعة تكمل الإطلالة';
