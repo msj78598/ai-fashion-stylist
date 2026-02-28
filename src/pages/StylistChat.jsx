@@ -24,6 +24,12 @@ const StylistChat = () => {
         try {
             // 1. Generate Spec Sheet (Text/JSON)
             const data = await generateTechPackSpecSheet(prefs);
+
+            if (!data || !data.designRecommendation) {
+                console.error("Malformed AI response:", data);
+                throw new Error("لم نتمكن من استلام تفاصيل التصميم بشكل كامل من الذكاء الاصطناعي. يرجى المحاولة مرة أخرى.");
+            }
+
             setResult(data);
 
             // 2. Generate Master Tech Pack Image

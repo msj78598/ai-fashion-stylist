@@ -55,7 +55,7 @@ const SYSTEM_PROMPT = `
       "name": "فستان...", 
       "reason": "...", 
       "affiliateLink": "...", 
-      "discountCode": "F-XXXX" (إن وجد)
+      "discountCode": "كود الخصم (اختياري)"
     }
   ]
 }
