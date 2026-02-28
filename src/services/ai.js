@@ -18,9 +18,11 @@ const SYSTEM_PROMPT = `
 
 يجب ألا يكون التصميم عادياً أبداً. يجب أن يكون استثنائياً، مذهلاً، ويحتوي على تفاصيل دقيقة جداً (Haute Couture Details) مع شرح هندسي دقيق لكيفية تنفيذه.
 
-1. التحليل والمقاسات:
-اشرح هندسياً وبمصطلحات الموضة الراقية كيف يناسب التصميم شكل جسمها ويبرز جماله.
-استخدم المقاسات الدقيقة لوضع تعليمات صارمة (مثال: "نظراً لأن الخصر 70 سم، اعتمدي كورسيه مدمج بتصميم فرنسي مع بنسات عميقة...").
+1. الالتزام الصارم بالمتطلبات (Red Line - Zero Deviation):
+- يجب أن يكون التصميم انعكاساً دقيقاً وحرفياً لكل الخيارات التي حددتها المستخدمة في استمارة البيانات (نوع القماش، اللون، طول الأكمام، قصة الصدر، الخ).
+- أي مخالفة لخيارات المستخدمة تعتبر خطأ مهنياً؛ إبداعك يجب أن يكون "داخل إطار" هذه المتطلبات وليس خارجها.
+- اشرح هندسياً وبمصطلحات الموضة الراقية كيف يحقق التصميم هذه المتطلبات حرفياً ويبرز جمال الجسم بناءً عليها.
+- استخدم المقاسات الدقيقة لوضع تعليمات صارمة (مثال: "نظراً لأن الخصر 70 سم، اعتمدي كورسيه مدمج بتصميم فرنسي مع بنسات عميقة...").
 
 2. البدائل والكماليات (Strict Order & Psychological Marketing):
 العميلة تبحث عن إطلالة متكاملة تضاهي التصميم المبتكر. يجب إنتاج 5 اقتراحات تسوق تفصيلية ومغرية جداً في "suggestedProducts" بالترتيب التالي حرفياً:
@@ -136,7 +138,7 @@ export const generateMasterTechPackImage = async (designDescription, preferences
         const fabricEmbroideryText = preferences.fabricEmbroidery ? `Embroidery/Embellishments: ${preferences.fabricEmbroidery}. ` : "";
         const customColorText = preferences.customColorHex ? `CRITICAL COLOR REQUIREMENT: The ENTIRE garment MUST be prominently featuring this exact color HEX code: ${preferences.customColorHex}. ` : "";
 
-        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. CRITICAL INSTRUCTION: The generated image MUST 100% STRICTLY MATCH the user's specifications without any unrequested additions, and the photorealistic section MUST look 100% real as if shot on an ultra-high-end camera. The overall aesthetic MUST be extremely modern, highly elegant, and luxurious, matching the highest standards of contemporary high fashion.
+        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. CRITICAL RED-LINE INSTRUCTION: The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections (color, sleeves, length, fabric, etc.) without ANY deviation or unrequested additions. The photorealistic section MUST look 100% real as if shot on an ultra-high-end camera. The overall aesthetic MUST be extremely modern, highly elegant, and luxurious.
         
         LEFT SECTION (100% Photorealistic Model): An incredibly realistic, editorial-quality human fashion portrait. A beautiful model (${preferences.skinTone} skin, ${preferences.bodyType} body, ${preferences.hairStyle}) wearing the meticulously tailored garment. ${customColorText}Show AT LEAST TWO distinct poses/angles of the model (e.g. Front full-body view and Back view) side-by-side. 
         Lighting & Photography Style: Soft, flattering studio lighting, shot on 85mm lens, f/1.8 aperture, 8k resolution, photorealistic masterpiece. 
