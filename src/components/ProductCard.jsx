@@ -3,8 +3,8 @@ import { ShoppingBag, Sparkles, ExternalLink, Gift, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ProductCard = ({ product }) => {
-    const storeKey = product.store?.toLowerCase();
-    const isMainDress = product.name?.includes('فستان');
+    const storeKey = product.storeName?.toLowerCase() || product.store?.toLowerCase();
+    const isMainDress = product.title?.includes('فستان') || product.name?.includes('فستان');
 
     const storeNames = {
         'asleen': 'فساتين آسلين',
@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
         'noon': 'نون'
     };
 
-    const storeName = storeNames[storeKey] || product.name || 'نون';
+    const storeName = storeNames[storeKey] || product.title || product.name || 'متجر غير محدد';
 
     // UI Configuration based on Store and Item Type
     const getStoreStyle = () => {
@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
 
     const style = getStoreStyle();
     const BadgeIcon = isMainDress ? Sparkles : Gift;
-    const badgeText = product.badge || (isMainDress ? 'الخيار الأقرب للتصميم' : 'قطعة تكمل الإطلالة');
+    const badgeText = product.badge || (product.matchScore ? `تطابق ${product.matchScore}%` : 'اقتراح ذكي');
 
     return (
         <div className={`glass-card overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full bg-white relative border ${style.border} hover:border-gray-300 group`}>
@@ -62,17 +62,21 @@ const ProductCard = ({ product }) => {
                 {storeName}
             </div>
 
-            {/* Visual Hero Area - Icons & Coupons */}
-            <div className={`relative h-44 overflow-hidden shrink-0 bg-gradient-to-br ${style.bg} flex flex-col items-center justify-center border-b border-gray-100 p-4`}>
-                <div className={`p-5 rounded-3xl shadow-sm border border-white/50 relative overflow-hidden backdrop-blur-md ${style.iconBg} mb-3`}>
-                    <div className="absolute inset-0 bg-white/40 scale-0 group-hover:scale-110 transition-transform duration-500 ease-in-out"></div>
-                    {isMainDress ? <Sparkles className="w-10 h-10 relative z-10" strokeWidth={1.5} /> : <Tag className="w-10 h-10 relative z-10" strokeWidth={1.5} />}
-                </div>
+            <div className={`relative h-48 overflow-hidden shrink-0 bg-gradient-to-br ${style.bg} flex flex-col items-center justify-center border-b border-gray-100 p-0 group-hover:p-1 transition-all duration-300`}>
+                {product.imageUrl ? (
+                    <img src={product.imageUrl} alt={product.title} className="w-full h-full object-cover rounded-t-xl opacity-90 group-hover:opacity-100 transition-opacity" />
+                ) : (
+                    <div className={`p-5 rounded-3xl shadow-sm border border-white/50 relative overflow-hidden backdrop-blur-md ${style.iconBg} mb-3`}>
+                        <div className="absolute inset-0 bg-white/40 scale-0 group-hover:scale-110 transition-transform duration-500 ease-in-out"></div>
+                        {isMainDress ? <Sparkles className="w-10 h-10 relative z-10" strokeWidth={1.5} /> : <Tag className="w-10 h-10 relative z-10" strokeWidth={1.5} />}
+                    </div>
+                )}
 
-                <div className="flex flex-col items-center gap-2 z-10">
-                    <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-gray-200">
-                        <BadgeIcon className={`w-3.5 h-3.5 ${isMainDress ? 'text-yellow-500' : 'text-gray-500'}`} />
-                        <span className="text-[11px] font-bold text-gray-700 leading-none">{badgeText}</span>
+
+                <div className="absolute top-4 left-4 flex flex-col items-start gap-2 z-10">
+                    <div className={`flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md border ${product.matchScore && product.matchScore > 80 ? 'border-green-200' : 'border-gray-200'}`}>
+                        <BadgeIcon className={`w-4 h-4 ${product.matchScore && product.matchScore > 80 ? 'text-green-500' : 'text-gray-500'}`} />
+                        <span className={`text-[12px] font-bold ${product.matchScore && product.matchScore > 80 ? 'text-green-700' : 'text-gray-700'} leading-none`}>{badgeText}</span>
                     </div>
 
                     {/* Discount Code Section */}
@@ -94,22 +98,34 @@ const ProductCard = ({ product }) => {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-100 to-transparent"></div>
 
                 <div>
-                    <h3 className="text-xl font-bold font-arabic text-gray-900 mb-2 leading-tight line-clamp-2">
-                        {product.name}
+                    <h3 className="text-xl font-bold font-arabic text-gray-900 mb-2 leading-tight line-clamp-2" dir="rtl">
+                        {product.title || product.name}
                     </h3>
 
-                    <div className="mt-2 p-4 bg-gray-50/80 rounded-2xl border border-gray-100/50 relative group-hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center gap-2 mt-2 mb-3">
+                        <span className="font-bold text-lg text-primary-700">{product.price} {product.currency || 'ر.س'}</span>
+                    </div>
+
+                    <div className="mt-2 p-4 bg-gray-50/80 rounded-2xl border border-gray-100/50 relative group-hover:bg-gray-50 transition-colors" dir="rtl">
                         <div className="absolute -top-3 -right-2 text-3xl text-gray-200 font-serif leading-none select-none">"</div>
-                        <p className="text-sm text-gray-700 font-arabic leading-relaxed relative z-10 italic">
-                            {/* Psychological copy from AI or fallback */}
-                            {product.reason || `حسب مواصفاتك المميزة، تم اختيار هذه القطعة بعناية لتعكس سحر شخصيتك وتبرز تألقك.`}
-                        </p>
+                        <div className="text-sm text-gray-700 font-arabic leading-relaxed relative z-10 italic">
+                            {product.matchDetails && product.matchDetails.length > 0 ? (
+                                <ul className="list-disc pr-4 space-y-1">
+                                    {product.matchDetails.filter(d => d.earned > 0).slice(0, 2).map((detail, idx) => (
+                                        <li key={idx} className="text-xs">تطابق في {detail.key === 'colorMatch' ? 'اللون' : detail.key === 'silhouetteMatch' ? 'القصة' : detail.key === 'fabricMatch' ? 'القماش' : detail.key === 'modestyCompliance' ? 'الحشمة' : detail.key} بنسبة {(detail.earned / detail.weight) * 100}%</li>
+                                    ))}
+                                    <li className="text-xs text-primary-600 font-bold mt-1">تم التقييم بواسطة Product Intelligence Engine</li>
+                                </ul>
+                            ) : (
+                                product.reason || `حسب مواصفاتك المميزة، تم اختيار هذه القطعة بعناية لتعكس سحر شخصيتك وتبرز تألقك.`
+                            )}
+                        </div>
                     </div>
                 </div>
 
                 <div className="mt-auto pt-4">
                     <a
-                        href={product.affiliateLink}
+                        href={product.productUrl || product.affiliateLink || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`w-full ${style.button} py-3.5 flex items-center justify-center gap-2 font-arabic shadow-md hover:shadow-lg active:scale-[0.98] transition-all relative overflow-hidden text-center rounded-xl`}

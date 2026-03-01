@@ -5,12 +5,15 @@ import { generateTechPackSpecSheet, generateMasterTechPackImage } from '../servi
 import ProductCard from '../components/ProductCard';
 import { motion } from 'framer-motion';
 import { matchAffiliateStores } from '../services/affiliateMatcher';
+import { generateProductIntelligence } from '../services/productIntelligence';
+import { fetchAndScoreProducts } from '../services/productApi';
 
 const StylistChat = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [result, setResult] = useState(null);
+    const [scoredProducts, setScoredProducts] = useState([]);
     const [error, setError] = useState(null);
 
     const [masterImage, setMasterImage] = useState(null);
@@ -33,13 +36,32 @@ const StylistChat = () => {
 
             setResult(data);
 
-            // 2. Generate Master Tech Pack Image
+            // 2. Generate Product Intelligence & Fetch Real/Mock Products
+            let finalScoredProducts = [];
+            let topProductDesc = "";
+            try {
+                const intelligenceObj = await generateProductIntelligence(prefs);
+                console.log("PIE Output:", intelligenceObj);
+                const products = await fetchAndScoreProducts(intelligenceObj.searchQueries, intelligenceObj);
+                finalScoredProducts = products;
+                setScoredProducts(products);
+
+                if (products.length > 0) {
+                    const topProduct = products[0];
+                    topProductDesc = `The design must closely resemble this real product: ${topProduct.title}. Color: ${topProduct.rawAttributes?.color || prefs.colors}. Material: ${topProduct.rawAttributes?.material || prefs.fabricMaterial}. DO NOT add elements not present in this description.`;
+                }
+            } catch (err) {
+                console.error("PIE/Scoring fail:", err);
+            }
+
+            // 3. Generate Master Tech Pack Image (Based on top product, if any)
             if (data.designRecommendation) {
                 setLoadingImage(true);
-                const desc = data.designRecommendation.description + ' made of ' + data.designRecommendation.fabric;
+                const baseDesc = data.designRecommendation.description + ' made of ' + data.designRecommendation.fabric;
+                const finalDesc = topProductDesc ? `${baseDesc}. STRICT MATCHING REQUIREMENT: ${topProductDesc}` : baseDesc;
 
                 try {
-                    const url = await generateMasterTechPackImage(desc, prefs);
+                    const url = await generateMasterTechPackImage(finalDesc, prefs);
                     setMasterImage(url);
                 } catch (err) {
                     console.error("Master image fail:", err);
@@ -220,6 +242,9 @@ const StylistChat = () => {
                                     )}
                                     {masterImage ? (
                                         <>
+                                            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-xl z-20 text-sm font-arabic border border-white/20 shadow-lg">
+                                                {scoredProducts.length > 0 ? 'تصور تصميم مبني على أقرب منتج مطابق لطلبك' : 'تصور مبدئي للتصميم'}
+                                            </div>
                                             <img src={masterImage} alt="Master Tech Pack Image" className="w-full object-contain max-h-[1000px] print:max-h-[600px] z-0 relative" />
                                         </>
                                     ) : (!loadingImage && (
@@ -324,31 +349,35 @@ const StylistChat = () => {
                         transition={{ delay: 0.4 }}
                         className="w-full print:hidden"
                     >
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-gradient-to-l from-primary-900 to-gray-900 p-6 rounded-2xl shadow-lg border border-primary-800">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4 bg-gradient-to-l from-primary-900 to-gray-900 p-6 rounded-2xl shadow-lg border border-primary-800">
                             <div className="flex items-center gap-4">
                                 <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
                                     <ShoppingBag className="w-8 h-8 text-primary-200" />
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-bold font-arabic text-white mb-1">تسوّقي هذه الإطلالة جاهزة</h2>
-                                    <p className="text-primary-200 font-arabic text-sm">أقرب الخيارات المتوفرة حالياً في المتاجر الكبرى المطابقة لتصميمك</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                            {(() => {
-                                const matchedStores = matchAffiliateStores(
-                                    location.state?.keywords || [],
-                                    location.state?.constraints || {}
-                                );
+                        {scoredProducts.length > 0 && (
+                            <div className="mb-8 p-4 bg-white/50 backdrop-blur-sm border border-primary-200 rounded-xl text-center shadow-sm" dir="rtl">
+                                <p className="font-arabic text-primary-900 text-lg">
+                                    هذه أقرب المنتجات المتوفرة حاليًا والمطابقة لطلبك بنسبة <span className="font-bold text-green-700">{Math.floor(scoredProducts[0].matchScore)}%</span> أو أعلى، مرتبة من الأعلى تطابقًا.
+                                </p>
+                            </div>
+                        )}
 
-                                return matchedStores.map((product, index) => (
-                                    <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                            {scoredProducts.length > 0 ? (
+                                scoredProducts.map((product, index) => (
+                                    <motion.div key={product.id || index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
                                         <ProductCard product={product} />
                                     </motion.div>
-                                ));
-                            })()}
+                                ))
+                            ) : (
+                                <p className="font-arabic text-gray-500 text-center col-span-full py-8">جاري البحث عن المنتجات المطابقة للمعايير...</p>
+                            )}
                         </div>
                     </motion.div>
 
