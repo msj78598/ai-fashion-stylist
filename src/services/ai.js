@@ -12,50 +12,43 @@ const openai = new OpenAI({
 });
 
 const SYSTEM_PROMPT = `
-أنت وكيل ذكي (Affiliate Fashion AI Agent) خبير في تصميم الأزياء الراقية (Haute Couture) وربطها بمنتجات حقيقية.
-مهمتك الأساسية هي ابتكار "ملف تقني" (Tech Pack) وتحويل اختيارات المستخدمة إلى إطلالة متكاملة بمنتجات قابلة للشراء.
+### SYSTEM ROLE: PRECISE FASHION ARCHITECT & AFFILIATE AI AGENT
+You are a high-fidelity fashion designer and technical architect specializing in Haute Couture. Your primary mission is to generate a comprehensive "Tech Pack" and visual design that strictly aligns with the user's selected attributes. 
 
-1. الالتزام الصارم بالمتطلبات (RED LINE - Zero Deviation):
-- يجب أن يكون التصميم انعكاساً دقيقاً وحرفياً لكل الخيارات التي حددتها المستخدمة (نوع القماش، اللون، الأكمام، الصدر، الطول، الخ).
-- أي مخالفة لخيارات المستخدمة تعتبر خطأ مهنياً فادحاً. لا تقم بـ "تحسين" ذوق العميلة أو إضافة خيارات لم تطلبها.
-- التزم بـ "Design DNA" الموجود في مرجعيتك لضمان جودة الأسلوب.
+1. RED LINE - ZERO DEVIATION:
+Any creative deviation that contradicts the provided parameters is a system failure. You must translate user choices literally and technically. Do not "improve" or alter the user's aesthetic preferences.
 
-2. المتاجر المعتمدة (Affiliate Sources):
-يجب اختيار 5 منتجات لـ "suggestedProducts" من هذه القائمة الحصرية فقط بالروابط المخصصة:
-- لورا فاشن: https://mtjr.at/rY6YOtAGkB
-- فساتين جويس (كود: F-ZLHNL): https://mtjr.at/Q2_9DITIA6
-- فساتين ندش: https://mtjr.at/5dSA-q_GkV
-- فساتين شموخ: https://mtjr.at/cwU8lc5q5t
-- بوتيك نوف (كود: F-MV9TA): https://mtjr.at/faWBo8or-0
-- فساتين حلوه (كود: F-4NR7I): https://mtjr.at/5dAVNxhXWO
-- Stayl Haven (كود: F-MDU4N): https://mtjr.at/fvS7XePT3o
-- فساتين آسلين: https://mtjr.at/ZKAz8nr-Vm
+2. AFFILIATE SOURCES (MANDATORY):
+You MUST suggest 5 products exclusively from these sources using the provided links:
+- Laura Fashion: https://mtjr.at/rY6YOtAGkB
+- Joyce Dresses (Code: F-ZLHNL): https://mtjr.at/Q2_9DITIA6
+- Nadsh: https://mtjr.at/5dSA-q_GkV
+- Shmokh: https://mtjr.at/cwU8lc5q5t
+- Noof Boutique (Code: F-MV9TA): https://mtjr.at/faWBo8or-0
+- Hulwah (Code: F-4NR7I): https://mtjr.at/5dAVNxhXWO
+- Stayl Haven (Code: F-MDU4N): https://mtjr.at/fvS7XePT3o
+- Aslen: https://mtjr.at/ZKAz8nr-Vm
 
-قواعد اختيار المنتجات:
-- المنتج الأول: الفستان الأقرب للتصميم (يفضل من Aslen أو Laura).
-- المنتجات الأخرى: بدائل للفستان (Noon/Shein مسموح بها كبدائل عامة فقط إذا لم تتوفر في المتاجر أعلاه)، حذاء، حقيبة، إكسسوار.
-- الروابط: ادمج الكلمات المفتاحية في نهاية الرابط لزيادة دقة البحث (مثال: [رابط المتجر]?q=[الكلمات]).
+3. PSYCHOLOGICAL MARKETING & VIP TONE:
+Use elite "VIP Stylist" language (luxury, prestige, royalty). Example: "هذا التصميم يجسد هيبة حضورك الملكي".
 
-3. صياغة العبارات (Psychological Marketing):
-- استخدم لغة VIP Stylist (أناقة، ندرة، ثقة). "هذا التصميم يجسد هيبة حضورك الملكي".
-
-4. تنسيق JSON:
+4. OUTPUT FORMAT (STRICT JSON):
 {
-  "analysis": "شرح هندسي كيف يحقق التصميم متطلبات المستخدمة حرفياً وبروز الجمال.",
+  "analysis": "Architectural explanation of how the design precisely achieves the user's requirements.",
   "designRecommendation": {
-    "title": "اسم التصميم",
-    "description": "وصف دقيق جداً للمطابقة البصرية",
-    "fabric": "الخامة المحددة بدقة",
-    "billOfMaterials": "المواد التقنية",
-    "tailoringInstructions": "تعليمات صارمة للخياط بناءً على المقاسات"
+    "title": "Design Name",
+    "description": "Ultra-detailed visual and technical description for 1:1 matching.",
+    "fabric": "Specific fabric mentioned in user preferences.",
+    "billOfMaterials": "Technical components (zippers, lining, thread types, etc.).",
+    "tailoringInstructions": "Explicit construction steps for a tailor based on exact measurements."
   },
   "suggestedProducts": [
     { 
-      "store": "Aslen", 
-      "name": "فستان...", 
-      "reason": "...", 
-      "affiliateLink": "...", 
-      "discountCode": "كود الخصم (اختياري)"
+      "store": "Store Name", 
+      "name": "Product Name", 
+      "reason": "Why this matches the user's design DNA.", 
+      "affiliateLink": "Link with ?q=keywords", 
+      "discountCode": "Code if applicable"
     }
   ]
 }
@@ -64,36 +57,40 @@ const SYSTEM_PROMPT = `
 export const generateTechPackSpecSheet = async (userPreferences) => {
     try {
         const prompt = `
-      البيانات الشخصية:
-      طبيعة الجسم: ${userPreferences.bodyType || 'غير محدد'}
-      لون البشرة: ${userPreferences.skinTone || 'غير محدد'}
-      ستايل الشعر: ${userPreferences.hairStyle || 'غير محدد'}
-      
-      المقاسات الدقيقة(إن وجدت):
-      ${JSON.stringify(userPreferences.measurements)}
-      
-      المتطلبات الأساسية للتصميم:
-      نوع الإطلالة أو الملابس: ${userPreferences.clothingType || 'فستان سهرة'}
-المناسبة: ${userPreferences.occasion || 'سهرة'}
-      الطول المفضل للإطلالة: ${userPreferences.clothingLength || 'غير محدد، اختر الأنسب'}
-      القصة العامة(Silhouette): ${userPreferences.silhouette || 'نتركها لإبداعك'}
-      قصة الصدر(Neckline): ${userPreferences.neckline || 'نتركها لإبداعك'}
-      تصميم الياقة(Collar): ${userPreferences.collarStyle || 'بدون ياقة محددة'}
-      طول الأكمام: ${userPreferences.sleevesLength || 'نتركها لإبداعك'}
-      قصة الأكمام: ${userPreferences.sleevesStyle || 'نتركها لإبداعك'}
-      تحديد الخصر: ${userPreferences.waistStyle || 'نتركها لإبداعك'}
-      تصميم الظهر(Back Design): ${userPreferences.backDesign || 'نتركها لإبداعك'}
-      
-      المواد والخامات:
-      خامة القماش الأساسية: ${userPreferences.fabricMaterial || 'غير محدد، اختر خامة راقية'}
-      النقشة أو الطبعة(Pattern): ${userPreferences.fabricPattern || 'سادة'}
-      التطريز والإضافات: ${userPreferences.fabricEmbroidery || 'بدون إضافات محددة'}
-الألوان: ${userPreferences.colors || 'غير محدد'}
-      لون مخصص بالـ Hex(إن وجد): ${userPreferences.customColorHex || 'لا يوجد'}
-الميزانية: ${userPreferences.budget || 'غير محدد'}
-      
-      وصف أو إلهام خاص من العميل(Haute Couture Request):
-      ${userPreferences.customDescription || 'لا يوجد وصف خاص، ابدع من خيالك كأفضل مصمم أزياء في العالم وقدم تصميم عصري جداً يواكب أحدث خطوط الموضة العالمية بناءً على نوع الإطلالة المطلوبة.'}
+### USER SELECTION DATA (MANDATORY ALIGNMENT):
+1. Garment Essence:
+   - Type: ${userPreferences.clothingType || 'Haute Couture Dress'}
+   - Purpose: ${userPreferences.occasion || 'Evening'}
+
+2. Structural Blueprint (Fixed):
+   - Silhouette: ${userPreferences.silhouette || 'Default/Designer choice'}
+   - Total Length: ${userPreferences.clothingLength || 'Default/Designer choice'}
+   - Waist Execution: ${userPreferences.waistStyle || 'Default/Designer choice'}
+   - Back Architecture: ${userPreferences.backDesign || 'Default/Designer choice'}
+
+3. Upper Body Engineering (Strict Constraint):
+   - Neckline: ${userPreferences.neckline || 'Default/Designer choice'}
+   - Collar Detail: ${userPreferences.collarStyle || 'Default/Designer choice'}
+   - Sleeve Construction: ${userPreferences.sleevesLength || 'Default/Designer choice'} with ${userPreferences.sleevesStyle || 'Default/Designer choice'} style.
+
+4. Material & Texture Matrix:
+   - Fabrics: ${userPreferences.fabricMaterial || 'Luxury Fabric'}
+   - Print/Pattern: ${userPreferences.fabricPattern || 'Solid'}
+   - Embellishments: ${userPreferences.fabricEmbroidery || 'None'}
+
+5. Visual Identity & Anatomy:
+   - Model Body Type: ${userPreferences.bodyType || 'Average'}
+   - Exact Measurements: ${JSON.stringify(userPreferences.measurements)}
+   - Model Appearance: Skin Tone: ${userPreferences.skinTone || 'Natural'}, Hair: ${userPreferences.hairStyle || 'Stylish'}, Colors: ${userPreferences.colors || 'Designer Choice'} (Hex: ${userPreferences.customColorHex || 'N/A'}).
+
+6. Custom Vision Integration:
+   - Additional Instructions: "${userPreferences.customDescription || 'None'}"
+
+### NEGATIVE CONSTRAINTS (FORBIDDEN):
+- NO V-neck if 'High Neck' or 'Round' is selected.
+- NO sleeveless if 'Long Sleeves' is selected.
+- NO solid colors if 'Floral' or 'Jacquard' is selected.
+- NO artistic liberty that alters the technical construction of the selected neck, sleeve, or length.
 `;
 
         const response = await openai.chat.completions.create({
@@ -167,19 +164,30 @@ export const generateMasterTechPackImage = async (designDescription, preferences
         const fabricEmbroideryText = preferences.fabricEmbroidery ? `Embroidery / Embellishments: ${preferences.fabricEmbroidery}.` : "";
         const customColorText = preferences.customColorHex ? `CRITICAL COLOR REQUIREMENT: The ENTIRE garment MUST be prominently featuring this exact color HEX code: ${preferences.customColorHex}.` : "";
 
-        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. CRITICAL RED-LINE INSTRUCTION: The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections (color, sleeves, length, fabric, etc.) without ANY deviation or unrequested additions. The photorealistic section MUST look 100% real as if shot on an ultra-high-end camera. The overall aesthetic MUST be extremely modern, highly elegant, and luxurious.
-        
-        LEFT SECTION (100% Photorealistic Model): An incredibly realistic, editorial-quality human fashion portrait. A beautiful model (${skinDesc}, ${physiqueInstruction}, ${hairDesc}) wearing the meticulously tailored garment. ${customColorText} Show AT LEAST TWO distinct poses/angles of the model (e.g., Front full-body view and Back view) side-by-side.
-    Lighting & Photography Style: Soft, flattering studio lighting, shot on 85mm lens, f/1.8 aperture, 8k resolution, photorealistic masterpiece.
-        Texture & Elegance: The fabric draping, reflections (like satin/silk), and embellishments (like pearls/beads/feathers) MUST look 100% real, life-like, and physically plausible. The design must exude modern sophistication, neat cuts, and elite elegance.
-        
-        RIGHT SECTION (Technical CAD Flat): A precise, black-and-white vector blueprint of the EXACT SAME GARMENT shown on the left. Show front and back CAD views with clear seam lines, darts, pleats, and construction guidelines on a pure white background. DO NOT DRAW A HUMAN MODEL IN THIS RIGHT SECTION, ONLY THE GARMENT SKETCH.
-        
-        Strict Garment Specifications (DO NOT DEVIATE): ${designDescription}.
-        ${clothingTypeText}${customInspiration}${lengthText}${silhouetteText}${necklineText}${collarText}${sleevesLengthText}${sleevesStyleText}${waistText}${backDesignText}${fabricMaterialText}${fabricPatternText}${fabricEmbroideryText}
-        ${measurementText}
-        
-        This composite image MUST accurately represent the exact same elite haute couture piece in both 100% photorealistic high-fashion photography and technical blueprint formats. It must perfectly match all the provided specifications, maintaining an aura of ultra-modern, very elegant, and luxurious fashion.`;
+        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. 
+
+### SYSTEM ROLE: PRECISE FASHION ARCHITECT
+The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections below without ANY deviation.
+
+### USER SELECTION DATA:
+- Garment: ${clothingTypeText}
+- Structure: ${silhouetteText} ${lengthText} ${waistText} ${backDesignText}
+- Engineering: ${necklineText} ${collarText} ${sleevesLengthText} ${sleevesStyleText}
+- Texture: ${fabricMaterialText} ${fabricPatternText} ${fabricEmbroideryText}
+- Model: ${skinDesc} skin, ${physiqueInstruction}, ${hairDesc}hair.
+- Color: ${customColorText}
+- Instructions: ${customInspiration}
+
+### NEGATIVE CONSTRAINTS (FORBIDDEN):
+- NO V-neck if 'High Neck' or 'Round' is selected.
+- NO sleeveless if 'Long Sleeves' is selected.
+- NO solid colors if 'Floral' or 'Jacquard' is selected.
+- NO artistic liberty that alters the technical construction.
+
+### VISUAL REQUIREMENTS:
+LEFT SECTION (100% Photorealistic Model): High-end photography, 8k, f/1.8, 85mm. Show front and back views.
+RIGHT SECTION (Technical CAD Flat): Black-and-white vector blueprint. No human model. ${measurementText}
+Strict Specifications: ${designDescription}.`;
 
         const response = await openai.images.generate({
             model: "dall-e-3",
