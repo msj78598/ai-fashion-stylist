@@ -7,6 +7,16 @@ import { DESIGN_CONSTRAINTS } from '../services/designConstraints';
 
 const questions = [
     {
+        id: 'activeTrack',
+        title: 'اختر مسار التصميم الابتكاري',
+        subtitle: 'حدد كيف ترغب في بناء إطلالتك اليوم مع مهندس الأزياء الأول',
+        type: 'options',
+        options: [
+            'المسار الآلي (AI-Suggested Style): اصنع لي الإطلالة المثالية بناءً على قياساتي المكتملة.',
+            'المسار اليدوي (Manual Customization): الالتزام الحرفي الكامل باختياراتي وتعديلاتي الخاصة.'
+        ],
+    },
+    {
         id: 'preciseMeasurements',
         title: 'القياسات الدقيقة (تُحفظ تلقائياً)',
         subtitle: 'أدخلي قياساتك مرة واحدة وسنحتفظ بها لجلساتك القادمة',
@@ -226,11 +236,17 @@ const IntakeForm = () => {
 
         let nextStep = currentStep + 1;
 
-        // Conditional logic: Skip sleevesStyle if Sleeveless
+        // 1. AI-Suggested Track Skip Logic
+        // If they pick Track A: Skip manual design details (after Occasion, jump to Colors)
+        if (currentQ.id === 'occasion' && answers['activeTrack']?.includes('AI-Suggested')) {
+            const colorsIndex = questions.findIndex(q => q.id === 'colors');
+            if (colorsIndex !== -1) nextStep = colorsIndex;
+        }
+
+        // 2. Sleeveless Skip Logic
         if (currentQ.id === 'sleevesLength' && answers['sleevesLength']?.includes('بدون أكمام')) {
-            // Find index of sleevesStyle
             const sleevesStyleIndex = questions.findIndex(q => q.id === 'sleevesStyle');
-            if (sleevesStyleIndex !== -1) {
+            if (sleevesStyleIndex !== -1 && nextStep <= sleevesStyleIndex) {
                 nextStep = sleevesStyleIndex + 1;
             }
         }
@@ -267,8 +283,15 @@ const IntakeForm = () => {
     const handleBack = () => {
         let prevStep = currentStep - 1;
 
-        // Conditional logic: Skip back from sleevesStyle's next question directly to sleevesLength
-        // Wait, easier to check if current is after sleevesStyle and we selected sleeveless
+        // 1. AI-Suggested Track Back Skip
+        // If we are at Colors and chose AI-Suggested, go back to Occasion
+        if (currentQ.id === 'colors' && answers['activeTrack']?.includes('AI-Suggested')) {
+            const occasionIndex = questions.findIndex(q => q.id === 'occasion');
+            if (occasionIndex !== -1) prevStep = occasionIndex;
+        }
+
+        // 2. Sleeveless Back Skip
+        // If current is after sleevesStyle and we selected sleeveless, skip sleevesStyle on the way back
         if (questions[currentStep]?.id !== 'sleevesStyle' && questions[currentStep - 1]?.id === 'sleevesStyle' && answers['sleevesLength']?.includes('بدون أكمام')) {
             prevStep = currentStep - 2;
         }

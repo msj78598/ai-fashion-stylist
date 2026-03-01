@@ -171,7 +171,23 @@ const StylistChat = () => {
                             <div className="mb-10 text-center relative">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-primary-600 rounded-full"></div>
                                 <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.designRecommendation?.title || 'مواصفات التصميم التقني'}</h1>
-                                <p className="text-primary-600 font-arabic text-lg tracking-widest opacity-80 uppercase">Elite Haute Couture Specification</p>
+                                <p className="text-primary-600 font-arabic text-lg tracking-widest opacity-80 uppercase mb-4">Elite Haute Couture Specification</p>
+
+                                <div className="flex justify-center mb-2">
+                                    <div className={`
+                                        px-4 py-1.5 rounded-full text-sm font-arabic font-bold flex items-center gap-2 shadow-sm
+                                        ${activePreferences?.activeTrack?.includes('AI-Suggested')
+                                            ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                                            : 'bg-primary-100 text-primary-700 border border-primary-200'}
+                                    `}>
+                                        <Sparkles className="w-4 h-4" />
+                                        <span>
+                                            {activePreferences?.activeTrack?.includes('AI-Suggested')
+                                                ? 'تم التوليد بواسطة: المسار الآلي (AI-Suggested Style)'
+                                                : 'تم التوليد بواسطة: المسار اليدوي (Manual Customization)'}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Section 0: Design Overview / Designer's Insight */}

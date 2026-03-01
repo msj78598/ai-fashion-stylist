@@ -52,6 +52,9 @@ export const generateTechPackSpecSheet = async (userPreferences) => {
     try {
         const prompt = `
 ### USER SELECTION DATA (MANDATORY ALIGNMENT):
+0. Operational Mode:
+   - Active Track: ${userPreferences.activeTrack || 'Manual_Customization'}
+
 1. Garment Essence:
    - Type: ${userPreferences.clothingType || 'Haute Couture Dress'}
    - Purpose: ${userPreferences.occasion || 'Evening'}
