@@ -230,11 +230,16 @@ export async function fetchAndScoreProducts(searchQueries, productIntelligence) 
         if (storeKey.includes("لورا")) code = "F-ZLHNl";
         else if (storeKey.includes("آسلين") || storeKey.includes("aslen")) code = "F-MDU4N";
         else if (storeKey.includes("نوف")) code = "F-ZLHNl";
+        else if (storeKey.includes("haven")) code = "F-MDU4N";
+
+        // Find the base affiliate link for tracking
+        const affiliateStore = AFFILIATE_STORES.find(s => s.title === p.storeName || storeKey.includes(s.title.toLowerCase()));
 
         return {
             ...p,
             // We NO LONGER overwrite the organic scraped URL. We preserve the exact deep link.
-            discountCode: code
+            discountCode: code,
+            affiliateBaseUrl: affiliateStore ? affiliateStore.baseUrl : null
         };
     });
 

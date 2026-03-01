@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
 
     const style = getStoreStyle();
     const BadgeIcon = isMainDress ? Sparkles : Gift;
-    const badgeText = product.badge || (product.matchScore ? `تطابق ${product.matchScore}%` : 'اقتراح ذكي');
+    const badgeText = product.badge || 'الخيار الأنسب لكِ';
 
     return (
         <div className={`glass-card overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full bg-white relative border ${style.border} hover:border-gray-300 group`}>
@@ -74,9 +74,9 @@ const ProductCard = ({ product }) => {
 
 
                 <div className="absolute top-4 left-4 flex flex-col items-start gap-2 z-10">
-                    <div className={`flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md border ${product.matchScore && product.matchScore > 80 ? 'border-green-200' : 'border-gray-200'}`}>
-                        <BadgeIcon className={`w-4 h-4 ${product.matchScore && product.matchScore > 80 ? 'text-green-500' : 'text-gray-500'}`} />
-                        <span className={`text-[12px] font-bold ${product.matchScore && product.matchScore > 80 ? 'text-green-700' : 'text-gray-700'} leading-none`}>{badgeText}</span>
+                    <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md border border-primary-200">
+                        <BadgeIcon className="w-4 h-4 text-primary-500" />
+                        <span className="text-[12px] font-bold text-primary-700 leading-none">{badgeText}</span>
                     </div>
 
                     {/* Discount Code Section */}
@@ -102,19 +102,15 @@ const ProductCard = ({ product }) => {
                         {product.title || product.name}
                     </h3>
 
-                    <div className="flex items-center gap-2 mt-2 mb-3">
-                        <span className="font-bold text-lg text-primary-700">{product.price} {product.currency || 'ر.س'}</span>
-                    </div>
-
                     <div className="mt-2 p-4 bg-gray-50/80 rounded-2xl border border-gray-100/50 relative group-hover:bg-gray-50 transition-colors" dir="rtl">
                         <div className="absolute -top-3 -right-2 text-3xl text-gray-200 font-serif leading-none select-none">"</div>
                         <div className="text-sm text-gray-700 font-arabic leading-relaxed relative z-10 italic">
                             {product.matchDetails && product.matchDetails.length > 0 ? (
                                 <ul className="list-disc pr-4 space-y-1">
                                     {product.matchDetails.filter(d => d.earned > 0).slice(0, 2).map((detail, idx) => (
-                                        <li key={idx} className="text-xs">تطابق في {detail.key === 'colorMatch' ? 'اللون' : detail.key === 'silhouetteMatch' ? 'القصة' : detail.key === 'fabricMatch' ? 'القماش' : detail.key === 'modestyCompliance' ? 'الحشمة' : detail.key} بنسبة {(detail.earned / detail.weight) * 100}%</li>
+                                        <li key={idx} className="text-xs">تطابق ممتاز في {detail.key === 'colorMatch' ? 'اللون' : detail.key === 'silhouetteMatch' ? 'القصة' : detail.key === 'fabricMatch' ? 'القماش' : detail.key === 'modestyCompliance' ? 'الحشمة' : detail.key === 'necklineMatch' ? 'ياقة الصدر' : detail.key === 'sleeveMatch' ? 'الأكمام' : 'مواصفاتك'}</li>
                                     ))}
-                                    <li className="text-xs text-primary-600 font-bold mt-1">تم التقييم بواسطة Product Intelligence Engine</li>
+                                    <li className="text-xs text-primary-600 font-bold mt-1">تمت التوصية بواسطة الذكاء الاصطناعي</li>
                                 </ul>
                             ) : (
                                 product.reason || `حسب مواصفاتك المميزة، تم اختيار هذه القطعة بعناية لتعكس سحر شخصيتك وتبرز تألقك.`
@@ -125,7 +121,7 @@ const ProductCard = ({ product }) => {
 
                 <div className="mt-auto pt-4">
                     <a
-                        href={product.productUrl || product.affiliateLink || '#'}
+                        href={product.affiliateBaseUrl ? `${product.affiliateBaseUrl}?url=${encodeURIComponent(product.productUrl)}` : (product.productUrl || '#')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`w-full ${style.button} py-3.5 flex items-center justify-center gap-2 font-arabic shadow-md hover:shadow-lg active:scale-[0.98] transition-all relative overflow-hidden text-center rounded-xl`}
