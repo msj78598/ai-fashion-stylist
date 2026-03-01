@@ -31,13 +31,16 @@ const AFFILIATE_STORES = [
     { title: "فساتين آسلين", baseUrl: 'https://mtjr.at/ZKAz8nr-Vm' }
 ];
 
-// Helper to build affiliate link
-function buildAffiliateLink(storeName, title) {
-    const store = AFFILIATE_STORES.find(s => s.title === storeName);
-    if (!store) return "#";
-    const query = encodeURIComponent(title);
-    return `${store.baseUrl}?q=${query}`;
-}
+// We are shifting from generic search URLs to the Deep Linking Protocol.
+// Store specific discount codes (user provided examples)
+const STORE_DISCOUNT_CODES = {
+    "لورا فاشن": "F-ZLHNl",
+    "فساتين آسلين": "F-MDU4N",
+    "بوتيك نوف": "F-ZLHNl",
+    "stayl haven": "F-MDU4N"
+};
+
+// Fallback logic for links if needed, but we rely on the scraped direct links.
 
 const MOCK_PRODUCTS = [
     {
@@ -218,12 +221,20 @@ export async function fetchAndScoreProducts(searchQueries, productIntelligence) 
     console.log("Starting Local Database Product Search...");
     console.log(`Database loaded with ${productDatabase.length} products.`);
 
-    // 1. Prepare products and inject affiliate links
+    // 1. Prepare products with Direct Links and Discount Codes (Deep Linking Protocol)
     const preparedProducts = productDatabase.map(p => {
+        const storeKey = p.storeName ? p.storeName.toLowerCase() : "";
+        let code = "F-VIP"; // fallback
+
+        // Try to match store name to discount code roughly
+        if (storeKey.includes("لورا")) code = "F-ZLHNl";
+        else if (storeKey.includes("آسلين") || storeKey.includes("aslen")) code = "F-MDU4N";
+        else if (storeKey.includes("نوف")) code = "F-ZLHNl";
+
         return {
             ...p,
-            // Replace the organic scraped URL with the user's mtjr.at affiliate search link
-            productUrl: buildAffiliateLink(p.storeName, p.title)
+            // We NO LONGER overwrite the organic scraped URL. We preserve the exact deep link.
+            discountCode: code
         };
     });
 
