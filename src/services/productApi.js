@@ -26,13 +26,13 @@ const MOCK_PRODUCTS = [
         productUrl: "https://mtjr.at/ZKAz8nr-Vm",
         storeName: "asleen",
         rawAttributes: {
-            color: "emerald green",
-            material: "silk",
-            length: "maxi",
-            sleeves: "long sleeve",
-            neckline: "high neck",
-            fit: "tailored",
-            silhouette: "a-line"
+            color: "أخضر زمردي",
+            material: "حرير",
+            length: "ماكسي",
+            sleeves: "كم طويل",
+            neckline: "ياقة عالية",
+            fit: "مخصر",
+            silhouette: "A-Line"
         }
     },
     {
@@ -44,13 +44,13 @@ const MOCK_PRODUCTS = [
         productUrl: "https://mtjr.at/rY6YOtAGkB",
         storeName: "laura",
         rawAttributes: {
-            color: "black",
-            material: "chiffon",
-            length: "maxi",
-            sleeves: "sleeveless",
-            neckline: "v-neck",
-            fit: "loose",
-            silhouette: "straight"
+            color: "أسود",
+            material: "شيفون",
+            length: "ماكسي",
+            sleeves: "بدون أكمام",
+            neckline: "ياقة V",
+            fit: "واسع",
+            silhouette: "مستقيم"
         }
     },
     {
@@ -62,13 +62,13 @@ const MOCK_PRODUCTS = [
         productUrl: "https://mtjr.at/Q2_9DITIA6",
         storeName: "joyce",
         rawAttributes: {
-            color: "black",
-            material: "crepe",
-            length: "maxi",
-            sleeves: "long sleeve",
-            neckline: "round",
-            fit: "oversized",
-            silhouette: "loose"
+            color: "أسود",
+            material: "كريب",
+            length: "ماكسي",
+            sleeves: "كم طويل",
+            neckline: "ياقة دائرية",
+            fit: "واسع جدا",
+            silhouette: "واسع"
         }
     }
 ];
