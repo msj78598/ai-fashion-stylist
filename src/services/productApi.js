@@ -8,6 +8,8 @@
  * @typedef {Object} Product
  * @property {string} id
  * @property {string} title - Product name
+ * @property {string} id
+ * @property {string} title - Product name
  * @property {number} price - Price
  * @property {string} currency - Currency
  * @property {string} imageUrl - Image URL
@@ -15,6 +17,24 @@
  * @property {string} storeName - Store identifier
  * @property {Object} rawAttributes - Attributes for scoring
  */
+
+import axios from 'axios';
+
+// SerpApi Key from user environment variables
+const SERPAPI_KEY = import.meta.env.VITE_SERPAPI_KEY;
+
+const AFFILIATE_STORES = [
+    { title: "لورا فاشن", keyword: '"لورا فاشن"' },
+    { title: "فساتين جويس", keyword: '"فساتين جويس"' },
+    { title: "فساتين ندش", keyword: '"فساتين ندش"' },
+    { title: "فساتين شموخ", keyword: '"فساتين شموخ"' },
+    { title: "بوتيك نوف", keyword: '"بوتيك نوف"' },
+    { title: "فساتين حلوه", keyword: '"فساتين حلوه"' },
+    { title: "Stayl Haven", keyword: '"stayl haven"' },
+    { title: "فساتين آسلين", keyword: '"فساتين آسلين"' },
+    { title: "شي ان", keyword: 'site:ar.shein.com' },
+    { title: "نون", keyword: 'site:noon.com/saudi-ar-en/' }
+];
 
 const MOCK_PRODUCTS = [
     {
@@ -173,17 +193,95 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
 }
 
 /**
- * Simulates fetching products based on generated search queries.
+ * Dynamically fetch products using SerpApi across the 10 target stores.
  */
 export async function fetchAndScoreProducts(searchQueries, productIntelligence) {
-    // In reality, we would call APIs using the `searchQueries`.
-    // Here we just use our MOCK_PRODUCTS and pass them to the scoring engine.
+    console.log("Starting Real-Time Product Search via SerpApi...");
 
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
+    // 1. Build the target domain string
+    const storeKeywords = AFFILIATE_STORES.map(s => s.keyword).join(' OR ');
 
+    // We use the first generated search query from the AI (usually the most accurate)
+    let aiQuery = "فستان سهرة";
+    if (searchQueries && searchQueries.length > 0) {
+        aiQuery = searchQueries[0];
+    }
+
+    const finalGoogleQuery = `(${storeKeywords}) ${aiQuery}`;
+    console.log("Executing Google Query:", finalGoogleQuery);
+
+    let liveProducts = [];
+
+    try {
+        // Run against SerpApi
+        const response = await axios.get('https://serpapi.com/search.json', {
+            params: {
+                engine: 'google',
+                q: finalGoogleQuery,
+                hl: 'ar',
+                gl: 'sa', // Google Saudi Arabia
+                api_key: SERPAPI_KEY
+            }
+        });
+
+        const results = response.data.organic_results || [];
+        console.log(`SerpApi returned ${results.length} organic results.`);
+
+        // 2. Map Organic Results to Product Schema
+        liveProducts = results.map((item, index) => {
+
+            // Extract price if available in rich snippets
+            let price = 0;
+            if (item.rich_snippet && item.rich_snippet.top && item.rich_snippet.top.extensions) {
+                const priceMatch = item.rich_snippet.top.extensions.join(" ").match(/[\d,.]+/);
+                if (priceMatch) price = parseFloat(priceMatch[0].replace(/,/g, ''));
+            }
+
+            // Extract image from thumbnail or main image
+            let imageUrl = item.thumbnail || "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop";
+
+            // Determine Store Name
+            let storeName = "متجر غير معروف";
+            for (const store of AFFILIATE_STORES) {
+                if (item.title.includes(store.title) || item.link.includes(store.title.replace(' ', ''))) {
+                    storeName = store.title;
+                    break;
+                }
+            }
+            if (item.link.includes('shein')) storeName = "شي ان";
+            if (item.link.includes('noon')) storeName = "نون";
+
+            return {
+                id: `live_${index}`,
+                title: item.title,
+                price: price || 400, // Fallback price 
+                currency: "SAR",
+                imageUrl: imageUrl,
+                productUrl: item.link,
+                storeName: storeName,
+                // We use the snippet + title as the "rawAttributes" to allow the evaluator to find keyword matches
+                rawAttributes: {
+                    color: item.snippet + " " + item.title,
+                    material: item.snippet + " " + item.title,
+                    length: item.snippet + " " + item.title,
+                    sleeves: item.snippet + " " + item.title,
+                    neckline: item.snippet + " " + item.title,
+                    fit: item.snippet + " " + item.title,
+                    silhouette: item.snippet + " " + item.title
+                }
+            };
+        });
+
+    } catch (err) {
+        console.error("SerpApi Fetch Error:", err);
+        // Fallback to MOCK_PRODUCTS if API fails
+        console.log("Falling back to MOCK_PRODUCTS due to API failure.");
+        liveProducts = MOCK_PRODUCTS;
+    }
+
+    // 3. Pipe into Scoring Engine
     const scored = processProductsWithIntelligence(
-        MOCK_PRODUCTS,
+        liveProducts,
         productIntelligence.productDNA,
         productIntelligence.scoringModel,
         productIntelligence.filterRules

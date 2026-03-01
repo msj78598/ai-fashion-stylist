@@ -22,12 +22,39 @@ const StylistChat = () => {
     const [tweakInput, setTweakInput] = useState("");
     const [activePreferences, setActivePreferences] = useState(location.state?.preferences || null);
 
+    const [loadingText, setLoadingText] = useState("جاري بناء الملف التقني (Tech Pack)...");
+
     const fetchTechPack = async (prefs) => {
         setLoading(true);
         setError(null);
         try {
-            // 1. Generate Spec Sheet (Text/JSON)
-            const data = await generateTechPackSpecSheet(prefs);
+            // STEP 1: Generate Product Intelligence & Fetch Real Products FIRST
+            setLoadingText("جاري تحليل المدخلات للبحث عن منتج حقيقي يطابق مواصفاتك...");
+            let finalScoredProducts = [];
+            let topProduct = null;
+            let topProductDesc = "";
+            let intelligenceObj = null;
+
+            try {
+                intelligenceObj = await generateProductIntelligence(prefs);
+                console.log("PIE Output:", intelligenceObj);
+
+                setLoadingText("جاري استكشاف قواعد بيانات المتاجر ومطابقة المنتجات...");
+                const products = await fetchAndScoreProducts(intelligenceObj.searchQueries, intelligenceObj);
+                finalScoredProducts = products;
+                setScoredProducts(products);
+
+                if (products.length > 0) {
+                    topProduct = products[0];
+                    topProductDesc = `The design must closely resemble this real product: ${topProduct.title}. Color: ${topProduct.rawAttributes?.color || prefs.colors}. Material: ${topProduct.rawAttributes?.material || prefs.fabricMaterial}. DO NOT add elements not present in this description.`;
+                }
+            } catch (err) {
+                console.error("PIE/Scoring fail:", err);
+            }
+
+            // STEP 2: Generate Spec Sheet (Text/JSON), Passing the Top Product to Force Alignment
+            setLoadingText("يتم الآن رسم لوحة المهندسة المعمارية للفستان (Master Board)...");
+            const data = await generateTechPackSpecSheet(prefs, topProduct);
 
             if (!data || !data.designRecommendation) {
                 console.error("Malformed AI response:", data);
@@ -36,25 +63,7 @@ const StylistChat = () => {
 
             setResult(data);
 
-            // 2. Generate Product Intelligence & Fetch Real/Mock Products
-            let finalScoredProducts = [];
-            let topProductDesc = "";
-            try {
-                const intelligenceObj = await generateProductIntelligence(prefs);
-                console.log("PIE Output:", intelligenceObj);
-                const products = await fetchAndScoreProducts(intelligenceObj.searchQueries, intelligenceObj);
-                finalScoredProducts = products;
-                setScoredProducts(products);
-
-                if (products.length > 0) {
-                    const topProduct = products[0];
-                    topProductDesc = `The design must closely resemble this real product: ${topProduct.title}. Color: ${topProduct.rawAttributes?.color || prefs.colors}. Material: ${topProduct.rawAttributes?.material || prefs.fabricMaterial}. DO NOT add elements not present in this description.`;
-                }
-            } catch (err) {
-                console.error("PIE/Scoring fail:", err);
-            }
-
-            // 3. Generate Master Tech Pack Image (Based on top product, if any)
+            // STEP 3: Generate Master Tech Pack Image (Based on top product, if any)
             if (data.designRecommendation) {
                 setLoadingImage(true);
                 const baseDesc = data.designRecommendation.description + ' made of ' + data.designRecommendation.fabric;
@@ -125,9 +134,9 @@ const StylistChat = () => {
                     transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                     className="w-24 h-24 rounded-full border-t-4 border-l-4 border-primary-600 mb-8"
                 />
-                <h2 className="text-2xl font-bold font-arabic text-primary-900 mb-3 animate-pulse">جاري بناء الملف التقني (Tech Pack)...</h2>
+                <h2 className="text-2xl font-bold font-arabic text-primary-900 mb-3 animate-pulse">{loadingText}</h2>
                 <p className="text-primary-700 font-arabic text-center max-w-md">
-                    يتم الآن رسم لوحة المهندسة المعمارية للفستان (Master Board) بكل الزوايا، وتجهيز القياسات للخياط.
+                    نقوم بالاعتماد على خوارزمياتنا لضمان دقة التنفيذ وموازنة طلبك مع قواعد التصميم والموضة.
                 </p>
             </div>
         );

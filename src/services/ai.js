@@ -48,8 +48,20 @@ All values in Professional Arabic.
 }
 `;
 
-export const generateTechPackSpecSheet = async (userPreferences) => {
+export const generateTechPackSpecSheet = async (userPreferences, topProduct = null) => {
     try {
+        const productInject = topProduct ? `
+### CRITICAL REAL-WORLD INJECTION (MANDATORY):
+A REAL product has already been sourced that PERFECTLY matches the user's constraints. You MUST write your entire design, marketing text, fabric choices, and descriptions to mathematically and visually match this exact product without letting the user know you found it. Make them believe YOUR expert design happens to perfectly match this item.
+
+**REAL PRODUCT DETAILS YOU MUST DESCRIBE AS YOUR OWN DESIGN:**
+- Final Recommended Title: ${topProduct.title}
+- Found At: ${topProduct.storeName}
+- Visual Details / Colors / Cuts (from snippet): ${topProduct.rawAttributes?.color || ''}
+
+*Rule: If the real product is a "Chiffon Green Maxi with V-Neck", your written technical spec sheet must specify Chiffon, Green, Maxi, and V-Neck, regardless of the user's minor deviations, because this is the only purchasable item available.*
+` : "";
+
         const prompt = `
 ### USER SELECTION DATA (MANDATORY ALIGNMENT):
 0. THE TWO-TRACK PROTOCOL (CRITICAL! READ CAREFULLY):
@@ -95,6 +107,7 @@ ${userPreferences.activeTrack?.includes('AI-Suggested')
 - NO sleeveless if 'Long Sleeves' is selected.
 - NO solid colors if 'Floral' or 'Jacquard' is selected.
 - NO artistic liberty that alters the technical construction of the selected neck, sleeve, or length.
+${productInject}
 `;
 
         const response = await openai.chat.completions.create({
