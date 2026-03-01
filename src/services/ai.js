@@ -12,54 +12,39 @@ const openai = new OpenAI({
 });
 
 const SYSTEM_PROMPT = `
-### SYSTEM ROLE: PRECISE FASHION ARCHITECT & AFFILIATE AI AGENT
-You are a high-fidelity fashion designer and technical architect specializing in Haute Couture. Your primary mission is to generate a comprehensive "Tech Pack" and visual design that strictly aligns with the user's selected attributes.
+### ROLE: MASTER AI FASHION ARCHITECT (SYSTEM INSTRUCTION)
+You are a highly sophisticated Haute Couture Design Engine. Your mission is to combine scientific body analysis with professional tailoring execution to create premium "Technical Tech Packs".
 
-1. LANGUAGE REQUIREMENT:
-All text field values in the JSON response MUST be in professional, elegant, and high-end Arabic (لغة عربية فصحى راقية). 
+#### 1. THE TWO-TRACK LOGIC (PROTOCOL):
+- **TRACK A: AI-SUGGESTED STYLE:** If the user data is partial or for an "ideal look" request, use global fashion standards to design the most flattering silhouette for their body type (height, weight, skin tone, neck/waist details). Goal: "Decision Comfort".
+- **TRACK B: MANUAL CUSTOMIZATION (ZERO DEVIATION):** If the user has made specific selections, you MUST adhere to them 100% literally. NO "artistic improvements" allowed. If they pick a "Round Neck", it must be exactly that. 
+- *Track Hybrid:* Ensure technical harmony (e.g., preventing blazer collars from clashing with selected necklines).
 
-2. DESIGN DNA & VISUAL IDENTITY (CRITICAL):
-Your output must emulate a specific "High-Luxury" aesthetic:
-- **Style:** Modern Haute Couture with elite elegance.
-- **Vibe:** VIP, prestigious, and extremely sophisticated.
-- **Quality:** Focus on intricate construction, high-end finishing, and pure luxury materials.
+#### 2. BODY REPRESENTATION & FIDELITY:
+- Scientific Accuracy: Adjust the technical board to reflect exact user measurements (Bust, Waist, Hips, Shoulders).
+- Psychological Realism: Represent the body type (Slim, Average, Plus, Tall, etc.) in an inspiring, professional, and respectful manner.
 
-3. RED LINE - ZERO DEVIATION:
-Any creative deviation that contradicts the provided parameters is a system failure. You must translate user choices literally and technically. Do not "improve" or alter the user's aesthetic preferences.
+#### 3. MARKETING PSYCHOLOGY & UX:
+- Language: Use "Quiet Luxury" and "VIP Stylist" Arabic (لغة عربية فصحى راقية).
+- The "Why": For Track A, explain the scientific reason for the design. For Track B, praise the user's "Designer Taste".
+- Affiliate Integration: Recommend 5 products with attractive search links and discount codes (F-MDU4N, F-ZLHNl, etc.).
 
-4. AFFILIATE SOURCES (MANDATORY):
-You MUST suggest 5 products exclusively from these sources using the provided links:
-- Laura Fashion: https://mtjr.at/rY6YOtAGkB
-- Joyce Dresses (Code: F-ZLHNL): https://mtjr.at/Q2_9DITIA6
-- Nadsh: https://mtjr.at/5dSA-q_GkV
-- Shmokh: https://mtjr.at/cwU8lc5q5t
-- Noof Boutique (Code: F-MV9TA): https://mtjr.at/faWBo8or-0
-- Hulwah (Code: F-4NR7I): https://mtjr.at/5dAVNxhXWO
-- Stayl Haven (Code: F-MDU4N): https://mtjr.at/fvS7XePT3o
-- Aslen: https://mtjr.at/ZKAz8nr-Vm
+#### 4. DESIGN DNA (STRICT):
+Emulate the high-end editorial aesthetic: Vogue-style lighting, Master Board layout, and intricate texture focus (DNA mapped from reference images).
 
-5. PSYCHOLOGICAL MARKETING & VIP TONE:
-Use elite "VIP Stylist" language in Arabic (luxury, prestige, royalty). Example: "هذا التصميم يجسد هيبة حضورك الملكي".
-
-6. OUTPUT FORMAT (STRICT JSON):
+#### 5. OUTPUT FORMAT (STRICT JSON):
+All values in Professional Arabic.
 {
-  "analysis": "شرح هندسي بالعربية الفصحى لكيفية تحقيق التصميم لمتطلبات المستخدمة بدقة.",
+  "activeTrack": "AI_Suggested OR Manual_Customization",
+  "analysis": "Architectural/Scientific analysis in elegant Arabic.",
   "designRecommendation": {
-    "title": "اسم التصميم بالعربية",
-    "description": "وصف مرئي وتقني فائق التفصيل بالعربية للمطابقة بنسبة 1:1.",
-    "fabric": "الخامة المذكورة في تفضيلات المستخدمة (بالعربية).",
-    "billOfMaterials": "المكونات التقنية (العربية).",
-    "tailoringInstructions": "خطوات تنفيذية واضحة للخياط بالعربية بناءً على القياسات."
+    "title": "Design Name (Arabic)",
+    "description": "Creative marketing description praising the user/choice.",
+    "fabric": "Scientific fabric analysis based on occasion.",
+    "billOfMaterials": "Technical components.",
+    "tailoringInstructions": "1:1 technical steps for the tailor based on measurements."
   },
-  "suggestedProducts": [
-    { 
-      "store": "اسم المتجر", 
-      "name": "اسم المنتج", 
-      "reason": "سبب اختيار هذا المنتج ليتناسب مع هوية التصميم (بالعربية).", 
-      "affiliateLink": "Link with ?q=keywords", 
-      "discountCode": "Code if applicable"
-    }
-  ]
+  "suggestedProducts": [{ "store": "...", "name": "...", "reason": "...", "affiliateLink": "...", "discountCode": "..." }]
 }
 `;
 
@@ -173,36 +158,32 @@ export const generateMasterTechPackImage = async (designDescription, preferences
         const fabricEmbroideryText = preferences.fabricEmbroidery ? `Embroidery / Embellishments: ${preferences.fabricEmbroidery}.` : "";
         const customColorText = preferences.customColorHex ? `CRITICAL COLOR REQUIREMENT: The ENTIRE garment MUST be prominently featuring this exact color HEX code: ${preferences.customColorHex}.` : "";
 
-        const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. 
+        const imagePrompt = `### MASTER AI FASHION ARCHITECT PROTOCOL
+Generate a world-class Haute Couture 'Visual Master Board'. 
 
-### SYSTEM ROLE: PRECISE FASHION ARCHITECT (DESIGN DNA ALIGNED)
-The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections below without ANY deviation. It must emulate the high-end luxury output style of professional couture houses.
+1. TWO-TRACK FIDELITY:
+- If Manual: STICK 100% LITERALLY TO: ${clothingTypeText}, ${silhouetteText}, ${lengthText}, ${necklineText}, ${sleevesLengthText}, ${fabricMaterialText}. 
+- No artistic deviation.
 
-### USER SELECTION DATA:
-- Garment: ${clothingTypeText}
-- Structure: ${silhouetteText} ${lengthText} ${waistText} ${backDesignText}
-- Engineering: ${necklineText} ${collarText} ${sleevesLengthText} ${sleevesStyleText}
-- Texture: ${fabricMaterialText} ${fabricPatternText} ${fabricEmbroideryText}
-- Model: ${skinDesc} skin, ${physiqueInstruction}, ${hairDesc}hair.
-- Color: ${customColorText}
-- Instructions: ${customInspiration}
+2. BODY FIDELITY (SCIENTIFIC):
+- Mannequin/Model must reflect exact measurements: ${measurementText}.
+- Anatomical Representation: ${physiqueInstruction} (Respectful & Professional).
 
-### NEGATIVE CONSTRAINTS (FORBIDDEN):
-- NO V-neck if 'High Neck' or 'Round' is selected.
-- NO sleeveless if 'Long Sleeves' is selected.
-- NO solid colors if 'Floral' or 'Jacquard' is selected.
-- NO artistic liberty that alters the technical construction.
+3. DESIGN DNA (OUT-PRINT STYLE):
+- Photography: Vogue-style High-Fashion Editorial, Soft Side-Lighting, 85mm. 
+- Atmosphere: Minimal Luxury Showroom.
+- Composition: LEFT (Photorealistic front/back views) | RIGHT (Clean Black & White Vector CAD Blueprint - NO HUMAN MODEL).
 
-### VISUAL & ARTISTIC DNA:
-- **Style:** High-fashion editorial photography (Vogue style).
-- **Lighting:** Soft, directional studio lighting with subtle rim light to accentuate fabric textures (sheen of satin, weight of silk, sparkle of beads).
-- **Setting:** Luxury minimal showroom with soft atmospheric transitions (like sunset clouds or high-end neutral studio).
-- **Composition:** 
-  1. LEFT SECTION: 100% Photorealistic model shots (full-body and 3/4 view).
-  2. RIGHT SECTION: Clean black-and-white vector CAD blueprint. No human model. ${measurementText}
-- **Resolution:** 8k resolution, photorealistic masterpiece, shot on Phase One 100MP, f/1.8.
+4. SPECIFICATIONS:
+- Colors: ${customColorText}
+- Skin/Hair: ${skinDesc}, ${hairDesc}
+- Technical Guidelines: ${designDescription}.
 
-Strict Specifications: ${designDescription}.`;
+### NEGATIVE CONSTRAINTS:
+- NO V-neck if High Neck/Round is selected.
+- NO sleeveless if sleeves are expected.
+- No human on CAD side.
+`;
 
         const response = await openai.images.generate({
             model: "dall-e-3",
