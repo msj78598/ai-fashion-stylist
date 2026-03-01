@@ -52,8 +52,15 @@ export const generateTechPackSpecSheet = async (userPreferences) => {
     try {
         const prompt = `
 ### USER SELECTION DATA (MANDATORY ALIGNMENT):
-0. Operational Mode:
-   - Active Track: ${userPreferences.activeTrack || 'Manual_Customization'}
+0. THE TWO-TRACK PROTOCOL (CRITICAL! READ CAREFULLY):
+${userPreferences.activeTrack?.includes('AI-Suggested')
+                ? `> YOU ARE IN TRACK A (AI-SUGGESTED SCIENCE): 
+    - Base your text analysis and design recommendations on fashion science to flatter the user's specific measurements: ${userPreferences.measurements?.bust}cm Bust, ${userPreferences.measurements?.waist}cm Waist, ${userPreferences.measurements?.hips}cm Hips.
+    - Emphasize WHY the suggested cuts work for their specific body.`
+                : `> YOU ARE IN TRACK B (STRICT MANUAL EXECUTION):
+    - STICK 100% LITERALLY TO EVERY SELECTION PROVIDED BELOW.
+    - ZERO artistic deviation in the structural elements.`
+            }
 
 1. Garment Essence:
    - Type: ${userPreferences.clothingType || 'Haute Couture Dress'}
@@ -133,16 +140,14 @@ const hairStyleMap = {
 export const generateMasterTechPackImage = async (designDescription, preferences) => {
     try {
         const hasMeasurements = preferences.measurements && Object.keys(preferences.measurements).length > 0;
-        const measurementText = hasMeasurements
-            ? `CRITICAL REQUIREMENT: You MUST draw large, bold, highly legible numerical dimension lines directly on the CAD sketch indicating: Bust ${preferences.measurements.bust || '?'} cm, Waist ${preferences.measurements.waist || '?'} cm, Hips ${preferences.measurements.hips || '?'} cm, Length ${preferences.height || '?'} cm, Shoulder ${preferences.shoulder || '?'} cm.`
-            : `Keep the CAD sketch clean without exact number annotations.`;
+        const measurementText = `Keep the CAD sketch clean and professional as a technical blueprint without numerical text annotations, as they are already provided in the table.`;
 
         const bodyDesc = bodyTypeMap[preferences.bodyType] || preferences.bodyType || 'Average';
         const skinDesc = skinToneMap[preferences.skinTone] || preferences.skinTone || 'Natural';
         const hairDesc = hairStyleMap[preferences.hairStyle] || preferences.hairStyle || 'Stylish';
 
         const physiqueInstruction = hasMeasurements
-            ? `The human model's physique MUST explicitly reflect these physical proportions: Bust ${preferences.measurements.bust}cm (chest), Waist ${preferences.measurements.waist}cm, and Hips ${preferences.measurements.hips}cm. Ensure her silhouette is realistic to these specific numbers while maintaining a ${bodyDesc} appearance.`
+            ? `The human model's physique MUST reflect these physical proportions with 100% scientific accuracy: ${preferences.measurements.bust}cm bust, ${preferences.measurements.waist}cm waist, and ${preferences.measurements.hips}cm hips. Ensure the silhouette is an exact anatomical reflection of these numbers (e.g., specific waist-to-hip ratio).`
             : `The human model must have a ${bodyDesc} body type.`;
 
         const customInspiration = preferences.customDescription ? `Incorporating specific client request: "${preferences.customDescription}". ` : "";
@@ -164,13 +169,24 @@ export const generateMasterTechPackImage = async (designDescription, preferences
         const imagePrompt = `### MASTER AI FASHION ARCHITECT PROTOCOL
 Generate a world-class Haute Couture 'Visual Master Board'. 
 
-1. TWO-TRACK FIDELITY:
-- If Manual: STICK 100% LITERALLY TO: ${clothingTypeText}, ${silhouetteText}, ${lengthText}, ${necklineText}, ${sleevesLengthText}, ${fabricMaterialText}. 
-- No artistic deviation.
+1. THE TWO-TRACK PROTOCOL (CRITICAL! READ CAREFULLY):
+${preferences.activeTrack === 'المسار الآلي (AI-Suggested Style): اصنع لي الإطلالة المثالية بناءً على قياساتي المكتملة.'
+                ? `> YOU ARE IN TRACK A (AI-SUGGESTED SCIENCE): 
+    - Base your design on fashion science to flatter the user's specific measurements: ${preferences.measurements.bust}cm Bust, ${preferences.measurements.waist}cm Waist, ${preferences.measurements.hips}cm Hips.
+    - If they are curvy, emphasize the waist. If they are slender, add structure. 
+    - You have creative freedom to override minor user selections to create the MOST PERFECT, flattering dress for this specific body type.`
+                : `> YOU ARE IN TRACK B (STRICT MANUAL EXECUTION):
+    - STICK 100% LITERALLY TO EVERY SELECTION: ${clothingTypeText}, ${silhouetteText}, ${lengthText}, ${necklineText}, ${sleevesLengthText}, ${fabricMaterialText}.
+    - ZERO artistic deviation. If they chose "Round Neck", it MUST be round. If "No Sleeves", it MUST be sleeveless.`
+            }
 
-2. BODY FIDELITY (SCIENTIFIC):
-- Mannequin/Model must reflect exact measurements: ${measurementText}.
-- Anatomical Representation: ${physiqueInstruction} (Respectful & Professional).
+2. THE GOLDEN RULE (100% CAD ALIGNMENT): 
+- The garment worn by the photorealistic model on the LEFT and the CAD blueprint on the RIGHT MUST BE EXACTLY IDENTICAL in every single detail, cut, proportion, and embellishment. It must be unmistakably the same dress.
+
+3. ANATOMICAL FIDELITY (SCIENTIFIC):
+- The mannequin/model must be an exact anatomical reflection of the provided measurements: ${preferences.measurements.bust}cm bust, ${preferences.measurements.waist}cm waist, ${preferences.measurements.hips}cm hips.
+- ${physiqueInstruction}
+
 
 3. DESIGN DNA (OUT-PRINT STYLE):
 - Photography: Vogue-style High-Fashion Editorial, Soft Side-Lighting, 85mm. 

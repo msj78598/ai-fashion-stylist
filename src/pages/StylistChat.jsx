@@ -221,26 +221,6 @@ const StylistChat = () => {
                                     {masterImage ? (
                                         <>
                                             <img src={masterImage} alt="Master Tech Pack Image" className="w-full object-contain max-h-[1000px] print:max-h-[600px] z-0 relative" />
-
-                                            {/* CSS Overlay Measurements to guarantee visibility for Tailor */}
-                                            {activePreferences.measurements && Object.keys(activePreferences.measurements).length > 0 && (
-                                                <div className="absolute inset-0 pointer-events-none flex rtl:flex-row-reverse">
-                                                    {/* Left side is usually photorealistic, Right side is CAD. Let's place physical specs over the CAD area (right half via flex) */}
-                                                    <div className="w-1/2 hidden md:block"></div> {/* Spacer for Photo Side */}
-                                                    <div className="w-full md:w-1/2 relative p-4 lg:p-10 flex flex-col justify-between">
-                                                        <div className="bg-white/95 backdrop-blur-md border-2 border-primary-600 p-4 rounded-xl shadow-2xl mt-4 md:mt-24 ml-auto max-w-fit transform md:-rotate-2 print:border-black print:bg-white print:shadow-none">
-                                                            <h4 className="text-xs font-bold font-arabic text-primary-500 uppercase tracking-widest mb-2 border-b border-primary-100 pb-2">قياسات الهيكل الأساسية</h4>
-                                                            <div className="grid flex flex-col gap-2 text-sm font-bold text-gray-900 font-mono" dir="ltr">
-                                                                {activePreferences.measurements.bust && <div className="flex justify-between gap-4"><span className="text-gray-400">Bust:</span> <span>{activePreferences.measurements.bust} <span className="text-[10px] text-gray-400">cm</span></span></div>}
-                                                                {activePreferences.measurements.waist && <div className="flex justify-between gap-4"><span className="text-gray-400">Waist:</span> <span>{activePreferences.measurements.waist} <span className="text-[10px] text-gray-400">cm</span></span></div>}
-                                                                {activePreferences.measurements.hips && <div className="flex justify-between gap-4"><span className="text-gray-400">Hips:</span> <span>{activePreferences.measurements.hips} <span className="text-[10px] text-gray-400">cm</span></span></div>}
-                                                                {activePreferences.measurements.shoulder && <div className="flex justify-between gap-4"><span className="text-gray-400">Shoulder:</span> <span>{activePreferences.measurements.shoulder} <span className="text-[10px] text-gray-400">cm</span></span></div>}
-                                                                {activePreferences.height && <div className="flex justify-between gap-4 border-t border-gray-100 pt-1 mt-1"><span className="text-gray-400">Total Length:</span> <span>{activePreferences.height} <span className="text-[10px] text-gray-400">cm</span></span></div>}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
                                         </>
                                     ) : (!loadingImage && (
                                         <div className="text-gray-300 flex flex-col items-center p-10 z-10 anim-pulse"><ImageIcon className="w-16 h-16 mb-4 opacity-30" />تعذر توليد لوحة التصميم</div>
