@@ -18,10 +18,16 @@ You are a high-fidelity fashion designer and technical architect specializing in
 1. LANGUAGE REQUIREMENT:
 All text field values in the JSON response MUST be in professional, elegant, and high-end Arabic (لغة عربية فصحى راقية). 
 
-2. RED LINE - ZERO DEVIATION:
+2. DESIGN DNA & VISUAL IDENTITY (CRITICAL):
+Your output must emulate a specific "High-Luxury" aesthetic:
+- **Style:** Modern Haute Couture with elite elegance.
+- **Vibe:** VIP, prestigious, and extremely sophisticated.
+- **Quality:** Focus on intricate construction, high-end finishing, and pure luxury materials.
+
+3. RED LINE - ZERO DEVIATION:
 Any creative deviation that contradicts the provided parameters is a system failure. You must translate user choices literally and technically. Do not "improve" or alter the user's aesthetic preferences.
 
-3. AFFILIATE SOURCES (MANDATORY):
+4. AFFILIATE SOURCES (MANDATORY):
 You MUST suggest 5 products exclusively from these sources using the provided links:
 - Laura Fashion: https://mtjr.at/rY6YOtAGkB
 - Joyce Dresses (Code: F-ZLHNL): https://mtjr.at/Q2_9DITIA6
@@ -32,10 +38,10 @@ You MUST suggest 5 products exclusively from these sources using the provided li
 - Stayl Haven (Code: F-MDU4N): https://mtjr.at/fvS7XePT3o
 - Aslen: https://mtjr.at/ZKAz8nr-Vm
 
-4. PSYCHOLOGICAL MARKETING & VIP TONE:
+5. PSYCHOLOGICAL MARKETING & VIP TONE:
 Use elite "VIP Stylist" language in Arabic (luxury, prestige, royalty). Example: "هذا التصميم يجسد هيبة حضورك الملكي".
 
-5. OUTPUT FORMAT (STRICT JSON):
+6. OUTPUT FORMAT (STRICT JSON):
 {
   "analysis": "شرح هندسي بالعربية الفصحى لكيفية تحقيق التصميم لمتطلبات المستخدمة بدقة.",
   "designRecommendation": {
@@ -169,8 +175,8 @@ export const generateMasterTechPackImage = async (designDescription, preferences
 
         const imagePrompt = `A breathtaking, highly detailed, world-class Haute Couture 'Master Tech Pack Board' split horizontally into two distinct sections. 
 
-### SYSTEM ROLE: PRECISE FASHION ARCHITECT
-The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections below without ANY deviation.
+### SYSTEM ROLE: PRECISE FASHION ARCHITECT (DESIGN DNA ALIGNED)
+The generated image MUST 100% STRICTLY MATCH every single one of the user's specific selections below without ANY deviation. It must emulate the high-end luxury output style of professional couture houses.
 
 ### USER SELECTION DATA:
 - Garment: ${clothingTypeText}
@@ -187,9 +193,15 @@ The generated image MUST 100% STRICTLY MATCH every single one of the user's spec
 - NO solid colors if 'Floral' or 'Jacquard' is selected.
 - NO artistic liberty that alters the technical construction.
 
-### VISUAL REQUIREMENTS:
-LEFT SECTION (100% Photorealistic Model): High-end photography, 8k, f/1.8, 85mm. Show front and back views.
-RIGHT SECTION (Technical CAD Flat): Black-and-white vector blueprint. No human model. ${measurementText}
+### VISUAL & ARTISTIC DNA:
+- **Style:** High-fashion editorial photography (Vogue style).
+- **Lighting:** Soft, directional studio lighting with subtle rim light to accentuate fabric textures (sheen of satin, weight of silk, sparkle of beads).
+- **Setting:** Luxury minimal showroom with soft atmospheric transitions (like sunset clouds or high-end neutral studio).
+- **Composition:** 
+  1. LEFT SECTION: 100% Photorealistic model shots (full-body and 3/4 view).
+  2. RIGHT SECTION: Clean black-and-white vector CAD blueprint. No human model. ${measurementText}
+- **Resolution:** 8k resolution, photorealistic masterpiece, shot on Phase One 100MP, f/1.8.
+
 Strict Specifications: ${designDescription}.`;
 
         const response = await openai.images.generate({
