@@ -376,7 +376,12 @@ const StylistChat = () => {
                                     </motion.div>
                                 ))
                             ) : (
-                                <p className="font-arabic text-gray-500 text-center col-span-full py-8">جاري البحث عن المنتجات المطابقة للمعايير...</p>
+                                <div className="col-span-full py-10 px-6 text-center bg-white rounded-2xl border border-gray-200 shadow-sm" dir="rtl">
+                                    <p className="font-arabic text-gray-800 font-bold text-lg mb-2">تعذر العثور على تطابق دقيق</p>
+                                    <p className="font-arabic text-gray-600 text-sm">
+                                        التزاماً بالشفافية والقيود الصارمة، لم نعثر على منتج حقيقي في المتاجر المعتمدة يحقق نسبة تطابق <span className="text-primary-600 font-bold">65%</span> أو أعلى لمواصفات تصميمك.
+                                    </p>
+                                </div>
                             )}
                         </div>
                     </motion.div>
