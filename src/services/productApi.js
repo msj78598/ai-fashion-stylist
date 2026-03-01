@@ -97,23 +97,35 @@ const MOCK_PRODUCTS = [
 ];
 
 /**
- * Validates a value against an evaluation rule string in a very basic way.
- * In a production app with a complete JS evaluator or LLM agent, this would be robust.
+ * Smart Keyword Matcher for Arabic Descriptions
+ * Extracts logic words from the AI Rule and checks if they exist in the deeply scraped Product Description.
  */
 function evaluateScore(attributeValue, ruleString, maxWeight) {
-    if (!attributeValue) return 0;
+    if (!attributeValue || !ruleString) return 0;
 
     const val = String(attributeValue).toLowerCase();
     const rule = String(ruleString).toLowerCase();
 
-    // Very naive heuristic scoring based on simple text includes
-    // If the rule mentions the value or vice versa, give some points.
+    // Exact or direct inclusion check (First Pass)
     if (rule.includes(val) || val.includes(rule)) {
         return maxWeight;
     }
 
-    // Partial score fallback
-    return Math.floor(maxWeight / 2);
+    // Keyword Extraction Check (Second Pass - for Deep Crawler Text)
+    // Extract words longer than 2 chars from the AI rule
+    const ruleWords = rule.replace(/[^\w\s\u0600-\u06FF]/g, ' ')
+        .split(/\s+/)
+        .filter(w => w.length > 2 && !['بدون', 'على', 'من', 'في', 'مع', 'أو', 'او'].includes(w));
+
+    // If any significant keyword from the rule exists in the product text, award full points
+    const hasMatch = ruleWords.some(keyword => val.includes(keyword));
+
+    if (hasMatch) {
+        return maxWeight;
+    }
+
+    // No match
+    return 0;
 }
 
 /**
@@ -161,14 +173,17 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
                 let earned = 0;
                 const attrs = product.rawAttributes || {};
 
+                // Safely convert arrays to strings if PIE generated an array
+                const safeColor = Array.isArray(productDNA?.colors) ? productDNA.colors.join(' ') : productDNA?.colors || '';
+
                 // User's specific requested keys mapping:
-                if (key === 'colorMatch' && attrs.color) earned = evaluateScore(attrs.color, rule + " " + (productDNA?.colors?.join(' ')), weight);
-                if (key === 'silhouetteMatch' && attrs.silhouette) earned = evaluateScore(attrs.silhouette, rule + " " + productDNA?.silhouette, weight);
-                if (key === 'lengthMatch' && attrs.length) earned = evaluateScore(attrs.length, rule + " " + productDNA?.length, weight);
-                if (key === 'necklineMatch' && attrs.neckline) earned = evaluateScore(attrs.neckline, rule + " " + productDNA?.neckline, weight);
-                if (key === 'sleeveMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " " + productDNA?.sleeves, weight);
-                if (key === 'modestyMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " long sleeve maxi", weight);
-                if (key === 'occasionMatch') earned = weight; // Assume occasion fits for mock
+                if (key === 'colorMatch' && attrs.color) earned = evaluateScore(attrs.color, rule + " " + safeColor, weight);
+                else if (key === 'silhouetteMatch' && attrs.silhouette) earned = evaluateScore(attrs.silhouette, rule + " " + productDNA?.silhouette, weight);
+                else if (key === 'lengthMatch' && attrs.length) earned = evaluateScore(attrs.length, rule + " " + productDNA?.length, weight);
+                else if (key === 'necklineMatch' && attrs.neckline) earned = evaluateScore(attrs.neckline, rule + " " + productDNA?.neckline, weight);
+                else if (key === 'sleeveMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " " + productDNA?.sleeves, weight);
+                else if (key === 'modestyMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " long sleeve maxi المحتشم", weight);
+                else if (key === 'occasionMatch') earned = weight; // Assume occasion fits for mock
 
                 totalScore += earned;
                 matchDetails.push({ key, earned, weight });
