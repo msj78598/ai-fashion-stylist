@@ -168,19 +168,38 @@ const StylistChat = () => {
                         <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-200 print:shadow-none print:border-none print:p-0">
 
                             {/* Tech Pack Header */}
-                            <div className="mb-8 border-b-2 border-gray-800 pb-4 text-center">
-                                <h1 className="text-3xl font-bold font-arabic text-gray-900 tracking-wide uppercase">{result?.designRecommendation?.title || 'Tech Pack Specification'}</h1>
-                                <p className="text-gray-500 mt-2 font-arabic text-lg">Detailed blueprint for custom tailoring construction</p>
+                            <div className="mb-10 text-center relative">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-primary-600 rounded-full"></div>
+                                <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.designRecommendation?.title || 'مواصفات التصميم التقني'}</h1>
+                                <p className="text-primary-600 font-arabic text-lg tracking-widest opacity-80 uppercase">Elite Haute Couture Specification</p>
                             </div>
 
+                            {/* Section 0: Design Overview / Designer's Insight */}
+                            {result?.designRecommendation?.description && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="mb-12 bg-gradient-to-br from-primary-50/50 to-white p-8 rounded-3xl border border-primary-100/50 relative overflow-hidden"
+                                >
+                                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                                        <Sparkles className="w-12 h-12 text-primary-600" />
+                                    </div>
+                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">نظرة عامة على الإطلالة (Design Overview)</h3>
+                                    <p className="text-xl font-arabic text-gray-700 leading-relaxed text-right dir-rtl">
+                                        {result?.designRecommendation?.description}
+                                    </p>
+                                </motion.div>
+                            )}
+
                             {/* Section 1: Visual Master Board */}
-                            <div className="mb-10">
-                                <h3 className="text-xl font-bold font-arabic mb-4 text-gray-800 border-l-4 border-gray-800 pl-3">لوحة التصميم الشاملة (Visual Master Board)</h3>
-                                <div className="rounded-xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-300 relative w-full flex items-center justify-center print:border-solid print:border-black min-h-[400px]">
+                            <div className="mb-12">
+                                <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">لوحة التصميم الشاملة (Visual Master Board)</h3>
+                                <div className="rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-primary-200 relative w-full flex items-center justify-center print:border-solid print:border-black min-h-[450px] shadow-inner">
                                     {loadingImage && !masterImage && (
-                                        <div className="absolute flex flex-col items-center z-10">
-                                            <Loader2 className="w-10 h-10 text-gray-800 animate-spin mb-3" />
-                                            <p className="font-arabic text-sm font-bold text-gray-600">جاري رسم المخطط المعماري للفستان...</p>
+                                        <div className="absolute flex flex-col items-center z-10 p-10 bg-white/60 backdrop-blur-md rounded-2xl shadow-xl">
+                                            <Loader2 className="w-12 h-12 text-primary-600 animate-spin mb-4" />
+                                            <p className="font-arabic text-lg font-bold text-primary-800">جاري رسم المخطط المعماري للفستان...</p>
+                                            <p className="font-arabic text-sm text-primary-600 mt-2 opacity-70">نقوم الآن بتحويل أفكارك إلى لوحة فنية</p>
                                         </div>
                                     )}
                                     {masterImage ? (
@@ -193,14 +212,14 @@ const StylistChat = () => {
                                                     {/* Left side is usually photorealistic, Right side is CAD. Let's place physical specs over the CAD area (right half via flex) */}
                                                     <div className="w-1/2 hidden md:block"></div> {/* Spacer for Photo Side */}
                                                     <div className="w-full md:w-1/2 relative p-4 lg:p-10 flex flex-col justify-between">
-                                                        <div className="bg-white/90 backdrop-blur-sm border-2 border-gray-800 p-3 rounded shadow-xl mt-4 md:mt-20 ml-auto max-w-fit transform md:-rotate-2 print:border-black print:bg-white print:shadow-none">
-                                                            <h4 className="text-xs font-bold font-arabic text-gray-500 uppercase tracking-widest mb-1 border-b border-gray-300 pb-1">KEY MEASUREMENTS</h4>
-                                                            <div className="flex flex-col gap-1 text-sm font-bold text-gray-900 font-mono" dir="ltr">
-                                                                {activePreferences.measurements.bust && <div><span className="text-gray-500">Bust:</span> {activePreferences.measurements.bust} <span className="text-xs">cm</span></div>}
-                                                                {activePreferences.measurements.waist && <div><span className="text-gray-500">Waist:</span> {activePreferences.measurements.waist} <span className="text-xs">cm</span></div>}
-                                                                {activePreferences.measurements.hips && <div><span className="text-gray-500">Hips:</span> {activePreferences.measurements.hips} <span className="text-xs">cm</span></div>}
-                                                                {activePreferences.measurements.shoulder && <div><span className="text-gray-500">Shoulder:</span> {activePreferences.measurements.shoulder} <span className="text-xs">cm</span></div>}
-                                                                {activePreferences.height && <div><span className="text-gray-500">Length/Height:</span> {activePreferences.height} <span className="text-xs">cm</span></div>}
+                                                        <div className="bg-white/95 backdrop-blur-md border-2 border-primary-600 p-4 rounded-xl shadow-2xl mt-4 md:mt-24 ml-auto max-w-fit transform md:-rotate-2 print:border-black print:bg-white print:shadow-none">
+                                                            <h4 className="text-xs font-bold font-arabic text-primary-500 uppercase tracking-widest mb-2 border-b border-primary-100 pb-2">قياسات الهيكل الأساسية</h4>
+                                                            <div className="grid flex flex-col gap-2 text-sm font-bold text-gray-900 font-mono" dir="ltr">
+                                                                {activePreferences.measurements.bust && <div className="flex justify-between gap-4"><span className="text-gray-400">Bust:</span> <span>{activePreferences.measurements.bust} <span className="text-[10px] text-gray-400">cm</span></span></div>}
+                                                                {activePreferences.measurements.waist && <div className="flex justify-between gap-4"><span className="text-gray-400">Waist:</span> <span>{activePreferences.measurements.waist} <span className="text-[10px] text-gray-400">cm</span></span></div>}
+                                                                {activePreferences.measurements.hips && <div className="flex justify-between gap-4"><span className="text-gray-400">Hips:</span> <span>{activePreferences.measurements.hips} <span className="text-[10px] text-gray-400">cm</span></span></div>}
+                                                                {activePreferences.measurements.shoulder && <div className="flex justify-between gap-4"><span className="text-gray-400">Shoulder:</span> <span>{activePreferences.measurements.shoulder} <span className="text-[10px] text-gray-400">cm</span></span></div>}
+                                                                {activePreferences.height && <div className="flex justify-between gap-4 border-t border-gray-100 pt-1 mt-1"><span className="text-gray-400">Total Length:</span> <span>{activePreferences.height} <span className="text-[10px] text-gray-400">cm</span></span></div>}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,26 +227,26 @@ const StylistChat = () => {
                                             )}
                                         </>
                                     ) : (!loadingImage && (
-                                        <div className="text-gray-400 flex flex-col items-center p-10 z-10"><ImageIcon className="w-12 h-12 mb-2 opacity-50" />تعذر توليد الصورة</div>
+                                        <div className="text-gray-300 flex flex-col items-center p-10 z-10 anim-pulse"><ImageIcon className="w-16 h-16 mb-4 opacity-30" />تعذر توليد لوحة التصميم</div>
                                     ))}
                                 </div>
                             </div>
 
                             {/* Section 2: Precise Measurements */}
-                            <div className="mb-10 print:break-inside-avoid">
-                                <h3 className="text-xl font-bold font-arabic mb-4 text-gray-800 border-l-4 border-gray-800 pl-3">المقاسات الدقيقة (Points of Measure)</h3>
-                                <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 print:bg-transparent print:border-black">
+                            <div className="mb-12 print:break-inside-avoid">
+                                <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">تفاصيل القياسات الدقيقة (Points of Measure)</h3>
+                                <div className="bg-white p-6 rounded-2xl border-2 border-primary-50 print:bg-transparent print:border-black shadow-sm">
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4" dir="ltr">
                                         {activePreferences.measurements && Object.keys(activePreferences.measurements).length > 0 ? (
                                             Object.entries(activePreferences.measurements).map(([key, value]) => (
-                                                <div key={key} className="bg-white p-3 rounded shadow-sm border border-gray-100 flex flex-col items-center print:border-black">
-                                                    <span className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{key}</span>
-                                                    <span className="text-lg font-bold text-gray-900">{value} cm</span>
+                                                <div key={key} className="bg-primary-50/30 p-4 rounded-xl border border-primary-100 flex flex-col items-center transition-all hover:bg-primary-50 print:border-black">
+                                                    <span className="text-xs text-primary-500 font-bold uppercase tracking-wider mb-2">{key === 'bust' ? 'Bust' : key === 'waist' ? 'Waist' : key === 'hips' ? 'Hips' : key === 'shoulder' ? 'Shoulder' : key}</span>
+                                                    <span className="text-xl font-black text-primary-900">{value} cm</span>
                                                 </div>
                                             ))
                                         ) : (
-                                            <div className="col-span-full text-right text-orange-500 font-arabic" dir="rtl">
-                                                لا توجد قياسات رقمية دقيقة مدخلة. يُفضل أخذ القياسات الفعلية قبل القص.
+                                            <div className="col-span-full text-right text-orange-500 font-arabic bg-orange-50 p-4 rounded-xl border border-orange-100" dir="rtl">
+                                                لا توجد قياسات رقمية دقيقة مدخلة. يُفضل أخذ القياسات الفعلية قبل القص لضمان الدقة بنسبة 1:1.
                                             </div>
                                         )}
                                     </div>
@@ -235,36 +254,47 @@ const StylistChat = () => {
                             </div>
 
                             {/* Section 3: Bill of Materials & Tailoring Instructions */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 print:break-inside-avoid">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 print:break-inside-avoid">
                                 <div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-gray-800 border-l-4 border-gray-800 pl-3">المواد (Bill of Materials)</h3>
-                                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 h-full print:bg-transparent print:border-black">
-                                        <p className="text-gray-800 font-arabic leading-relaxed">
-                                            <span className="font-bold underline mb-2 block">القماش (Fabric):</span>
-                                            {result?.designRecommendation?.fabric}
+                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">المواد والخامات (Bill of Materials)</h3>
+                                    <div className="bg-primary-50/20 p-8 rounded-3xl border border-primary-100 h-full print:bg-transparent print:border-black shadow-sm">
+                                        <p className="text-primary-900 font-arabic leading-relaxed mb-6">
+                                            <span className="text-xs font-bold uppercase tracking-widest text-primary-400 block mb-2">القماش الأساسي:</span>
+                                            <span className="text-lg font-bold">{result?.designRecommendation?.fabric}</span>
                                         </p>
-                                        <hr className="my-4 border-gray-300 print:border-black" />
-                                        <p className="text-gray-800 font-arabic leading-relaxed">
-                                            <span className="font-bold underline mb-2 block">المكونات الاضافية:</span>
-                                            {result?.designRecommendation?.billOfMaterials || 'تحدد بواسطة الخياط حسب المخطط.'}
+                                        <div className="h-px bg-primary-100 my-6 print:bg-black"></div>
+                                        <p className="text-primary-900 font-arabic leading-relaxed">
+                                            <span className="text-xs font-bold uppercase tracking-widest text-primary-400 block mb-2">المكونات الإضافية والشك:</span>
+                                            <span className="text-lg font-medium">{result?.designRecommendation?.billOfMaterials || 'تحدد بواسطة الخياط حسب المخطط.'}</span>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-gray-800 border-l-4 border-gray-800 pl-3">تعليمات الخياطة (Instructions)</h3>
-                                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 h-full print:bg-transparent print:border-black">
-                                        <p className="text-gray-800 font-arabic leading-relaxed whitespace-pre-wrap">
+                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">تعليمات الخياطة والتركيب (Tailoring Instructions)</h3>
+                                    <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 h-full print:bg-transparent print:border-black shadow-xl text-white">
+                                        <p className="font-arabic leading-loose whitespace-pre-wrap text-gray-300">
                                             {result?.designRecommendation?.tailoringInstructions}
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="mt-12 text-center print:block">
-                                <p className="text-2xl font-arabic text-gray-700 leading-relaxed italic border-t pt-8 print:border-black">
+                            {/* Analysis Section - Redesigned as Premium Quote */}
+                            <div className="mt-16 text-center relative p-12 bg-primary-900 rounded-[3rem] overflow-hidden shadow-2xl print:bg-white print:text-black print:border-2 print:border-black">
+                                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)] pointer-events-none"></div>
+                                <div className="absolute top-8 left-12 opacity-20 pointer-events-none">
+                                    <Sparkles className="w-16 h-16 text-white" />
+                                </div>
+                                <span className="block text-primary-400 font-arabic text-sm tracking-[0.3em] uppercase mb-6">تحليل المصمم الخاص</span>
+                                <p className="text-2xl sm:text-3xl font-arabic text-white leading-snug italic relative z-10 px-4">
                                     "{result?.analysis}"
                                 </p>
+                                <div className="mt-8 flex items-center justify-center gap-2 text-primary-400 font-arabic">
+                                    <div className="h-px w-8 bg-primary-800"></div>
+                                    <span className="text-xs uppercase tracking-widest">VIP Styling Intelligence</span>
+                                    <div className="h-px w-8 bg-primary-800"></div>
+                                </div>
                             </div>
 
                             {/* Fast Regeneration / Tweak Area */}
