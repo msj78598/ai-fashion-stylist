@@ -48,125 +48,90 @@ const STATIC_QUESTIONS = [
     },
     {
         id: 'silhouette',
-        title: 'ما هي القصة العامة (Silhouette) للتصميم؟',
-        subtitle: 'شكل الملابس الخارجي وكيف ينسدل على الجسم',
+        title: 'القـوام والقصّـة (Silhouette)',
+        subtitle: 'شكل القصّة وكيفية انسدال القطعة على الجسم',
         type: 'options',
-        options: ['حورية البحر أو ضيق (Fitted/Mermaid)', 'قصة حرف A المنسدلة (A-Line)', 'منفوش كلاسيكي (Ball Gown / Voluminous)', 'مستقيم (Sheath / Straight)', 'فضفاض ومريح (Oversized / Loose)'],
+        options: ['منفوش ملكي', 'كلوش واسع', 'مستقيم "Straight"', 'قصة سمكة "Mermaid"', 'قصة A-Line'],
     },
     {
         id: 'clothingLength',
-        title: 'ما هو الطول المفضل للإطلالة؟',
-        subtitle: 'لتحديد شكل ونسبة التصميم من الأسفل',
+        title: 'طـول الإطـلالـة',
+        subtitle: 'المستوى الذي يصل إليه التصميم',
         type: 'options',
-        options: ['طويل ملامس للأرض (Maxi)', 'طويل مع ذيل (Train)', 'يصل للكاحل (Ankle-Length)', 'متوسط يغطي الركبة (Midi)', 'قصير (Mini / Above Knee)'],
+        options: ['طويل ملامس للأرض', 'طويل مع ذيل "Train"', 'ميدي يغطي الركبة', 'قصير'],
     },
     {
         id: 'neckline',
-        title: 'كيف تفضلين قصة الصدر (Neckline)؟',
-        subtitle: 'شكل القصة من الأمام',
+        title: 'ياقـة وقصّـة الصـدر (Neckline)',
+        subtitle: 'تفاصيل الجزء العلوي للإطلالة',
         type: 'options',
-        options: ['قصة V مفتوحة (V-Neck)', 'شكل قلب (Sweetheart)', 'دائري أو ياقة قارب (Scoop / Boat)', 'ياقة عالية دائرية (High Neck)', 'مربع (Square)'],
+        options: [
+            'الياقات المفتوحة: فتحة V عميقة، ياقة قلب "Sweetheart"، ياقة مربعة، ياقة قارب واسعة',
+            'الياقات المغلقة والرسمية: ياقة عالية دائرية "High Neck"، ياقة قميص، ياقة بليزر رسمية "Lapel"',
+            'الياقات المزخرفة: ياقة كشكش، ياقة مطرزة بالخرز، ياقة فرو أو ريش'
+        ],
     },
     {
-        id: 'collarStyle',
-        title: 'هل ترغبين بتفاصيل إضافية للياقة (Collar)؟',
-        subtitle: 'شكل الياقة الملتفة حول الرقبة',
+        id: 'sleeves',
+        title: 'مواصفـات الأكمـام (Sleeves)',
+        subtitle: 'شكل وطول الأكمام',
         type: 'options',
-        options: ['بدون ياقة (Collarless)', 'ياقة قميص كلاسيكية (Shirt Collar)', 'ياقة بليزر رسمية (Lapel)', 'ياقة فرو أو ريش', 'ياقة كشكش (Ruffled Collar)'],
-    },
-    {
-        id: 'sleevesLength',
-        title: 'ما هو الطول المفضل للأكمام؟',
-        subtitle: 'اختاري الطول المناسب لكِ',
-        type: 'options',
-        options: ['بدون أكمام (Sleeveless / Off-Shoulder)', 'أكمام قصيرة (Short Sleeves)', 'نصف كم / ثلاثة أرباع (3/4 Sleeves)', 'أكمام طويلة للرسغ (Long Sleeves)', 'أكمام طويلة تغطي اليد'],
-    },
-    {
-        id: 'sleevesStyle',
-        title: 'ما هي القصة المفضلة للأكمام؟',
-        subtitle: 'شكل وحجم السواعد والأكتاف',
-        type: 'options',
-        options: ['مستقيمة وضيقة (Fitted)', 'منفوخة من الأعلى (Puff Sleeves)', 'واسعة كالجرس (Bell Sleeves)', 'أكمام الكاب المتدلية (Cape Sleeves)', 'كشكش أو طبقات (Ruffled)'],
-    },
-    {
-        id: 'waistStyle',
-        title: 'كيف تفضلين تحديد الخصر؟',
-        subtitle: 'طريقة إبراز منطقة الخصر',
-        type: 'options',
-        options: ['محدد بحزام مدمج (Belted)', 'كورسيه داخلي مشدود (Corset Waist)', 'قصة خصر عالي (Empire Waist)', 'حر وبدون تحديد (Free/Drop Waist)'],
-    },
-    {
-        id: 'backDesign',
-        title: 'ما هي تفاصيل تصميم الظهر؟',
-        subtitle: 'اللمسة الخفية خلف التصميم',
-        type: 'options',
-        options: ['ظهر مفتوح أو V عميقة (Open Back)', 'ظهر مغطى بالكامل (Covered)', 'ظهر شفاف بالدانتيل أو التول (Illusion)', 'ربطات كورسيه (Lace-up)', 'تفاصيل أزرار متسلسلة'],
+        options: [
+            'أكمام طويلة: ضيقة مستقيمة، واسعة كلوش، مطرزة بالكامل، شفافة من التول',
+            'أكمام متوسطة وقصيرة: نصف كم، كم فرنسي، أكمام منفوخة "Puff"',
+            'أكمام خاصة: أكمام الكاب المتدلية، أكمام بفتحات جانبية، أكمام بكشكشة "Ruffles"',
+            'بدون أكمام: علاقات نحيفة، كتف مكشوف "Off-shoulder"'
+        ],
     },
     {
         id: 'fabricMaterial',
-        title: 'ما هي خامة القماش الأساسية؟',
-        subtitle: 'يمكنك اختيار أكثر من خامة لدمجها معاً',
+        title: 'خامـات الأقمشـة (Fabric)',
+        subtitle: 'نوع النسيج الذي يبرز أناقة التصميم',
         type: 'options',
         multiSelect: true,
-        options: ['ستان حريري / ساتان', 'شيفون أو كريب (منسدل وطايح)', 'تفتا أو أورجانزا (واقف ومنفوش)', 'مخمل (قطيفة فخمة)', 'تول شفاف', 'صوف أو تويد (للبدل الكلاسيكية)'],
-    },
-    {
-        id: 'fabricPattern',
-        title: 'ما هو اختيارك للنقشات (Patterns)؟',
-        subtitle: 'شكل القماش وتصميم الطبعة',
-        type: 'options',
-        options: ['سادة بالكامل (Solid Color)', 'مورد / نباتي (Floral Print)', 'هندسي أو مخطط (Geometric/Striped)', 'منقط كلاسيكي (Polka Dots)', 'نقشة جكار أو تطريز مدمج بالنسيج (Jacquard)'],
+        options: ['ساتان ملكي', 'تفتا واقفه', 'مخمل', 'شيفون ناعم', 'كريب', 'تول شفاف'],
     },
     {
         id: 'fabricEmbroidery',
-        title: 'هل تفضلين إضافة تطريز أو لمسات فنية؟',
-        subtitle: 'اختاري تفاصيل الشك الفاخرة',
+        title: 'الزينـة والتطريـز (Embroidery & Details)',
+        subtitle: 'اللمسات الفنية والزخارف',
         type: 'options',
         multiSelect: true,
-        options: ['تصميم نظيف بدون إضافات', 'تطريز خرز وكريستال ثقيل', 'دانتيل فرنسي كلاسيكي', 'شك يدوي خفيف', 'لمسات من الريش أو الشراشيب (Fringe/Feathers)'],
+        options: [
+            'التطريز المكثف: خرز يدوي، كريستال، شك كامل، خيوط ذهبية/فضية',
+            'الأقمشة المشغولة: دانتيل فرنسي، جكار منقوش، أورجانزا مشغولة',
+            'الإضافات العصرية: ريش طبيعي، شراشيب، أزرار متسلسلة، أحزمة مدمجة',
+            'تصميم نظيف بدون إضافات'
+        ],
     },
     {
         id: 'colors',
-        title: 'ما هي درجات الألوان التي تميلين إليها؟',
-        subtitle: 'يمكنك اختيار التدرجات أو تحديد لونك المفضل بدقة من الخريطة',
+        title: 'تدرجـات الألـوان (Colors)',
+        subtitle: 'المجموعة اللونية التي تعكس شخصيتك',
         type: 'options',
         multiSelect: true,
-        options: ['ألوان داكنة (عنابي، زيتي، كحلي، أسود)', 'ترابية محايدة (بيج، نود، بني)', 'طيف الباستيل (سماوي، وردي، لافندر)', 'ميتاليك لامع (ذهبي، فضي)', 'ألوان جريئة (أحمر، فوشيا)', 'تحديد درجة لون مخصصة (Color Picker)'],
-    },
-    {
-        id: 'bodyType',
-        title: 'ما هي طبيعة جسمك التقريبية؟',
-        subtitle: 'ليتمكن الذكاء الاصطناعي من رسم القصّة الأنسب لكِ ضمن العرض',
-        type: 'options',
-        options: ['نحيف (Petite)', 'متوسط ومتناسق', 'ممتلئ أنثوي (Curvy)', 'شكل كمثرى', 'طويل القامة'],
-    },
-    {
-        id: 'skinTone',
-        title: 'ما هي درجة لون بشرتك للعارضة؟',
-        subtitle: 'يساعد ذلك في مطابقة ألوان الأقمشة مع بشرتك وعرض تصميم واقعي',
-        type: 'options',
-        options: ['بيضاء / فاتحة', 'حنطية / قمحية', 'سمراء / برونزية', 'داكنة'],
-    },
-    {
-        id: 'hairStyle',
-        title: 'ستايل شعر العارضة لمعاينة الإطلالة؟',
-        subtitle: 'لتكون العارضة في الرسم مشابهة لإطلالتك',
-        type: 'options',
-        options: ['متحجبة (حجاب منتظم)', 'شعر طويل مفرود', 'شعر طويل مموج', 'شعر قصير', 'مرفوع (تسريحة)'],
+        options: [
+            'الألوان الكلاسيكية والفخمة: أسود، كحلي، عنابي، زيتي',
+            'ألوان "الباستيل" والأنوثة: وردي، لافندر، موف، سماوي، مشمشي',
+            'الألوان الميتاليك والاحتفالية: ذهبي، فضي، لؤلؤي',
+            'الألوان الترابية والطبيعية: بيج، نود، بني، ترابي',
+            'الألوان الجريئة: أحمر، فوشيا، تيفاني',
+            'تحديد درجة لون مخصصة (Color Picker)'
+        ],
     },
     {
         id: 'budget',
-        title: 'ما هي الميزانية التقريبية لهذه الإطلالة؟',
-        subtitle: 'لنطابق التصميم مع خيارات التسوق وكمية أمتار القماش',
+        title: 'الميزانيـة التقريبيـة',
+        subtitle: 'لتخصيص أفضل القطع المتاحة',
         type: 'options',
         options: ['أقل من 300 ريال', '300 - 800 ريال', '800 - 1500 ريال', 'ميزانية مفتوحة (VIP)'],
     },
     {
         id: 'customDescription',
         title: 'مساحة الإبداع والتفاصيل الخاصة',
-        subtitle: 'اكتبي هنا أي أفكار إضافية: موديل معين، قصة في بالك، أو ستايل جديد حسب الموضة العالمية تودين محاكاته',
+        subtitle: 'اكتبي هنا أي أفكار إضافية تودين إضافتها للتصميم الأساسي...',
         type: 'textarea',
-        placeholder: 'مثال: أريد عباية بليزر بقصة فرنسية، أو بدلة قطعتين بقصة واسعة جداً، أو فستان مستوحى من الموضة الكورية...'
+        placeholder: 'مثال: أريد فستان مستوحى من حقبة الخمسينات ولكن بلمسة عصرية...'
     }
 ];
 
@@ -252,14 +217,6 @@ const IntakeForm = () => {
             if (colorsIndex !== -1) nextStep = colorsIndex;
         }
 
-        // 2. Sleeveless Skip Logic
-        if (currentQ.id === 'sleevesLength' && answers['sleevesLength']?.includes('بدون أكمام')) {
-            const sleevesStyleIndex = questions.findIndex(q => q.id === 'sleevesStyle');
-            if (sleevesStyleIndex !== -1 && nextStep <= sleevesStyleIndex) {
-                nextStep = sleevesStyleIndex + 1;
-            }
-        }
-
         if (nextStep < questions.length) {
             setDirection(1);
             setCurrentStep(nextStep);
@@ -297,12 +254,6 @@ const IntakeForm = () => {
         if (currentQ.id === 'colors' && answers['activeTrack']?.includes('AI-Suggested')) {
             const occasionIndex = questions.findIndex(q => q.id === 'occasion');
             if (occasionIndex !== -1) prevStep = occasionIndex;
-        }
-
-        // 2. Sleeveless Back Skip
-        // If current is after sleevesStyle and we selected sleeveless, skip sleevesStyle on the way back
-        if (questions[currentStep]?.id !== 'sleevesStyle' && questions[currentStep - 1]?.id === 'sleevesStyle' && answers['sleevesLength']?.includes('بدون أكمام')) {
-            prevStep = currentStep - 2;
         }
 
         if (prevStep >= 0) {

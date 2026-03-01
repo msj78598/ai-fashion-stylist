@@ -39,8 +39,7 @@ export function getFilteredQuestions(staticQuestions) {
     // We don't want to filter foundational logic questions, only style choices.
     const questionsToFilter = [
         'clothingType', 'occasion', 'silhouette', 'clothingLength', 'neckline',
-        'collarStyle', 'sleevesLength', 'sleevesStyle', 'waistStyle',
-        'backDesign', 'fabricMaterial', 'fabricPattern', 'fabricEmbroidery', 'colors'
+        'sleeves', 'fabricMaterial', 'fabricEmbroidery', 'colors'
     ];
 
     // Some options must ALWAYS be kept to prevent breaking the flow or because they denote "Skip" or "Custom"
