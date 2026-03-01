@@ -18,23 +18,26 @@
  * @property {Object} rawAttributes - Attributes for scoring
  */
 
-import axios from 'axios';
-
-// SerpApi Key from user environment variables
-const SERPAPI_KEY = import.meta.env.VITE_SERPAPI_KEY;
+import productDatabase from '../data/productDatabase.json';
 
 const AFFILIATE_STORES = [
-    { title: "لورا فاشن", keyword: '"لورا فاشن"' },
-    { title: "فساتين جويس", keyword: '"فساتين جويس"' },
-    { title: "فساتين ندش", keyword: '"فساتين ندش"' },
-    { title: "فساتين شموخ", keyword: '"فساتين شموخ"' },
-    { title: "بوتيك نوف", keyword: '"بوتيك نوف"' },
-    { title: "فساتين حلوه", keyword: '"فساتين حلوه"' },
-    { title: "Stayl Haven", keyword: '"stayl haven"' },
-    { title: "فساتين آسلين", keyword: '"فساتين آسلين"' },
-    { title: "شي ان", keyword: 'site:ar.shein.com' },
-    { title: "نون", keyword: 'site:noon.com/saudi-ar-en/' }
+    { title: "لورا فاشن", baseUrl: 'https://mtjr.at/rY6YOtAGkB' },
+    { title: "فساتين جويس", baseUrl: 'https://mtjr.at/Q2_9DITIA6' },
+    { title: "فساتين ندش", baseUrl: 'https://mtjr.at/5dSA-q_GkV' },
+    { title: "فساتين شموخ", baseUrl: 'https://mtjr.at/cwU8lc5q5t' },
+    { title: "بوتيك نوف", baseUrl: 'https://mtjr.at/faWBo8or-0' },
+    { title: "فساتين حلوه", baseUrl: 'https://mtjr.at/5dAVNxhXWO' },
+    { title: "Stayl Haven", baseUrl: 'https://mtjr.at/fvS7XePT3o' },
+    { title: "فساتين آسلين", baseUrl: 'https://mtjr.at/ZKAz8nr-Vm' }
 ];
+
+// Helper to build affiliate link
+function buildAffiliateLink(storeName, title) {
+    const store = AFFILIATE_STORES.find(s => s.title === storeName);
+    if (!store) return "#";
+    const query = encodeURIComponent(title);
+    return `${store.baseUrl}?q=${query}`;
+}
 
 const MOCK_PRODUCTS = [
     {
@@ -193,95 +196,25 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
 }
 
 /**
- * Dynamically fetch products using SerpApi across the 10 target stores.
+ * Dynamically fetch products using the local pre-scraped Product Database.
+ * No longer relying on external SerpApi calls.
  */
 export async function fetchAndScoreProducts(searchQueries, productIntelligence) {
-    console.log("Starting Real-Time Product Search via SerpApi...");
+    console.log("Starting Local Database Product Search...");
+    console.log(`Database loaded with ${productDatabase.length} products.`);
 
-    // 1. Build the target domain string
-    const storeKeywords = AFFILIATE_STORES.map(s => s.keyword).join(' OR ');
+    // 1. Prepare products and inject affiliate links
+    const preparedProducts = productDatabase.map(p => {
+        return {
+            ...p,
+            // Replace the organic scraped URL with the user's mtjr.at affiliate search link
+            productUrl: buildAffiliateLink(p.storeName, p.title)
+        };
+    });
 
-    // We use the first generated search query from the AI (usually the most accurate)
-    let aiQuery = "فستان سهرة";
-    if (searchQueries && searchQueries.length > 0) {
-        aiQuery = searchQueries[0];
-    }
-
-    const finalGoogleQuery = `(${storeKeywords}) ${aiQuery}`;
-    console.log("Executing Google Query:", finalGoogleQuery);
-
-    let liveProducts = [];
-
-    try {
-        // Run against SerpApi
-        const response = await axios.get('https://serpapi.com/search.json', {
-            params: {
-                engine: 'google',
-                q: finalGoogleQuery,
-                hl: 'ar',
-                gl: 'sa', // Google Saudi Arabia
-                api_key: SERPAPI_KEY
-            }
-        });
-
-        const results = response.data.organic_results || [];
-        console.log(`SerpApi returned ${results.length} organic results.`);
-
-        // 2. Map Organic Results to Product Schema
-        liveProducts = results.map((item, index) => {
-
-            // Extract price if available in rich snippets
-            let price = 0;
-            if (item.rich_snippet && item.rich_snippet.top && item.rich_snippet.top.extensions) {
-                const priceMatch = item.rich_snippet.top.extensions.join(" ").match(/[\d,.]+/);
-                if (priceMatch) price = parseFloat(priceMatch[0].replace(/,/g, ''));
-            }
-
-            // Extract image from thumbnail or main image
-            let imageUrl = item.thumbnail || "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop";
-
-            // Determine Store Name
-            let storeName = "متجر غير معروف";
-            for (const store of AFFILIATE_STORES) {
-                if (item.title.includes(store.title) || item.link.includes(store.title.replace(' ', ''))) {
-                    storeName = store.title;
-                    break;
-                }
-            }
-            if (item.link.includes('shein')) storeName = "شي ان";
-            if (item.link.includes('noon')) storeName = "نون";
-
-            return {
-                id: `live_${index}`,
-                title: item.title,
-                price: price || 400, // Fallback price 
-                currency: "SAR",
-                imageUrl: imageUrl,
-                productUrl: item.link,
-                storeName: storeName,
-                // We use the snippet + title as the "rawAttributes" to allow the evaluator to find keyword matches
-                rawAttributes: {
-                    color: item.snippet + " " + item.title,
-                    material: item.snippet + " " + item.title,
-                    length: item.snippet + " " + item.title,
-                    sleeves: item.snippet + " " + item.title,
-                    neckline: item.snippet + " " + item.title,
-                    fit: item.snippet + " " + item.title,
-                    silhouette: item.snippet + " " + item.title
-                }
-            };
-        });
-
-    } catch (err) {
-        console.error("SerpApi Fetch Error:", err);
-        // Fallback to MOCK_PRODUCTS if API fails
-        console.log("Falling back to MOCK_PRODUCTS due to API failure.");
-        liveProducts = MOCK_PRODUCTS;
-    }
-
-    // 3. Pipe into Scoring Engine
+    // 2. Pipe into Scoring Engine
     const scored = processProductsWithIntelligence(
-        liveProducts,
+        preparedProducts,
         productIntelligence.productDNA,
         productIntelligence.scoringModel,
         productIntelligence.filterRules

@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { generateKeywords } from '../services/keywordMapper';
 import { DESIGN_CONSTRAINTS } from '../services/designConstraints';
+import { getFilteredQuestions } from '../services/dynamicInventory';
 
-const questions = [
+const STATIC_QUESTIONS = [
     {
         id: 'activeTrack',
         title: 'اختر مسار التصميم الابتكاري',
@@ -172,10 +173,18 @@ const questions = [
 const IntakeForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [questions, setQuestions] = useState(STATIC_QUESTIONS);
     const [currentStep, setCurrentStep] = useState(0);
     const [answers, setAnswers] = useState({});
     const [measurements, setMeasurements] = useState({});
     const [direction, setDirection] = useState(1); // 1 forward, -1 backward
+
+    // Load Filtered Dynamic Questions on Mount
+    useEffect(() => {
+        console.log("👗 Applying Smart Intake constraints against DB...");
+        const dynamicQuestions = getFilteredQuestions(STATIC_QUESTIONS);
+        setQuestions(dynamicQuestions);
+    }, []);
 
     const currentQ = questions[currentStep];
 
