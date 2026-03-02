@@ -18,7 +18,7 @@
  * @property {Object} rawAttributes - Attributes for scoring
  */
 
-import productDatabase from '../data/productDatabase.json';
+import productDatabase from '../data/Clean_Fashion_DB.json';
 
 const AFFILIATE_STORES = [
     { title: "لورا فاشن", baseUrl: 'https://mtjr.at/rY6YOtAGkB' },
@@ -141,7 +141,7 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
         let isExcluded = false;
 
         // 0. Hard Coded Sanity Filters (Reject Menswear/Casual Tops)
-        const productTitle = (product.title || product.name || "").toLowerCase();
+        const productTitle = (product.title || product.product_id || product.store_info?.name || "").toLowerCase();
         if (productTitle.includes('رجالي') || productTitle.includes('تي شيرت') || productTitle.includes('t-shirt') || productTitle.includes('شيرت') || productTitle.includes('طفل')) {
             continue; // Skip evaluating this irrelevant product entirely
         }
@@ -149,19 +149,18 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
         // 1. Apply Hard Filters
         if (filterRules && Array.isArray(filterRules)) {
             for (const filter of filterRules) {
-                // Naive filter implementation. e.g. "sleeveType in ['sleeveless']"
                 const rule = filter.rule.toLowerCase();
-                const attrs = product.rawAttributes || {};
+                const feats = product.features || {};
 
-                if (rule.includes('price >') && product.price > 1000) { // simplified
+                if (rule.includes('price >') && product.original_price > 1000) {
                     isExcluded = true; break;
                 }
 
-                if (rule.includes('sleeve') && attrs.sleeves && rule.includes(attrs.sleeves.toLowerCase())) {
+                if (rule.includes('sleeve') && feats.upper_design?.sleeves_style && rule.includes(feats.upper_design.sleeves_style.toLowerCase())) {
                     isExcluded = true; break;
                 }
 
-                if (rule.includes('length') && attrs.length && rule.includes(attrs.length.toLowerCase())) {
+                if (rule.includes('length') && feats.anatomy?.length && rule.includes(feats.anatomy.length.toLowerCase())) {
                     isExcluded = true; break;
                 }
             }
@@ -180,18 +179,21 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
                 const rule = criteria.evaluationRule;
 
                 let earned = 0;
-                const attrs = product.rawAttributes || {};
+                const feats = product.features || {};
 
                 // Safely convert arrays to strings if PIE generated an array
                 const safeColor = Array.isArray(productDNA?.colors) ? productDNA.colors.join(' ') : productDNA?.colors || '';
 
-                // User's specific requested keys mapping:
-                if (key === 'colorMatch' && attrs.color) earned = evaluateScore(attrs.color, rule + " " + safeColor, weight);
-                else if (key === 'silhouetteMatch' && attrs.silhouette) earned = evaluateScore(attrs.silhouette, rule + " " + productDNA?.silhouette, weight);
-                else if (key === 'lengthMatch' && attrs.length) earned = evaluateScore(attrs.length, rule + " " + productDNA?.length, weight);
-                else if (key === 'necklineMatch' && attrs.neckline) earned = evaluateScore(attrs.neckline, rule + " " + productDNA?.neckline, weight);
-                else if (key === 'sleeveMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " " + productDNA?.sleeves, weight);
-                else if (key === 'modestyMatch' && attrs.sleeves) earned = evaluateScore(attrs.sleeves, rule + " long sleeve maxi المحتشم", weight);
+                // User's specific requested keys mapping against NEW JSON STRUCTURE:
+                if (key === 'colorMatch' && feats.aesthetics?.primary_color) earned = evaluateScore(feats.aesthetics.primary_color, rule + " " + safeColor, weight);
+                else if (key === 'silhouetteMatch' && feats.anatomy?.silhouette) earned = evaluateScore(feats.anatomy.silhouette, rule + " " + productDNA?.silhouette, weight);
+                else if (key === 'lengthMatch' && feats.anatomy?.length) earned = evaluateScore(feats.anatomy.length, rule + " " + productDNA?.length, weight);
+                else if (key === 'necklineMatch' && feats.upper_design?.neckline) earned = evaluateScore(feats.upper_design.neckline, rule + " " + productDNA?.neckline, weight);
+                else if (key === 'sleeveMatch') {
+                    const sleeveText = (feats.upper_design?.sleeves_length || '') + " " + (feats.upper_design?.sleeves_style || '');
+                    earned = evaluateScore(sleeveText, rule + " " + productDNA?.sleeves, weight);
+                }
+                else if (key === 'modestyMatch') earned = evaluateScore(feats.anatomy?.length, rule + " long sleeve maxi المحتشم", weight);
                 else if (key === 'occasionMatch') earned = weight; // Assume occasion fits for mock
 
                 totalScore += earned;
@@ -229,11 +231,12 @@ export async function fetchAndScoreProducts(searchQueries, productIntelligence) 
 
     // 1. Prepare products with Direct Links and Discount Codes (Deep Linking Protocol)
     const preparedProducts = productDatabase.map(p => {
-        const urlDomain = (p.productUrl || "").toLowerCase();
-        const storeKey = p.storeName ? p.storeName.toLowerCase() : "";
-        let code = "F-VIP"; // fallback
+        const urlDomain = (p.productUrl || p.direct_product_url || "").toLowerCase();
+        const storeInfoName = p.store_info?.name || "";
+        const storeKey = storeInfoName.toLowerCase();
+        let code = p.store_info?.discount_code || "F-VIP"; // fallback
 
-        let actualStoreTitle = p.storeName || "متجر غير محدد";
+        let actualStoreTitle = storeInfoName || "متجر غير محدد";
         let affiliateBase = null;
 
         // Try to match store name or URL domain to construct affiliate and code robustly
@@ -258,12 +261,16 @@ export async function fetchAndScoreProducts(searchQueries, productIntelligence) 
             affiliateBase = "https://mtjr.at/fvS7XePT3o";
         } else {
             // Fallback lookup
-            const foundStore = AFFILIATE_STORES.find(s => s.title === p.storeName || storeKey.includes(s.title.toLowerCase()));
+            const foundStore = AFFILIATE_STORES.find(s => s.title === actualStoreTitle || storeKey.includes(s.title.toLowerCase()));
             if (foundStore) affiliateBase = foundStore.baseUrl;
         }
 
         return {
             ...p,
+            title: p.product_id, // Fallback for components that expect title
+            price: p.original_price, // Mapping
+            imageUrl: p.image_url, // Mapping
+            productUrl: p.direct_product_url || p.productUrl, // Mapping
             storeName: actualStoreTitle,
             // We preserve the exact deep link.
             discountCode: code,
