@@ -126,14 +126,12 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
 
         const aiResult = JSON.parse(response.choices[0].message.content);
 
-        // Secure Affiliate Routing Logic outside of LLM:
+        // Secure Routing Logic: Return direct URLs without dummy link wrappers
         const wrapAffiliate = (array) => {
             if (!Array.isArray(array)) return [];
             return array.map(match => ({
                 ...match,
                 final_affiliate_url: match.direct_product_url
-                    ? `${AFFILIATE_BASE_URL}${encodeURIComponent(match.direct_product_url)}`
-                    : null
             }));
         };
 
