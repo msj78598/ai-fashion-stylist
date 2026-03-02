@@ -75,8 +75,8 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         YOUR MISSION (SMART ZONING ARCHITECTURE):
         Search the provided JSON database array. Instead of a random list of matches, categorize your findings into 4 STRICT ZONES.
         
-        ZONE 1: exact_match (The Exact Match 100%)
-        - Must match User Preferences (Color, Silhouette, Neckline, Sleeves) exactly. Max 1 item.
+        ZONE 1: exact_match (The Closest Match)
+        - The absolute closest match to User Preferences. It may NOT be 100% exact, but it is the best you have. Max 1 item.
         - Write a main_marketing_text in Arabic praising this choice.
         
         ZONE 2: color_alternatives (Same Cut, Different Color)
@@ -93,7 +93,7 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database.
 
         NULL RULE: If a feature is "null" in the DB, consider it a wildcard. Do not crash.
-        GRACEFUL DEGRADATION: If you cannot find an exact match, try your hardest to fill the alternative zones.
+        GRACEFUL DEGRADATION: Try your hardest to fill all the alternative zones to give the user options.
     
         OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {
@@ -104,17 +104,17 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
               "product_id": "exact id from DB",
               "direct_product_url": "the exact productUrl from DB",
               "discount_code": "code from store_info",
-              "match_reason": "Arabic text explaining the match (e.g., 'تطابق مثالي 100% مع اختياراتك')"
+              "match_reason": "Arabic text explaining the match (e.g., 'وجدنا منتج جاهز مقارب جداً لما تبحثين عنه')"
             }
           ],
           "color_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'نفس تصميمك المفضل.. ولكن بلون مختلف')" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'خيار رائع مقارب لطلبك مع اختلاف بسيط في اللون')" }
           ],
           "silhouette_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'تصميم مشابه باللون المفضل مع اختلاف بسيط في القصة')" }
           ],
           "detail_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'مقترح مميز مقارب لطلبك مع اختلافات بسيطة في الياقة أو الأكمام')" }
           ]
         }
         `;
