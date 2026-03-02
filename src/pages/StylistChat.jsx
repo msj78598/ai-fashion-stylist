@@ -326,91 +326,82 @@ const StylistChat = () => {
                                 </button>
                             </div>
 
-                            {/* Smart Zoning Architecture: Tiered Cross-Selling */}
-                            <div className="mt-12 space-y-12 print:hidden">
-                                {/* Zone 2: Color Variations */}
-                                {result?.color_alternatives?.length > 0 && (
-                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
-                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">نفس تصميمك المفضل.. ولكن بألوان أخرى ساحرة</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            {result.color_alternatives.map((match, index) => (
-                                                <AlternativeCard key={index} match={match} />
+                            {/* --- بداية كود عرض البلوكات الذكية --- */}
+
+                            <div className="product-suggestions-container mt-8 space-y-8 print:hidden">
+
+                                {/* التحقق من وجود تطابق 100% */}
+                                {result.exact_match && result.exact_match.length > 0 && (
+                                    <div className="zone-exact bg-green-50 p-6 rounded-2xl border-2 border-green-500 shadow-lg">
+                                        <h3 className="text-2xl font-bold font-arabic text-green-800 mb-4">✨ التصميم الذي طلبتِه تماماً (تطابق 100%)</h3>
+                                        {result.exact_match.map(product => (
+                                            <div key={product.product_id} className="product-card flex flex-col items-center">
+                                                <p className="text-gray-700 font-arabic text-center mb-4">{product.match_reason}</p>
+                                                <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" rel="noopener noreferrer" className="btn-buy font-arabic bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition">
+                                                    انتقلي لصفحة الشراء الآن
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* منطقة بدائل الألوان */}
+                                {result.color_alternatives && result.color_alternatives.length > 0 && (
+                                    <div className="zone-color bg-blue-50 p-6 rounded-2xl border border-blue-200">
+                                        <h3 className="text-xl font-bold font-arabic text-blue-800 mb-4">🎨 نفس تصميمك المفضل.. بألوان أخرى ساحرة</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {result.color_alternatives.map(product => (
+                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
+                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
+                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-blue-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
                                 )}
 
-                                {/* Zone 3: Silhouette Variations */}
-                                {result?.silhouette_alternatives?.length > 0 && (
-                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
-                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">بنفس لونك المفضل.. مع اختلاف بسيط في قصة الفستان</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            {result.silhouette_alternatives.map((match, index) => (
-                                                <AlternativeCard key={index} match={match} />
+                                {/* منطقة بدائل القصة (الهيكل) */}
+                                {result.silhouette_alternatives && result.silhouette_alternatives.length > 0 && (
+                                    <div className="zone-silhouette bg-purple-50 p-6 rounded-2xl border border-purple-200">
+                                        <h3 className="text-xl font-bold font-arabic text-purple-800 mb-4">👗 بنفس لونك المفضل.. مع اختلاف بسيط في القصة</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {result.silhouette_alternatives.map(product => (
+                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
+                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
+                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-purple-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
                                 )}
 
-                                {/* Zone 4: Detail Variations */}
-                                {result?.detail_alternatives?.length > 0 && (
-                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
-                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">تصاميم قريبة جداً لطلبك.. بلمسة مختلفة على الأكتاف والياقة</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            {result.detail_alternatives.map((match, index) => (
-                                                <AlternativeCard key={index} match={match} />
+                                {/* منطقة بدائل الياقة والتفاصيل */}
+                                {result.detail_alternatives && result.detail_alternatives.length > 0 && (
+                                    <div className="zone-details bg-orange-50 p-6 rounded-2xl border border-orange-200">
+                                        <h3 className="text-xl font-bold font-arabic text-orange-800 mb-4">✨ تصاميم قريبة لطلبك.. بلمسة مختلفة على الأكتاف والياقة</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {result.detail_alternatives.map(product => (
+                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
+                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
+                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-orange-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
                                 )}
+
+                                {/* رسالة الخطأ (تظهر فقط إذا كانت كل البلوكات الأربعة فارغة) */}
+                                {(!result.exact_match?.length && !result.color_alternatives?.length && !result.silhouette_alternatives?.length && !result.detail_alternatives?.length) && (
+                                    <div className="bg-red-50 p-6 rounded-2xl border border-red-200 text-center">
+                                        <h3 className="text-xl font-bold font-arabic text-red-800">عذراً، لم نجد تطابقاً قريباً</h3>
+                                        <p className="text-gray-600 font-arabic mt-2">جربي تغيير بعض الخيارات (مثل اللون أو الياقة) لنتمكن من إيجاد الفستان المثالي لكِ.</p>
+                                    </div>
+                                )}
+
                             </div>
+                            {/* --- نهاية كود عرض البلوكات الذكية --- */}
                         </div>
                     </motion.div>
-
-                    {/* Affiliate Store Column - Now Horizontal & Prominent */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="w-full print:hidden"
-                    >
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4 bg-gradient-to-l from-primary-900 to-gray-900 p-6 rounded-2xl shadow-lg border border-primary-800">
-                            <div className="flex items-center gap-4">
-                                <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
-                                    <ShoppingBag className="w-8 h-8 text-primary-200" />
-                                </div>
-                                <div>
-                                    <h2 className="text-2xl font-bold font-arabic text-white mb-1">تسوّقي هذه الإطلالة جاهزة</h2>
-                                </div>
-                            </div>
-                        </div>
-
-                        {scoredProducts.length > 0 && (
-                            <div className="mb-8 p-4 bg-white/50 backdrop-blur-sm border border-primary-200 rounded-xl text-center shadow-sm" dir="rtl">
-                                <p className="font-arabic text-primary-900 text-lg">
-                                    هذه أقرب المنتجات المتوفرة حاليًا والمطابقة لطلبك بنسبة <span className="font-bold text-green-700">{Math.floor(scoredProducts[0].matchScore)}%</span> أو أعلى، مرتبة من الأعلى تطابقًا.
-                                </p>
-                            </div>
-                        )}
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                            {scoredProducts.length > 0 ? (
-                                scoredProducts.map((product, index) => (
-                                    <motion.div key={product.id || index} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 + (index * 0.1) }} className="h-full">
-                                        <ProductCard product={product} />
-                                    </motion.div>
-                                ))
-                            ) : (
-                                <div className="col-span-full py-10 px-6 text-center bg-white rounded-2xl border border-gray-200 shadow-sm" dir="rtl">
-                                    <p className="font-arabic text-gray-800 font-bold text-lg mb-2">تعذر العثور على تطابق دقيق</p>
-                                    <p className="font-arabic text-gray-600 text-sm">
-                                        التزاماً بالشفافية والقيود الصارمة، لم نعثر على منتج حقيقي في المتاجر المعتمدة يحقق نسبة تطابق <span className="text-primary-600 font-bold">65%</span> أو أعلى لمواصفات تصميمك.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    </motion.div>
-
                 </div>
             </div>
         </div>

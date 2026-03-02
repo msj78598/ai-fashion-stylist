@@ -72,7 +72,6 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         
         ZONE 1: exact_match (The Exact Match 100%)
         - Must match User Preferences (Color, Silhouette, Neckline, Sleeves) exactly. Max 1 item.
-        - Generate ONE HIGH-QUALITY English visual prompt for DALL-E based ONLY on this match, incorporating the AVATAR PREFERENCE.
         - Write a main_marketing_text in Arabic praising this choice.
         
         ZONE 2: color_alternatives (Same Cut, Different Color)
@@ -84,12 +83,16 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         ZONE 4: detail_alternatives (Same Color/Cut, Different Neckline/Sleeves)
         - Same Color and Silhouette, but different neckline or sleeves.
 
+        VISUAL PROMPT LOGIC (CRITICAL):
+        - If STRICT MODE = true (Manual Track): Build the "visual_prompt" strictly based on the User's Preferences literally (plus the Avatar Preference), regardless of whether you found a 100% exact_match product or not.
+        - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database.
+
         NULL RULE: If a feature is "null" in the DB, consider it a wildcard. Do not crash.
         GRACEFUL DEGRADATION: If you cannot find an exact match, try your hardest to fill the alternative zones.
     
         OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {
-          "visual_prompt": "English prompt based on the best match AND the user's Avatar preference",
+          "visual_prompt": "English prompt based on the logic rules above AND the user's Avatar preference",
           "main_marketing_text": "Arabic text praising the choice",
           "exact_match": [
             {
