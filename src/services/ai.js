@@ -56,7 +56,12 @@ Your final output back to the frontend must strictly be a structured JSON object
 export const generateTechPackSpecSheet = async (userPreferences, topProduct = null) => {
     try {
         const strictMode = userPreferences.activeTrack?.includes('Manual') ? true : false;
-        const avatarPref = userPreferences.avatarCustomization || 'Standard elegant model';
+
+        // Assemble separated avatar details into a cohesive instruction for the LLM
+        const skin = userPreferences.skinTone || '';
+        const shape = userPreferences.bodyShape || '';
+        const hair = userPreferences.hairStyle || '';
+        const avatarPref = `Skin Tone: ${skin}, Body Shape: ${shape}, Hair/Head Style: ${hair}`;
 
         const strictPrompt = `
         You are an Elite AI Fashion Matcher and Recommendation Engine.
