@@ -56,21 +56,18 @@ const StylistChat = () => {
             setLoadingText("يتم الآن رسم لوحة المهندسة المعمارية للفستان (Master Board)...");
             const data = await generateTechPackSpecSheet(prefs, topProduct);
 
-            if (!data || !data.designRecommendation) {
+            if (!data || (!data.marketing_copy && !data.exact_product_name)) {
                 console.error("Malformed AI response:", data);
                 throw new Error("لم نتمكن من استلام تفاصيل التصميم بشكل كامل من الذكاء الاصطناعي. يرجى المحاولة مرة أخرى.");
             }
 
             setResult(data);
 
-            // STEP 3: Generate Master Tech Pack Image (Based on top product, if any)
-            if (data.designRecommendation) {
+            // STEP 3: Generate Master Tech Pack Image (Based on text model's prompt)
+            if (data.image_generation_prompt) {
                 setLoadingImage(true);
-                const baseDesc = data.designRecommendation.description + ' made of ' + data.designRecommendation.fabric;
-                const finalDesc = topProductDesc ? `${baseDesc}. STRICT MATCHING REQUIREMENT: ${topProductDesc}` : baseDesc;
-
                 try {
-                    const url = await generateMasterTechPackImage(finalDesc, prefs);
+                    const url = await generateMasterTechPackImage(data.image_generation_prompt, prefs);
                     setMasterImage(url);
                 } catch (err) {
                     console.error("Master image fail:", err);
@@ -201,7 +198,7 @@ const StylistChat = () => {
                             {/* Tech Pack Header */}
                             <div className="mb-10 text-center relative">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-primary-600 rounded-full"></div>
-                                <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.designRecommendation?.title || 'مواصفات التصميم التقني'}</h1>
+                                <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.exact_product_name || 'مواصفات التصميم التقني'}</h1>
                                 <p className="text-primary-600 font-arabic text-lg tracking-widest opacity-80 uppercase mb-4">Elite Haute Couture Specification</p>
 
                                 <div className="flex justify-center mb-2">
@@ -221,8 +218,8 @@ const StylistChat = () => {
                                 </div>
                             </div>
 
-                            {/* Section 0: Design Overview / Designer's Insight */}
-                            {result?.designRecommendation?.description && (
+                            {/* Section 0: Design Overview / Marketing Copy */}
+                            {result?.marketing_copy && (
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -231,10 +228,17 @@ const StylistChat = () => {
                                     <div className="absolute top-0 right-0 p-4 opacity-10">
                                         <Sparkles className="w-12 h-12 text-primary-600" />
                                     </div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">نظرة عامة على الإطلالة (Design Overview)</h3>
-                                    <p className="text-xl font-arabic text-gray-700 leading-relaxed text-right dir-rtl">
-                                        {result?.designRecommendation?.description}
+                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">رؤية المصمم (Stylist Vision)</h3>
+                                    <p className="text-xl font-arabic text-primary-900 leading-relaxed text-right dir-rtl italic">
+                                        "{result?.marketing_copy}"
                                     </p>
+
+                                    {result?.discount_code && (
+                                        <div className="mt-6 flex flex-wrap gap-4 items-center justify-end bg-primary-100/50 p-4 rounded-xl border border-primary-200">
+                                            <span className="font-arabic font-bold text-primary-800 text-lg">كود الخصم الحصري:</span>
+                                            <span className="bg-white text-primary-900 px-4 py-2 rounded-lg font-bold border border-primary-300 shadow-sm text-xl">{result?.discount_code}</span>
+                                        </div>
+                                    )}
                                 </motion.div>
                             )}
 
@@ -283,49 +287,23 @@ const StylistChat = () => {
                                 </div>
                             </div>
 
-                            {/* Section 3: Bill of Materials & Tailoring Instructions */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 print:break-inside-avoid">
-                                <div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">المواد والخامات (Bill of Materials)</h3>
-                                    <div className="bg-primary-50/20 p-8 rounded-3xl border border-primary-100 h-full print:bg-transparent print:border-black shadow-sm">
-                                        <p className="text-primary-900 font-arabic leading-relaxed mb-6">
-                                            <span className="text-xs font-bold uppercase tracking-widest text-primary-400 block mb-2">القماش الأساسي:</span>
-                                            <span className="text-lg font-bold">{result?.designRecommendation?.fabric}</span>
-                                        </p>
-                                        <div className="h-px bg-primary-100 my-6 print:bg-black"></div>
-                                        <p className="text-primary-900 font-arabic leading-relaxed">
-                                            <span className="text-xs font-bold uppercase tracking-widest text-primary-400 block mb-2">المكونات الإضافية والشك:</span>
-                                            <span className="text-lg font-medium">{result?.designRecommendation?.billOfMaterials || 'تحدد بواسطة الخياط حسب المخطط.'}</span>
-                                        </p>
-                                    </div>
+                            {/* Purchase CTA directly linking to AI's Deep Link */}
+                            {result?.final_affiliate_url && (
+                                <div className="mt-4 mb-12 text-center relative p-8 bg-gradient-to-l from-primary-900 to-gray-900 rounded-[3rem] overflow-hidden shadow-2xl print:hidden flex flex-col items-center">
+                                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)] pointer-events-none"></div>
+                                    <ShoppingBag className="w-12 h-12 text-white/50 mb-4" />
+                                    <h3 className="text-2xl font-bold font-arabic text-white mb-2 leading-snug">اقتني هذا التصميم المطابق لطلبك حرفياً</h3>
+                                    <p className="text-primary-200 font-arabic text-sm mb-6 max-w-lg">تم التعرف على قطعة تتطابق 100% مع رؤيتك وتصميمك المبدئي، متوفرة الآن للطلب المباشر.</p>
+                                    <a
+                                        href={result.final_affiliate_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-white text-primary-900 hover:bg-primary-50 px-10 py-4 rounded-full font-bold font-arabic text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:scale-105"
+                                    >
+                                        انتقلي لصفحة الشراء الآن
+                                    </a>
                                 </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">تعليمات الخياطة والتركيب (Tailoring Instructions)</h3>
-                                    <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 h-full print:bg-transparent print:border-black shadow-xl text-white">
-                                        <p className="font-arabic leading-loose whitespace-pre-wrap text-gray-300">
-                                            {result?.designRecommendation?.tailoringInstructions}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Analysis Section - Redesigned as Premium Quote */}
-                            <div className="mt-16 text-center relative p-12 bg-primary-900 rounded-[3rem] overflow-hidden shadow-2xl print:bg-white print:text-black print:border-2 print:border-black">
-                                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)] pointer-events-none"></div>
-                                <div className="absolute top-8 left-12 opacity-20 pointer-events-none">
-                                    <Sparkles className="w-16 h-16 text-white" />
-                                </div>
-                                <span className="block text-primary-400 font-arabic text-sm tracking-[0.3em] uppercase mb-6">تحليل المصمم الخاص</span>
-                                <p className="text-2xl sm:text-3xl font-arabic text-white leading-snug italic relative z-10 px-4">
-                                    "{result?.analysis}"
-                                </p>
-                                <div className="mt-8 flex items-center justify-center gap-2 text-primary-400 font-arabic">
-                                    <div className="h-px w-8 bg-primary-800"></div>
-                                    <span className="text-xs uppercase tracking-widest">VIP Styling Intelligence</span>
-                                    <div className="h-px w-8 bg-primary-800"></div>
-                                </div>
-                            </div>
+                            )}
 
                             {/* Fast Regeneration / Tweak Area */}
                             <div className="mt-12 bg-primary-50 p-6 rounded-2xl border border-primary-100 print:hidden flex flex-col items-center">
