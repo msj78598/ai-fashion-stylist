@@ -56,29 +56,58 @@ Your final output back to the frontend must strictly be a structured JSON object
 export const generateTechPackSpecSheet = async (userPreferences, topProduct = null) => {
     try {
         const strictMode = userPreferences.activeTrack?.includes('Manual') ? true : false;
+        const avatarPref = userPreferences.avatarCustomization || 'Standard elegant model';
 
         const strictPrompt = `
-        You are an Elite AI Fashion Matcher and Affiliate Routing Engine.
-        Your job is to find the exact 1:1 matching product from the provided JSON database based on the user's preferences.
+        You are an Elite AI Fashion Matcher and Recommendation Engine.
         
         USER PREFERENCES:
         ${JSON.stringify(userPreferences)}
         
+        AVATAR PREFERENCE: ${avatarPref}
         STRICT MODE (Manual Track): ${strictMode}
     
-        RULES:
-        1. Search the provided JSON database array (sent as user message) and find the BEST matching product. If Strict Mode is true, features like neckline, silhouette, and sleeves MUST match the User Preferences exactly. Do not hallucinate.
-        2. Extract the 'product_id', 'productUrl', and 'discount_code' (from store_info) EXACTLY as they appear in the matched database item.
-        3. Generate a HIGH-QUALITY English visual prompt for DALL-E to generate an image of this exact dress on a model matching these measurements: bust ${userPreferences.measurements?.bust}cm, waist ${userPreferences.measurements?.waist}cm, hips ${userPreferences.measurements?.hips}cm.
-        4. Write a 2-sentence persuasive marketing copy in Arabic praising their choice.
+        YOUR MISSION (SMART ZONING ARCHITECTURE):
+        Search the provided JSON database array. Instead of a random list of matches, categorize your findings into 4 STRICT ZONES.
+        
+        ZONE 1: exact_match (The Exact Match 100%)
+        - Must match User Preferences (Color, Silhouette, Neckline, Sleeves) exactly. Max 1 item.
+        - Generate ONE HIGH-QUALITY English visual prompt for DALL-E based ONLY on this match, incorporating the AVATAR PREFERENCE.
+        - Write a main_marketing_text in Arabic praising this choice.
+        
+        ZONE 2: color_alternatives (Same Cut, Different Color)
+        - Same Silhouette and Neckline, but a DIFFERENT color available in the DB.
+        
+        ZONE 3: silhouette_alternatives (Same Color/Neckline, Different Cut)
+        - Same Color and Neckline, but an alternative cut (e.g. asked for Mermaid, found A-Line).
+        
+        ZONE 4: detail_alternatives (Same Color/Cut, Different Neckline/Sleeves)
+        - Same Color and Silhouette, but different neckline or sleeves.
+
+        NULL RULE: If a feature is "null" in the DB, consider it a wildcard. Do not crash.
+        GRACEFUL DEGRADATION: If you cannot find an exact match, try your hardest to fill the alternative zones.
     
-        OUTPUT STRICTLY IN THIS JSON FORMAT:
+        OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {
-          "exact_product_name": "product_id from DB",
-          "direct_product_url": "the exact productUrl from DB",
-          "discount_code": "code from store_info from DB",
-          "image_generation_prompt": "English prompt for image model...",
-          "marketing_copy": "Arabic persuasive text..."
+          "visual_prompt": "English prompt based on the best match AND the user's Avatar preference",
+          "main_marketing_text": "Arabic text praising the choice",
+          "exact_match": [
+            {
+              "product_id": "exact id from DB",
+              "direct_product_url": "the exact productUrl from DB",
+              "discount_code": "code from store_info",
+              "match_reason": "Arabic text explaining the match (e.g., 'تطابق مثالي 100% مع اختياراتك')"
+            }
+          ],
+          "color_alternatives": [
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'نفس تصميمك المفضل.. ولكن بلون مختلف')" }
+          ],
+          "silhouette_alternatives": [
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
+          ],
+          "detail_alternatives": [
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
+          ]
         }
         `;
 
@@ -94,24 +123,24 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
 
         const aiResult = JSON.parse(response.choices[0].message.content);
 
-        // Affiliate Routing Logic: If the DB item doesn't have an affiliateBaseUrl, fallback.
-        // For 'lora', 'asleen' etc., the productUrl is usually direct.
-        const storeMatch = cleanDb.find(item => item.product_id === aiResult.exact_product_name);
-
-        // Deep Link formatting
-        let finalUrl = aiResult.direct_product_url;
-        // In this implementation, if an affiliateBaseUrl exists for the store, we'd prefix it. 
-        // Based on the user's snippet, they wanted: [AFFILIATE_BASE_URL][Encoded_Direct_URL]
-        // But since we mapped codes in DB, we'll try to just return the url as is if it's already affiliated, or route it.
-        // For simplicity and to follow the latest instructions:
-        const constructedAffiliateUrl = `${AFFILIATE_BASE_URL}${encodeURIComponent(aiResult.direct_product_url)}`;
+        // Secure Affiliate Routing Logic outside of LLM:
+        const wrapAffiliate = (array) => {
+            if (!Array.isArray(array)) return [];
+            return array.map(match => ({
+                ...match,
+                final_affiliate_url: match.direct_product_url
+                    ? `${AFFILIATE_BASE_URL}${encodeURIComponent(match.direct_product_url)}`
+                    : null
+            }));
+        };
 
         return {
-            exact_product_name: aiResult.exact_product_name,
-            marketing_copy: aiResult.marketing_copy,
-            image_generation_prompt: aiResult.image_generation_prompt,
-            final_affiliate_url: finalUrl, // Returning the exact valid URL
-            discount_code: aiResult.discount_code
+            marketing_copy: aiResult.main_marketing_text,
+            image_generation_prompt: aiResult.visual_prompt,
+            exact_match: wrapAffiliate(aiResult.exact_match),
+            color_alternatives: wrapAffiliate(aiResult.color_alternatives),
+            silhouette_alternatives: wrapAffiliate(aiResult.silhouette_alternatives),
+            detail_alternatives: wrapAffiliate(aiResult.detail_alternatives)
         };
 
     } catch (error) {

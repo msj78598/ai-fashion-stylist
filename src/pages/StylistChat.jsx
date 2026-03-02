@@ -56,7 +56,7 @@ const StylistChat = () => {
             setLoadingText("يتم الآن رسم لوحة المهندسة المعمارية للفستان (Master Board)...");
             const data = await generateTechPackSpecSheet(prefs, topProduct);
 
-            if (!data || (!data.marketing_copy && !data.exact_product_name)) {
+            if (!data || (!data.marketing_copy && !data.top_matches)) {
                 console.error("Malformed AI response:", data);
                 throw new Error("لم نتمكن من استلام تفاصيل التصميم بشكل كامل من الذكاء الاصطناعي. يرجى المحاولة مرة أخرى.");
             }
@@ -198,7 +198,7 @@ const StylistChat = () => {
                             {/* Tech Pack Header */}
                             <div className="mb-10 text-center relative">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-primary-600 rounded-full"></div>
-                                <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.exact_product_name || 'مواصفات التصميم التقني'}</h1>
+                                <h1 className="text-4xl font-bold font-arabic text-primary-900 tracking-wide pt-6 mb-3">{result?.exact_match?.[0]?.product_id || 'مواصفات التصميم التقني'}</h1>
                                 <p className="text-primary-600 font-arabic text-lg tracking-widest opacity-80 uppercase mb-4">Elite Haute Couture Specification</p>
 
                                 <div className="flex justify-center mb-2">
@@ -233,10 +233,10 @@ const StylistChat = () => {
                                         "{result?.marketing_copy}"
                                     </p>
 
-                                    {result?.discount_code && (
+                                    {result?.exact_match?.[0]?.discount_code && (
                                         <div className="mt-6 flex flex-wrap gap-4 items-center justify-end bg-primary-100/50 p-4 rounded-xl border border-primary-200">
                                             <span className="font-arabic font-bold text-primary-800 text-lg">كود الخصم الحصري:</span>
-                                            <span className="bg-white text-primary-900 px-4 py-2 rounded-lg font-bold border border-primary-300 shadow-sm text-xl">{result?.discount_code}</span>
+                                            <span className="bg-white text-primary-900 px-4 py-2 rounded-lg font-bold border border-primary-300 shadow-sm text-xl">{result.exact_match[0].discount_code}</span>
                                         </div>
                                     )}
                                 </motion.div>
@@ -287,15 +287,15 @@ const StylistChat = () => {
                                 </div>
                             </div>
 
-                            {/* Purchase CTA directly linking to AI's Deep Link */}
-                            {result?.final_affiliate_url && (
+                            {/* Purchase CTA directly linking to Exact Match */}
+                            {result?.exact_match?.[0]?.final_affiliate_url && (
                                 <div className="mt-4 mb-12 text-center relative p-8 bg-gradient-to-l from-primary-900 to-gray-900 rounded-[3rem] overflow-hidden shadow-2xl print:hidden flex flex-col items-center">
                                     <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)] pointer-events-none"></div>
                                     <ShoppingBag className="w-12 h-12 text-white/50 mb-4" />
-                                    <h3 className="text-2xl font-bold font-arabic text-white mb-2 leading-snug">اقتني هذا التصميم المطابق لطلبك حرفياً</h3>
-                                    <p className="text-primary-200 font-arabic text-sm mb-6 max-w-lg">تم التعرف على قطعة تتطابق 100% مع رؤيتك وتصميمك المبدئي، متوفرة الآن للطلب المباشر.</p>
+                                    <h3 className="text-2xl font-bold font-arabic text-white mb-2 leading-snug">التصميم الذي طلبتِه تماماً (تطابق 100%)</h3>
+                                    <p className="text-primary-200 font-arabic text-sm mb-6 max-w-lg">{result.exact_match[0].match_reason}</p>
                                     <a
-                                        href={result.final_affiliate_url}
+                                        href={result.exact_match[0].final_affiliate_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="bg-white text-primary-900 hover:bg-primary-50 px-10 py-4 rounded-full font-bold font-arabic text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:scale-105"
@@ -326,6 +326,44 @@ const StylistChat = () => {
                                 </button>
                             </div>
 
+                            {/* Smart Zoning Architecture: Tiered Cross-Selling */}
+                            <div className="mt-12 space-y-12 print:hidden">
+                                {/* Zone 2: Color Variations */}
+                                {result?.color_alternatives?.length > 0 && (
+                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
+                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">نفس تصميمك المفضل.. ولكن بألوان أخرى ساحرة</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {result.color_alternatives.map((match, index) => (
+                                                <AlternativeCard key={index} match={match} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Zone 3: Silhouette Variations */}
+                                {result?.silhouette_alternatives?.length > 0 && (
+                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
+                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">بنفس لونك المفضل.. مع اختلاف بسيط في قصة الفستان</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {result.silhouette_alternatives.map((match, index) => (
+                                                <AlternativeCard key={index} match={match} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Zone 4: Detail Variations */}
+                                {result?.detail_alternatives?.length > 0 && (
+                                    <div className="bg-white p-8 rounded-3xl border border-primary-100 shadow-lg">
+                                        <h3 className="text-2xl font-bold font-arabic mb-6 text-primary-900 border-r-4 border-primary-600 pr-4">تصاميم قريبة جداً لطلبك.. بلمسة مختلفة على الأكتاف والياقة</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {result.detail_alternatives.map((match, index) => (
+                                                <AlternativeCard key={index} match={match} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </motion.div>
 
@@ -375,6 +413,31 @@ const StylistChat = () => {
 
                 </div>
             </div>
+        </div>
+    );
+};
+
+// Reusable card component for the alternative zones
+const AlternativeCard = ({ match }) => {
+    return (
+        <div className="bg-gradient-to-br from-primary-50/50 to-white p-6 rounded-2xl border border-primary-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden">
+            <div className="mb-6 z-10">
+                <div className="flex justify-end items-center mb-4">
+                    {match.discount_code && <span className="bg-green-100 text-green-800 text-sm font-bold px-3 py-1.5 rounded-full font-arabic border border-green-200">{match.discount_code}</span>}
+                </div>
+                <h4 className="font-bold text-primary-900 text-lg mb-2 font-arabic" dir="rtl">{match.product_id}</h4>
+                <p className="font-arabic text-primary-700 text-base leading-relaxed" dir="rtl">{match.match_reason}</p>
+            </div>
+            {match.final_affiliate_url && (
+                <a
+                    href={match.final_affiliate_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-primary-100 hover:bg-primary-600 hover:text-white text-primary-800 font-arabic text-center py-3 rounded-xl transition-colors shadow-sm font-bold text-lg z-10"
+                >
+                    رؤية هذه النسخة
+                </a>
+            )}
         </div>
     );
 };
