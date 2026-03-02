@@ -72,28 +72,38 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         AVATAR PREFERENCE: ${avatarPref}
         STRICT MODE (Manual Track): ${strictMode}
     
-        YOUR MISSION (SMART ZONING ARCHITECTURE):
-        Search the provided JSON database array. Instead of a random list of matches, categorize your findings into 4 STRICT ZONES.
+        YOUR MISSION (SMART ZONING ARCHITECTURE & CROSS-STORE DISCOVERY):
+        Search the provided JSON database array. Categorize your findings into 4 STRICT ZONES with the following absolute rules:
         
+        CRITICAL RULE 1: ZERO-REDUNDANCY
+        - A 'product_id' can ONLY appear in ONE zone. If it is in ZONE 1, it CANNOT be in ZONE 2, 3, or 4. Every single product returned must be unique.
+        
+        CRITICAL RULE 2: CROSS-STORE DISCOVERY (JUSTICE DOCTRINE)
+        - You MUST NOT limit results to only one store (e.g., only Laura). You must actively search and propose items from other stores in the DB (like Joyce, Asleen, or Shumoukh) across the different zones to ensure brand diversity.
+        
+        CRITICAL RULE 3: HANDLING NULLS
+        - Products with "null" values are NOT to be ignored. Treat them as "flexible options" that can fit into alternative zones based on their 'search_tags' and 'anatomy.category'.
+        
+        CRITICAL RULE 4: AI-SUGGESTED ALIGNMENT
+        - If STRICT MODE = false, prioritize selecting a primary product (for ZONE 1) that is 'Data-Rich' (has very few nulls). Then, build the "visual_prompt" based strictly on THAT product's real features to ensure the generated image matches the suggested product.
+
+        SLOT FILLING STRATEGY:
         ZONE 1: exact_match (The Closest Match)
-        - The absolute closest match to User Preferences. It may NOT be 100% exact, but it is the best you have. Max 1 item.
+        - The absolute closest match to User Preferences (Body type, Color, Cut). Max 1 item.
         - Write a main_marketing_text in Arabic praising this choice.
         
         ZONE 2: color_alternatives (Same Cut, Different Color)
-        - Same Silhouette and Neckline, but a DIFFERENT color available in the DB.
+        - Actively look in OTHER STORES for the same Silhouette/Neckline, but a DIFFERENT color.
         
         ZONE 3: silhouette_alternatives (Same Color/Neckline, Different Cut)
-        - Same Color and Neckline, but an alternative cut (e.g. asked for Mermaid, found A-Line).
+        - Actively look in OTHER STORES for the same Color/Neckline, but an alternative cut.
         
         ZONE 4: detail_alternatives (Same Color/Cut, Different Neckline/Sleeves)
-        - Same Color and Silhouette, but different neckline or sleeves.
+        - Find unique pieces from stores that haven't appeared heavily in Zones 1-3.
 
         VISUAL PROMPT LOGIC (CRITICAL):
-        - If STRICT MODE = true (Manual Track): Build the "visual_prompt" strictly based on the User's Preferences literally (plus the Avatar Preference), regardless of whether you found a 100% exact_match product or not.
+        - If STRICT MODE = true (Manual Track): Build the "visual_prompt" strictly based on the User's Preferences literally (plus the Avatar Preference).
         - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database.
-
-        NULL RULE: If a feature is "null" in the DB, consider it a wildcard. Do not crash.
-        GRACEFUL DEGRADATION: Try your hardest to fill all the alternative zones to give the user options.
     
         OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {
