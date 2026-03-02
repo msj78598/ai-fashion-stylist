@@ -140,6 +140,12 @@ export function processProductsWithIntelligence(products, productDNA, scoringMod
     for (const product of products) {
         let isExcluded = false;
 
+        // 0. Hard Coded Sanity Filters (Reject Menswear/Casual Tops)
+        const productTitle = (product.title || product.name || "").toLowerCase();
+        if (productTitle.includes('رجالي') || productTitle.includes('تي شيرت') || productTitle.includes('t-shirt') || productTitle.includes('شيرت') || productTitle.includes('طفل')) {
+            continue; // Skip evaluating this irrelevant product entirely
+        }
+
         // 1. Apply Hard Filters
         if (filterRules && Array.isArray(filterRules)) {
             for (const filter of filterRules) {
@@ -223,23 +229,45 @@ export async function fetchAndScoreProducts(searchQueries, productIntelligence) 
 
     // 1. Prepare products with Direct Links and Discount Codes (Deep Linking Protocol)
     const preparedProducts = productDatabase.map(p => {
+        const urlDomain = (p.productUrl || "").toLowerCase();
         const storeKey = p.storeName ? p.storeName.toLowerCase() : "";
         let code = "F-VIP"; // fallback
 
-        // Try to match store name to discount code roughly
-        if (storeKey.includes("لورا")) code = "F-ZLHNl";
-        else if (storeKey.includes("آسلين") || storeKey.includes("aslen")) code = "F-MDU4N";
-        else if (storeKey.includes("نوف")) code = "F-ZLHNl";
-        else if (storeKey.includes("haven")) code = "F-MDU4N";
+        let actualStoreTitle = p.storeName || "متجر غير محدد";
+        let affiliateBase = null;
 
-        // Find the base affiliate link for tracking
-        const affiliateStore = AFFILIATE_STORES.find(s => s.title === p.storeName || storeKey.includes(s.title.toLowerCase()));
+        // Try to match store name or URL domain to construct affiliate and code robustly
+        if (urlDomain.includes("lora") || storeKey.includes("لورا")) {
+            actualStoreTitle = "لورا فاشن";
+            code = "F-ZLHNl";
+            affiliateBase = "https://mtjr.at/rY6YOtAGkB";
+        }
+        else if (urlDomain.includes("aslen") || urlDomain.includes("asleen") || storeKey.includes("آسلين")) {
+            actualStoreTitle = "فساتين آسلين";
+            code = "F-MDU4N";
+            affiliateBase = "https://mtjr.at/ZKAz8nr-Vm";
+        }
+        else if (urlDomain.includes("noof") || storeKey.includes("نوف")) {
+            actualStoreTitle = "بوتيك نوف";
+            code = "F-ZLHNl";
+            affiliateBase = "https://mtjr.at/faWBo8or-0";
+        }
+        else if (urlDomain.includes("stayl") || urlDomain.includes("haven") || storeKey.includes("haven")) {
+            actualStoreTitle = "Stayl Haven";
+            code = "F-MDU4N";
+            affiliateBase = "https://mtjr.at/fvS7XePT3o";
+        } else {
+            // Fallback lookup
+            const foundStore = AFFILIATE_STORES.find(s => s.title === p.storeName || storeKey.includes(s.title.toLowerCase()));
+            if (foundStore) affiliateBase = foundStore.baseUrl;
+        }
 
         return {
             ...p,
-            // We NO LONGER overwrite the organic scraped URL. We preserve the exact deep link.
+            storeName: actualStoreTitle,
+            // We preserve the exact deep link.
             discountCode: code,
-            affiliateBaseUrl: affiliateStore ? affiliateStore.baseUrl : null
+            affiliateBaseUrl: affiliateBase
         };
     });
 
