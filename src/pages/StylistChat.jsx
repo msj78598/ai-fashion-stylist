@@ -249,20 +249,32 @@ const StylistChat = () => {
                                     {loadingImage && !masterImage && (
                                         <div className="absolute flex flex-col items-center z-10 p-10 bg-white/60 backdrop-blur-md rounded-2xl shadow-xl">
                                             <Loader2 className="w-12 h-12 text-primary-600 animate-spin mb-4" />
-                                            <p className="font-arabic text-lg font-bold text-primary-800">جاري رسم المخطط المعماري للفستان...</p>
-                                            <p className="font-arabic text-sm text-primary-600 mt-2 opacity-70">نقوم الآن بتحويل أفكارك إلى لوحة فنية</p>
+                                            <p className="font-arabic font-bold text-primary-900 text-xl">جاري رسم وتجسيد التصميم الابتكاري لكِ...</p>
                                         </div>
                                     )}
+
                                     {masterImage ? (
-                                        <>
-                                            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-xl z-20 text-sm font-arabic border border-white/20 shadow-lg">
-                                                {scoredProducts.length > 0 ? 'تصور تصميم مبني على أقرب منتج مطابق لطلبك' : 'تصور مبدئي للتصميم'}
+                                        <img
+                                            src={masterImage}
+                                            alt="Master Tech Pack Design"
+                                            className="w-full h-auto object-cover opacity-0 transition-opacity duration-1000 ease-in-out hover:scale-105 transform cursor-zoom-in"
+                                            onLoad={(e) => e.target.classList.remove('opacity-0')}
+                                            onClick={() => window.open(masterImage, '_blank')}
+                                        />
+                                    ) : (
+                                        !loadingImage && (
+                                            <div className="text-gray-400 flex flex-col items-center p-12">
+                                                <ImageIcon className="w-20 h-20 mb-4 opacity-50" />
+                                                <p className="font-arabic text-lg">الصورة التوضيحية غير متوفرة</p>
                                             </div>
-                                            <img src={masterImage} alt="Master Tech Pack Image" className="w-full object-contain max-h-[1000px] print:max-h-[600px] z-0 relative" />
-                                        </>
-                                    ) : (!loadingImage && (
-                                        <div className="text-gray-300 flex flex-col items-center p-10 z-10 anim-pulse"><ImageIcon className="w-16 h-16 mb-4 opacity-30" />تعذر توليد لوحة التصميم</div>
-                                    ))}
+                                        )
+                                    )}
+                                </div>
+
+                                <div className="mt-4 p-4 bg-primary-50 rounded-xl border border-primary-100 text-center">
+                                    <p className="font-arabic text-primary-800 text-sm italic">
+                                        هذا التصميم تم توليده ذكياً بناءً على خياراتك، ونرشح لك القطع التالية كأقرب تنفيذ واقعي له
+                                    </p>
                                 </div>
                             </div>
 
@@ -330,10 +342,10 @@ const StylistChat = () => {
 
                             <div className="product-suggestions-container mt-8 space-y-8 print:hidden">
 
-                                {/* التحقق من وجود تطابق 100% */}
+                                {/* التحقق من وجود منتج مقترح أقرب للمثالي */}
                                 {result.exact_match && result.exact_match.length > 0 && (
                                     <div className="zone-exact bg-green-50 p-6 rounded-2xl border-2 border-green-500 shadow-lg">
-                                        <h3 className="text-2xl font-bold font-arabic text-green-800 mb-4">✨ التصميم الذي طلبتِه تماماً (تطابق 100%)</h3>
+                                        <h3 className="text-2xl font-bold font-arabic text-green-800 mb-4">✨ تصميم مقترح مستوحى من طلبك</h3>
                                         {result.exact_match.map(product => (
                                             <div key={product.product_id} className="product-card flex flex-col items-center">
                                                 <p className="text-gray-700 font-arabic text-center mb-4">{product.match_reason}</p>
