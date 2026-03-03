@@ -57,7 +57,7 @@ const StylistChat = () => {
                 silhouette_alternatives: products.length > 2 ? [products[2]] : [],
                 detail_alternatives: products.length > 3 ? [products[3]] : [],
                 // Create a literal prompt for the master image based on the exact matched DNA
-                image_generation_prompt: `A highly realistic, ultra-detailed fashion editorial photo of a ${dna.category}. Features: ${dna.silhouette} silhouette, ${dna.neckline} neckline, ${dna.sleeves} sleeves, made of ${dna.fabric} fabric. Details: ${(dna.embellishments || []).join(', ')}. Occasion: ${dna.occasion}. Elegant, luxurious lighting, worn by a high-end fashion model, studio gray background, 8k resolution, photorealistic.`
+                image_generation_prompt: `A highly realistic, ultra-detailed fashion editorial photo of a ${dna.category}. Features: ${dna.silhouette} silhouette, ${dna.neckline} neckline, ${dna.sleeves} sleeves, made of ${dna.fabric} fabric. Details: ${(Array.isArray(dna.embellishments) ? dna.embellishments : (dna.embellishments ? [dna.embellishments] : [])).join(', ')}. Occasion: ${dna.occasion}. Elegant, luxurious lighting, worn by a high-end fashion model, studio gray background, 8k resolution, photorealistic.`
             };
 
             setResult(data);
