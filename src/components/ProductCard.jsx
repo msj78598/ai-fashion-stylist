@@ -117,6 +117,14 @@ const ProductCard = ({ product }) => {
                             )}
                         </div>
                     </div>
+
+                    {/* Visual Feature Enrichment */}
+                    {product.upper_design?.neckline && product.aesthetics?.fabric && (
+                        <div className="mt-3 text-[13px] text-primary-700 bg-primary-50/50 px-3 py-2 rounded-xl border border-primary-100/50 flex items-center justify-start gap-2 font-arabic">
+                            <Sparkles className="w-4 h-4 text-primary-500 shrink-0" />
+                            <span>يتميز بـ <span className="font-bold">{product.upper_design.neckline}</span> وقماش <span className="font-bold">{product.aesthetics.fabric}</span> فاخر</span>
+                        </div>
+                    )}
                 </div>
 
                 <div className="mt-auto pt-4">

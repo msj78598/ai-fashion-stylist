@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Sparkles, Scissors, Loader2, ArrowRight, ShoppingBag, Image as ImageIcon, Printer, RefreshCcw, Plus } from 'lucide-react';
-import { generateTechPackSpecSheet, generateMasterTechPackImage } from '../services/ai';
-import ProductCard from '../components/ProductCard';
-import { motion } from 'framer-motion';
-import { matchAffiliateStores } from '../services/affiliateMatcher';
-import { generateProductIntelligence } from '../services/productIntelligence';
+import { generateMasterTechPackImage } from '../services/ai';
 import { fetchAndScoreProducts } from '../services/productApi';
 
 const StylistChat = () => {
@@ -28,56 +24,58 @@ const StylistChat = () => {
         setLoading(true);
         setError(null);
         try {
-            // STEP 1: Generate Product Intelligence & Fetch Real Products FIRST
-            setLoadingText("جاري تحليل المدخلات للبحث عن منتج حقيقي يطابق مواصفاتك...");
-            let finalScoredProducts = [];
-            let topProduct = null;
-            let topProductDesc = "";
-            let intelligenceObj = null;
+            setLoadingText("جاري استكشاف قواعد بيانات المتاجر ومطابقة المنتجات مع الهوية الوراثية (AI DNA)...");
 
-            try {
-                intelligenceObj = await generateProductIntelligence(prefs);
-                console.log("PIE Output:", intelligenceObj);
+            // 1. Fetch matching products directly using our robust local matcher
+            const products = await fetchAndScoreProducts(prefs);
+            setScoredProducts(products);
 
-                setLoadingText("جاري استكشاف قواعد بيانات المتاجر ومطابقة المنتجات...");
-                const products = await fetchAndScoreProducts(intelligenceObj.searchQueries, intelligenceObj);
-                finalScoredProducts = products;
-                setScoredProducts(products);
-
-                if (products.length > 0) {
-                    topProduct = products[0];
-                    topProductDesc = `The design must closely resemble this real product: ${topProduct.title}. Color: ${topProduct.rawAttributes?.color || prefs.colors}. Material: ${topProduct.rawAttributes?.material || prefs.fabricMaterial}. DO NOT add elements not present in this description.`;
-                }
-            } catch (err) {
-                console.error("PIE/Scoring fail:", err);
+            if (products.length === 0) {
+                throw new Error("لم نتمكن من إيجاد تطابق في قاعدة البيانات الحالية لخياراتك. يرجى تعديل الخصائص والمحاولة مجدداً.");
             }
 
-            // STEP 2: Generate Spec Sheet (Text/JSON), Passing the Top Product to Force Alignment
-            setLoadingText("يتم الآن رسم لوحة المهندسة المعمارية للفستان (Master Board)...");
-            const data = await generateTechPackSpecSheet(prefs, topProduct);
+            const topProduct = products[0];
+            const dna = topProduct.ai_dna;
 
-            if (!data || (!data.marketing_copy && !data.top_matches)) {
-                console.error("Malformed AI response:", data);
-                throw new Error("لم نتمكن من استلام تفاصيل التصميم بشكل كامل من الذكاء الاصطناعي. يرجى المحاولة مرة أخرى.");
-            }
+            // 2. Synthesize the Result Object to feed the UI Sketch Board
+            const data = {
+                exact_match: [topProduct],
+                marketing_copy: dna.ai_marketing_title || topProduct.title,
+                tech_specs: {
+                    silhouette: dna.silhouette,
+                    neckline: dna.neckline,
+                    sleeves: dna.sleeves,
+                    waist: dna.waist,
+                    fabric: dna.fabric,
+                    embellishments: dna.embellishments || [],
+                    textures: dna.textures || [],
+                    modesty: dna.modesty,
+                    price: topProduct.price,
+                    currency: topProduct.currency
+                },
+                color_alternatives: products.length > 1 ? [products[1]] : [],
+                silhouette_alternatives: products.length > 2 ? [products[2]] : [],
+                detail_alternatives: products.length > 3 ? [products[3]] : [],
+                // Create a literal prompt for the master image based on the exact matched DNA
+                image_generation_prompt: `A highly realistic, ultra-detailed fashion editorial photo of a ${dna.category}. Features: ${dna.silhouette} silhouette, ${dna.neckline} neckline, ${dna.sleeves} sleeves, made of ${dna.fabric} fabric. Details: ${(dna.embellishments || []).join(', ')}. Occasion: ${dna.occasion}. Elegant, luxurious lighting, worn by a high-end fashion model, studio gray background, 8k resolution, photorealistic.`
+            };
 
             setResult(data);
 
-            // STEP 3: Generate Master Tech Pack Image (Based on text model's prompt)
-            if (data.image_generation_prompt) {
-                setLoadingImage(true);
-                try {
-                    const url = await generateMasterTechPackImage(data.image_generation_prompt, prefs);
-                    setMasterImage(url);
-                } catch (err) {
-                    console.error("Master image fail:", err);
-                } finally {
-                    setLoadingImage(false);
-                }
+            // 3. Generate Visual Master Image
+            setLoadingImage(true);
+            try {
+                const url = await generateMasterTechPackImage(data.image_generation_prompt, prefs);
+                setMasterImage(url);
+            } catch (err) {
+                console.error("Master image fail:", err);
+            } finally {
+                setLoadingImage(false);
             }
 
         } catch (err) {
-            setError('عذراً، حدث خطأ أثناء إعداد الملف التقني (Tech Pack). يرجى المحاولة مرة أخرى.');
+            console.error(err);
+            setError(err.message || 'عذراً، حدث خطأ أثناء إعداد الملف التقني (Tech Pack). يرجى المحاولة مرة أخرى.');
         } finally {
             setLoading(false);
         }
@@ -228,15 +226,47 @@ const StylistChat = () => {
                                     <div className="absolute top-0 right-0 p-4 opacity-10">
                                         <Sparkles className="w-12 h-12 text-primary-600" />
                                     </div>
-                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">رؤية المصمم (Stylist Vision)</h3>
-                                    <p className="text-xl font-arabic text-primary-900 leading-relaxed text-right dir-rtl italic">
-                                        "{result?.marketing_copy}"
+                                    <h3 className="text-xl font-bold font-arabic mb-4 text-primary-900 border-r-4 border-primary-600 pr-4">العنوان الترويجي المبتكر</h3>
+                                    <p className="text-2xl font-bold text-primary-800 leading-relaxed text-right dir-rtl mb-6">
+                                        {result.marketing_copy}
                                     </p>
 
-                                    {result?.exact_match?.[0]?.discount_code && (
+                                    {/* تفاصيل السكتش التقني الجديد */}
+                                    {result.tech_specs && (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 font-arabic" dir="rtl">
+                                            {/* الهيكل الإنشائي */}
+                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm">
+                                                <h4 className="text-lg font-bold text-primary-900 mb-3 flex items-center gap-2"><Scissors className="w-5 h-5" /> الهيكل الإنشائي الأساسي (Structure)</h4>
+                                                <ul className="text-primary-800 space-y-2">
+                                                    <li><span className="font-bold">القصة (Silhouette):</span> {result.tech_specs.silhouette}</li>
+                                                    <li><span className="font-bold">الياقة (Neckline):</span> {result.tech_specs.neckline}</li>
+                                                    <li><span className="font-bold">الأكمام (Sleeves):</span> {result.tech_specs.sleeves}</li>
+                                                    <li><span className="font-bold">تحديد الخصر (Waist):</span> {result.tech_specs.waist}</li>
+                                                </ul>
+                                            </div>
+
+                                            {/* هوية القماش والزينة ودليل الحشمة */}
+                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm">
+                                                <h4 className="text-lg font-bold text-primary-900 mb-3 flex items-center gap-2"><Sparkles className="w-5 h-5" /> هوية القماش والحشمة (Aesthetics)</h4>
+                                                <ul className="text-primary-800 space-y-2">
+                                                    <li><span className="font-bold">القماش (Fabric):</span> {result.tech_specs.fabric}</li>
+                                                    {result.tech_specs.embellishments.length > 0 && (
+                                                        <li><span className="font-bold">الزينة:</span> {result.tech_specs.embellishments.join('، ')}</li>
+                                                    )}
+                                                    {result.tech_specs.textures.length > 0 && (
+                                                        <li><span className="font-bold">الطبقات والكسرات:</span> {result.tech_specs.textures.join('، ')}</li>
+                                                    )}
+                                                    <li><span className="font-bold">دليل الحشمة:</span> <span className="text-green-700 bg-green-50 px-2 rounded">{result.tech_specs.modesty}</span></li>
+                                                    <li><span className="font-bold">السعر التجاري:</span> <span className="font-sans font-bold">{result.tech_specs.price} {result.tech_specs.currency}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {result?.exact_match?.[0]?.discountCode && (
                                         <div className="mt-6 flex flex-wrap gap-4 items-center justify-end bg-primary-100/50 p-4 rounded-xl border border-primary-200">
-                                            <span className="font-arabic font-bold text-primary-800 text-lg">كود الخصم الحصري:</span>
-                                            <span className="bg-white text-primary-900 px-4 py-2 rounded-lg font-bold border border-primary-300 shadow-sm text-xl">{result.exact_match[0].discount_code}</span>
+                                            <span className="font-arabic font-bold text-primary-800 text-lg">كود الخصم الحصري في متجر {result.exact_match[0].storeName}:</span>
+                                            <span className="bg-white text-primary-900 px-4 py-2 rounded-lg font-bold border border-primary-300 shadow-sm text-xl">{result.exact_match[0].discountCode}</span>
                                         </div>
                                     )}
                                 </motion.div>
@@ -357,47 +387,22 @@ const StylistChat = () => {
                                     </div>
                                 )}
 
-                                {/* منطقة بدائل الألوان */}
+                                {/* منطقة بدائل الألوان والموديلات المشابهة */}
                                 {result.color_alternatives && result.color_alternatives.length > 0 && (
                                     <div className="zone-color bg-blue-50 p-6 rounded-2xl border border-blue-200">
-                                        <h3 className="text-xl font-bold font-arabic text-blue-800 mb-4">🎨 نفس تصميمك المفضل.. بألوان أخرى ساحرة</h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            {result.color_alternatives.map(product => (
-                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
-                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
-                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-blue-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* منطقة بدائل القصة (الهيكل) */}
-                                {result.silhouette_alternatives && result.silhouette_alternatives.length > 0 && (
-                                    <div className="zone-silhouette bg-purple-50 p-6 rounded-2xl border border-purple-200">
-                                        <h3 className="text-xl font-bold font-arabic text-purple-800 mb-4">👗 بنفس لونك المفضل.. مع اختلاف بسيط في القصة</h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            {result.silhouette_alternatives.map(product => (
-                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
-                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
-                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-purple-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* منطقة بدائل الياقة والتفاصيل */}
-                                {result.detail_alternatives && result.detail_alternatives.length > 0 && (
-                                    <div className="zone-details bg-orange-50 p-6 rounded-2xl border border-orange-200">
-                                        <h3 className="text-xl font-bold font-arabic text-orange-800 mb-4">✨ تصاميم قريبة لطلبك.. بلمسة مختلفة على الأكتاف والياقة</h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            {result.detail_alternatives.map(product => (
-                                                <div key={product.product_id} className="p-4 bg-white rounded-xl shadow-sm">
-                                                    <p className="text-sm font-arabic text-gray-600 mb-3" dir="rtl">{product.match_reason}</p>
-                                                    <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" className="font-arabic text-orange-600 underline font-bold" rel="noopener noreferrer">عرض الفستان</a>
-                                                </div>
-                                            ))}
+                                        <h3 className="text-xl font-bold font-arabic text-blue-800 mb-4">🎨 خيارات متوافقة إضافية تم اختيارها لكِ بدقة</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                            {[...result.color_alternatives, ...result.silhouette_alternatives, ...result.detail_alternatives]
+                                                .filter(Boolean)
+                                                .slice(0, 3) // إظهار أفضل 3 بدائل إضافية
+                                                .map(product => (
+                                                    <div key={product.id || Math.random()} className="p-4 bg-white rounded-xl shadow-sm flex flex-col items-center">
+                                                        {product.imageUrl && <img src={product.imageUrl} alt={product.title} className="w-full h-48 object-cover rounded-lg mb-3" />}
+                                                        <p className="text-sm font-arabic font-bold text-gray-800 mb-1 text-center" dir="rtl">{product.product_id}</p>
+                                                        <p className="text-xs font-arabic text-gray-500 mb-3 text-center" dir="rtl">{product.match_reason}</p>
+                                                        <a href={product.final_affiliate_url} target="_blank" className="font-arabic text-sm bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-bold w-full text-center hover:bg-blue-200" rel="noopener noreferrer">تفاصيل الفستان</a>
+                                                    </div>
+                                                ))}
                                         </div>
                                     </div>
                                 )}
@@ -426,7 +431,7 @@ const AlternativeCard = ({ match }) => {
         <div className="bg-gradient-to-br from-primary-50/50 to-white p-6 rounded-2xl border border-primary-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden">
             <div className="mb-6 z-10">
                 <div className="flex justify-end items-center mb-4">
-                    {match.discount_code && <span className="bg-green-100 text-green-800 text-sm font-bold px-3 py-1.5 rounded-full font-arabic border border-green-200">{match.discount_code}</span>}
+                    {match.discountCode && <span className="bg-green-100 text-green-800 text-sm font-bold px-3 py-1.5 rounded-full font-arabic border border-green-200">{match.discountCode}</span>}
                 </div>
                 <h4 className="font-bold text-primary-900 text-lg mb-2 font-arabic" dir="rtl">{match.product_id}</h4>
                 <p className="font-arabic text-primary-700 text-base leading-relaxed" dir="rtl">{match.match_reason}</p>

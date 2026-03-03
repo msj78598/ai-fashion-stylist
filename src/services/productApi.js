@@ -1,24 +1,4 @@
-// src/services/productApi.js
-// Placeholder product API service. In a real implementation, these would call
-// external APIs or your backend to search for products.
-// We are using mock data to demonstrate the Product Intelligence Engine flow.
-
-/**
- * Mock product structure
- * @typedef {Object} Product
- * @property {string} id
- * @property {string} title - Product name
- * @property {string} id
- * @property {string} title - Product name
- * @property {number} price - Price
- * @property {string} currency - Currency
- * @property {string} imageUrl - Image URL
- * @property {string} productUrl - Affiliate URL
- * @property {string} storeName - Store identifier
- * @property {Object} rawAttributes - Attributes for scoring
- */
-
-import productDatabase from '../data/Clean_Fashion_DB.json';
+import productDatabase from '../data/Master_Fashion_Intelligence.json';
 
 const AFFILIATE_STORES = [
     { title: "لورا فاشن", baseUrl: 'https://mtjr.at/rY6YOtAGkB' },
@@ -31,260 +11,105 @@ const AFFILIATE_STORES = [
     { title: "فساتين آسلين", baseUrl: 'https://mtjr.at/ZKAz8nr-Vm' }
 ];
 
-// We are shifting from generic search URLs to the Deep Linking Protocol.
-// Store specific discount codes (user provided examples)
-const STORE_DISCOUNT_CODES = {
-    "لورا فاشن": "F-ZLHNl",
-    "فساتين آسلين": "F-MDU4N",
-    "بوتيك نوف": "F-ZLHNl",
-    "stayl haven": "F-MDU4N"
-};
+export async function fetchAndScoreProducts(prefs) {
+    console.log("👗 Starting Local AI DNA Product Matcher...");
 
-// Fallback logic for links if needed, but we rely on the scraped direct links.
+    // 1. استبعاد أي منتج لا يحتوي على ai_dna (منتج فارغ الملامح)
+    const validProducts = productDatabase.filter(p => p.ai_dna !== null && p.ai_dna !== undefined);
+    console.log(`✅ Found ${validProducts.length} fully processed products with AI DNA.`);
 
-const MOCK_PRODUCTS = [
-    {
-        id: "p1",
-        title: "فستان سهرة ماكسي حرير أخضر زمردي",
-        price: 450,
-        currency: "SAR",
-        imageUrl: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop",
-        productUrl: "https://mtjr.at/ZKAz8nr-Vm",
-        storeName: "asleen",
-        rawAttributes: {
-            color: "أخضر زمردي",
-            material: "حرير",
-            length: "ماكسي",
-            sleeves: "كم طويل",
-            neckline: "ياقة عالية",
-            fit: "مخصر",
-            silhouette: "A-Line"
-        }
-    },
-    {
-        id: "p2",
-        title: "فستان سهرة أسود شيفون بدون أكمام",
-        price: 300,
-        currency: "SAR",
-        imageUrl: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=500&auto=format&fit=crop",
-        productUrl: "https://mtjr.at/rY6YOtAGkB",
-        storeName: "laura",
-        rawAttributes: {
-            color: "أسود",
-            material: "شيفون",
-            length: "ماكسي",
-            sleeves: "بدون أكمام",
-            neckline: "ياقة V",
-            fit: "واسع",
-            silhouette: "مستقيم"
-        }
-    },
-    {
-        id: "p3",
-        title: "عباية سهرة فخمة بقصة واسعة",
-        price: 800,
-        currency: "SAR",
-        imageUrl: "https://images.unsplash.com/photo-1610433572201-110753c6cff9?w=500&auto=format&fit=crop",
-        productUrl: "https://mtjr.at/Q2_9DITIA6",
-        storeName: "joyce",
-        rawAttributes: {
-            color: "أسود",
-            material: "كريب",
-            length: "ماكسي",
-            sleeves: "كم طويل",
-            neckline: "ياقة دائرية",
-            fit: "واسع جدا",
-            silhouette: "واسع"
-        }
-    }
-];
+    // 2. خوارزمية المطابقة المباشرة (Matching Algorithm)
+    const scoredProducts = validProducts.map(p => {
+        let score = 0;
+        let matchReasons = [];
+        const dna = p.ai_dna;
 
-/**
- * Smart Keyword Matcher for Arabic Descriptions
- * Extracts logic words from the AI Rule and checks if they exist in the deeply scraped Product Description.
- */
-function evaluateScore(attributeValue, ruleString, maxWeight) {
-    if (!attributeValue || !ruleString) return 0;
-
-    const val = String(attributeValue).toLowerCase();
-    const rule = String(ruleString).toLowerCase();
-
-    // Exact or direct inclusion check (First Pass)
-    if (rule.includes(val) || val.includes(rule)) {
-        return maxWeight;
-    }
-
-    // Keyword Extraction Check (Second Pass - for Deep Crawler Text)
-    // Extract words longer than 2 chars from the AI rule
-    const ruleWords = rule.replace(/[^\w\s\u0600-\u06FF]/g, ' ')
-        .split(/\s+/)
-        .filter(w => w.length > 2 && !['بدون', 'على', 'من', 'في', 'مع', 'أو', 'او'].includes(w));
-
-    // If any significant keyword from the rule exists in the product text, award full points
-    const hasMatch = ruleWords.some(keyword => val.includes(keyword));
-
-    if (hasMatch) {
-        return maxWeight;
-    }
-
-    // No match
-    return 0;
-}
-
-/**
- * Evaluates a product against the Product Intelligence Engine's scoring model and filters.
- */
-export function processProductsWithIntelligence(products, productDNA, scoringModel, filterRules) {
-    const scoredProducts = [];
-
-    for (const product of products) {
-        let isExcluded = false;
-
-        // 0. Hard Coded Sanity Filters (Reject Menswear/Casual Tops)
-        const productTitle = (product.title || product.product_id || product.store_info?.name || "").toLowerCase();
-        if (productTitle.includes('رجالي') || productTitle.includes('تي شيرت') || productTitle.includes('t-shirt') || productTitle.includes('شيرت') || productTitle.includes('طفل')) {
-            continue; // Skip evaluating this irrelevant product entirely
+        // النوع (Category) - 25 نقطة
+        if (prefs.clothingType && dna.category === prefs.clothingType) {
+            score += 25;
+            matchReasons.push("النوع");
         }
 
-        // 1. Apply Hard Filters
-        if (filterRules && Array.isArray(filterRules)) {
-            for (const filter of filterRules) {
-                const rule = filter.rule.toLowerCase();
-                const feats = product.features || {};
-
-                if (rule.includes('price >') && product.original_price > 1000) {
-                    isExcluded = true; break;
-                }
-
-                if (rule.includes('sleeve') && feats.upper_design?.sleeves_style && rule.includes(feats.upper_design.sleeves_style.toLowerCase())) {
-                    isExcluded = true; break;
-                }
-
-                if (rule.includes('length') && feats.anatomy?.length && rule.includes(feats.anatomy.length.toLowerCase())) {
-                    isExcluded = true; break;
-                }
-            }
+        // المناسبة (Occasion) - مصفوفة - 20 نقطة
+        const occasionArray = Array.isArray(dna.occasion) ? dna.occasion : [dna.occasion];
+        if (prefs.occasion && occasionArray.includes(prefs.occasion)) {
+            score += 20;
+            matchReasons.push("المناسبة");
         }
 
-        if (isExcluded) continue;
-
-        // 2. Apply Scoring Model
-        let totalScore = 0;
-        let matchDetails = [];
-
-        if (scoringModel && scoringModel.criteria) {
-            for (const criteria of scoringModel.criteria) {
-                const weight = criteria.weight || 0;
-                const key = criteria.key; // e.g. 'colorMatch', 'silhouetteMatch'
-                const rule = criteria.evaluationRule;
-
-                let earned = 0;
-                const feats = product.features || {};
-
-                // Safely convert arrays to strings if PIE generated an array
-                const safeColor = Array.isArray(productDNA?.colors) ? productDNA.colors.join(' ') : productDNA?.colors || '';
-
-                // User's specific requested keys mapping against NEW JSON STRUCTURE:
-                if (key === 'colorMatch' && feats.aesthetics?.primary_color) earned = evaluateScore(feats.aesthetics.primary_color, rule + " " + safeColor, weight);
-                else if (key === 'silhouetteMatch' && feats.anatomy?.silhouette) earned = evaluateScore(feats.anatomy.silhouette, rule + " " + productDNA?.silhouette, weight);
-                else if (key === 'lengthMatch' && feats.anatomy?.length) earned = evaluateScore(feats.anatomy.length, rule + " " + productDNA?.length, weight);
-                else if (key === 'necklineMatch' && feats.upper_design?.neckline) earned = evaluateScore(feats.upper_design.neckline, rule + " " + productDNA?.neckline, weight);
-                else if (key === 'sleeveMatch') {
-                    const sleeveText = (feats.upper_design?.sleeves_length || '') + " " + (feats.upper_design?.sleeves_style || '');
-                    earned = evaluateScore(sleeveText, rule + " " + productDNA?.sleeves, weight);
-                }
-                else if (key === 'modestyMatch') earned = evaluateScore(feats.anatomy?.length, rule + " long sleeve maxi المحتشم", weight);
-                else if (key === 'occasionMatch') earned = weight; // Assume occasion fits for mock
-
-                totalScore += earned;
-                matchDetails.push({ key, earned, weight });
-            }
-        } else {
-            // Fallback score if no model provided
-            totalScore = 50;
+        // القصة (Silhouette) - 15 نقطة
+        if (prefs.silhouette && dna.silhouette === prefs.silhouette) {
+            score += 15;
+            matchReasons.push("القصة");
         }
 
-        // Normalize score to 100 max just in case
-        totalScore = Math.min(100, Math.floor(totalScore));
-
-        // CRITICAL CONSTRAINT: Drop products with score < 65%
-        if (totalScore >= 65) {
-            scoredProducts.push({
-                ...product,
-                matchScore: totalScore,
-                matchDetails: matchDetails
-            });
+        // الطول (Length) - 10 نقاط
+        if (prefs.clothingLength && dna.length === prefs.clothingLength) {
+            score += 10;
+            matchReasons.push("الطول");
         }
-    }
 
-    // 3. Sort Descending by Score
-    return scoredProducts.sort((a, b) => b.matchScore - a.matchScore);
-}
+        // الياقة (Neckline) - 10 نقاط
+        if (prefs.neckline && dna.neckline === prefs.neckline) {
+            score += 10;
+            matchReasons.push("الياقة");
+        }
 
-/**
- * Dynamically fetch products using the local pre-scraped Product Database.
- * No longer relying on external SerpApi calls.
- */
-export async function fetchAndScoreProducts(searchQueries, productIntelligence) {
-    console.log("Starting Local Database Product Search...");
-    console.log(`Database loaded with ${productDatabase.length} products.`);
+        // الأكمام (Sleeves) - 10 نقاط
+        if (prefs.sleeves && dna.sleeves === prefs.sleeves) {
+            score += 10;
+            matchReasons.push("الأكمام");
+        }
 
-    // 1. Prepare products with Direct Links and Discount Codes (Deep Linking Protocol)
-    const preparedProducts = productDatabase.map(p => {
-        const urlDomain = (p.productUrl || p.direct_product_url || "").toLowerCase();
-        const storeInfoName = p.store_info?.name || "";
-        const storeKey = storeInfoName.toLowerCase();
-        let code = p.store_info?.discount_code || "F-VIP"; // fallback
+        // القماش (Fabric) - 10 نقاط
+        if (prefs.fabricMaterial && dna.fabric === prefs.fabricMaterial) {
+            score += 10;
+            matchReasons.push("القماش");
+        }
 
-        let actualStoreTitle = storeInfoName || "متجر غير محدد";
+        // ضبط الروابط وأسماء المتاجر للتسويق بالعمولة (Affiliates)
+        const urlDomain = (p.productUrl || "").toLowerCase();
+        let storeTitle = p.store || "متجر غير محدد";
         let affiliateBase = null;
 
-        // Try to match store name or URL domain to construct affiliate and code robustly
-        if (urlDomain.includes("lora") || storeKey.includes("لورا")) {
-            actualStoreTitle = "لورا فاشن";
-            code = "F-ZLHNl";
+        if (urlDomain.includes("lora") || storeTitle.includes("لورا")) {
+            storeTitle = "لورا فاشن";
             affiliateBase = "https://mtjr.at/rY6YOtAGkB";
         }
-        else if (urlDomain.includes("aslen") || urlDomain.includes("asleen") || storeKey.includes("آسلين")) {
-            actualStoreTitle = "فساتين آسلين";
-            code = "F-MDU4N";
+        else if (urlDomain.includes("aslen") || urlDomain.includes("asleen") || storeTitle.includes("آسلين")) {
+            storeTitle = "فساتين آسلين";
             affiliateBase = "https://mtjr.at/ZKAz8nr-Vm";
         }
-        else if (urlDomain.includes("noof") || storeKey.includes("نوف")) {
-            actualStoreTitle = "بوتيك نوف";
-            code = "F-ZLHNl";
+        else if (urlDomain.includes("noof") || storeTitle.includes("نوف")) {
+            storeTitle = "بوتيك نوف";
             affiliateBase = "https://mtjr.at/faWBo8or-0";
         }
-        else if (urlDomain.includes("stayl") || urlDomain.includes("haven") || storeKey.includes("haven")) {
-            actualStoreTitle = "Stayl Haven";
-            code = "F-MDU4N";
+        else if (urlDomain.includes("stayl") || urlDomain.includes("haven")) {
+            storeTitle = "Stayl Haven";
             affiliateBase = "https://mtjr.at/fvS7XePT3o";
         } else {
-            // Fallback lookup
-            const foundStore = AFFILIATE_STORES.find(s => s.title === actualStoreTitle || storeKey.includes(s.title.toLowerCase()));
+            const foundStore = AFFILIATE_STORES.find(s => s.title === storeTitle || storeTitle.includes(s.title));
             if (foundStore) affiliateBase = foundStore.baseUrl;
         }
 
         return {
             ...p,
-            title: p.product_id, // Fallback for components that expect title
-            price: p.original_price, // Mapping
-            imageUrl: p.image_url, // Mapping
-            productUrl: p.direct_product_url || p.productUrl, // Mapping
-            storeName: actualStoreTitle,
-            // We preserve the exact deep link.
-            discountCode: code,
-            affiliateBaseUrl: affiliateBase
+            matchScore: score,
+            match_reason: matchReasons.length > 0 ? `يتطابق في: ${matchReasons.join('، ')} (بنسبة ${score}%)` : "لا يوجد تطابق مباشر",
+            product_id: dna.ai_marketing_title || p.title || "تصميم راقٍ",
+            storeName: storeTitle,
+            direct_product_url: p.productUrl,
+            final_affiliate_url: affiliateBase ? p.productUrl // In real app, you'd wrap it in an affiliate deep link. For now we just pass direct.
+                : p.productUrl,
+            imageUrl: p.images && p.images.length > 0 ? p.images[0] : null
         };
     });
 
-    // 2. Pipe into Scoring Engine
-    const scored = processProductsWithIntelligence(
-        preparedProducts,
-        productIntelligence.productDNA,
-        productIntelligence.scoringModel,
-        productIntelligence.filterRules
-    );
+    // 3. ترتيب النتائج من الأعلى للأسفل، وطرد أي منتج تحت الـ 25 نقطة (يجب أن يتطابق في قطعة واحدة على الأقل)
+    const filteredAndSorted = scoredProducts
+        .filter(p => p.matchScore >= 25)
+        .sort((a, b) => b.matchScore - a.matchScore);
 
-    return scored;
+    console.log(`🎯 Engine Matched ${filteredAndSorted.length} high-quality products.`);
+    return filteredAndSorted;
 }

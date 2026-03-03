@@ -88,8 +88,9 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         - If STRICT MODE = false, prioritize selecting a primary product (for ZONE 1) that is 'Data-Rich' (has very few nulls). Then, build the "visual_prompt" based strictly on THAT product's real features to ensure the generated image matches the suggested product.
 
         SLOT FILLING STRATEGY:
-        ZONE 1: exact_match (The Closest Match)
+        ZONE 1: exact_match (The Closest Match - STRICT MATCHING ENABLED)
         - The absolute closest match to User Preferences (Body type, Color, Cut). Max 1 item.
+        - STRICT MATCH RULE: You MUST NOT accept or place any product in ZONE 1 unless both its 'neckline' and 'silhouette' ACTUALLY MATCH the required design.
         - Write a main_marketing_text in Arabic praising this choice.
         
         ZONE 2: color_alternatives (Same Cut, Different Color)
@@ -103,7 +104,7 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
 
         VISUAL PROMPT LOGIC (CRITICAL):
         - If STRICT MODE = true (Manual Track): Build the "visual_prompt" strictly based on the User's Preferences literally (plus the Avatar Preference).
-        - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database.
+        - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database, explicitly leveraging its 'neckline' and 'silhouette' fields to ensure the generated image matches the real product image in the store with >90% accuracy.
     
         OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {

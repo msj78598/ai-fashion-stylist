@@ -60,7 +60,7 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": "طويلة",
       "sleeves_style": "واسعة",
       "back_design": null
@@ -225,9 +225,9 @@
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": "بدون",
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
@@ -309,9 +309,9 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستطيل",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
@@ -351,7 +351,7 @@
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
       "sleeves_style": "كاب",
       "back_design": null
@@ -690,15 +690,15 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكتاف",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أبيض",
       "pattern": "زهور ملونة",
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -731,15 +731,15 @@
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": "قصيرة",
-      "sleeves_style": null,
+      "sleeves_style": "أكمام فراشة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أسود, ذهبي",
       "pattern": "نقشات فنية",
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -906,7 +906,7 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": "طويلة",
       "sleeves_style": "شفاف مزخرف",
       "back_design": null
@@ -1247,19 +1247,19 @@
     "image_url": "https://cdn.salla.sa/RreKD/PvwqRD65HltAd9PcLGHHVT34XJE6gqMekJQ9SMfw.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
       "neckline": "هالتر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "وردي",
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": "تطريز"
     },
     "special_features": {
@@ -1333,7 +1333,7 @@
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
       "sleeves_style": "عريضة",
       "back_design": null
@@ -1341,7 +1341,7 @@
     "aesthetics": {
       "primary_color": "أوف وايت",
       "pattern": null,
-      "fabric": null,
+      "fabric": "حرير",
       "embellishment": "تطريز"
     },
     "special_features": {
@@ -2145,19 +2145,19 @@
     "image_url": "https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=400,height=400,onerror=redirect,format=auto/mAYYV/vRTaHWP5kinek5BKQpErtOyoSGuZJZz2GEiTKBPG.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "",
       "embellishment": null
     },
     "special_features": {
@@ -2177,19 +2177,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/670daa80-8d68-4d79-b90e-2f7ebe383955-375x500-CT6VDixZGqQmCOxcTjnGsZo7JQgOUdTJV5TTTqx7.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مفتوح",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -2209,19 +2209,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/59fd5353-01b6-4890-aa3b-c782ffaea4aa-400.03078343851x500-qyNQZduh6Zd0FmCEdQrRXLZkE9zZqIH6g4vh9Gz6.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصير",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -2241,19 +2241,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/d88ad9d3-e7be-4310-8d2d-dec0df842580-333.50730688935x500-M7eakPZeQQ9LkAxFLANliwsOUnVKgHyhAR1utugB.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -2273,19 +2273,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/FNzX53kjFXAHyjKccLZFAzknRPzNHc3lkd99QOtW.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2369,19 +2369,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/3bf2ef7e-4341-462f-a0e6-f7caf7a22677-372.32187344295x500-vaX0GjkYM3lFVhSQeuLKILcBX6SVqnXMGNy1JSSw.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "وواسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "سادة",
       "embellishment": null
     },
     "special_features": {
@@ -2401,19 +2401,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/gPKAb8CM449C03EBwA7dGGa8VLP8gUSdI1JhdfXa.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -2433,19 +2433,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/46bcfefa-5131-4da0-ab10-794b57b687bb-333.41003221353x500-AqzD5YnSAepemEaDJxsrtNOiiGDu6mDyitNyKRyh.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "قبة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2465,19 +2465,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/cUCyWlclnkZ1GbOrpFGaKAQOXUidWwz9gfkzZ5eq.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2529,19 +2529,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/76110d4c-d42d-4f4e-936c-8db8a3f4aa4d-361.55747836836x500-fGfwzkgR3ynHs4l2CTOiBKI39sAai3X4jFKKEWCJ.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2561,19 +2561,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/115f203a-5dc9-48ff-a9b3-0616c1278e61-500x500-NHZL39zb3PXlife7UHj6G30sOX7Uqie2c11AfpMP.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "روسيل",
       "embellishment": null
     },
     "special_features": {
@@ -2593,19 +2593,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/fd646161-6fde-4f33-9b5a-2c398a66dbfc-442.40645634629x500-xSOSgG6JT3etMcCGAGm2yYauYD9iIVKafJ0lSU3H.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2625,19 +2625,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/4i1aAyuVs6aEtYC9KsOvX991WcsOHE6D53DmAGxp.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "على شكل V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2657,19 +2657,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/fdOY0qAZ1gXas2O6UIoQjkzDDRkArZRiRil8YivV.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -2689,19 +2689,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/7ptzqMZOvXpMv03tlBUs4HsUjSmCVq2V909tRE6F.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلاسيكية",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2753,19 +2753,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/JuQeGhjAQEsmC38koiYBFYxUkyoxcby5aKW5S6Pn.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصير",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -2785,19 +2785,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/gptkBgFZq6O265aQYysNoVhYxD9qu6Pf72lwHha0.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -2817,19 +2817,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/1b19XGqVPvIyBek65D4wDGL58QlwUHi0keqQNjOJ.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -2849,19 +2849,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/S7VVUticKTj3fSRmkQsMUCglwq8GO08aY13EXBrf.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "شفافة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -2881,19 +2881,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/lkjaPSHuc5OIHCCg0SdVO3vXZF5IU84dvISaO7rc.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مفصلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -2945,19 +2945,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/CB2UqYRwjNFRnuU0xuoLDEQEsWoVjQtSqiz5FrD5.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام منتفخة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -2977,19 +2977,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/YJOUiZoJnokioqUl2My9soHzVEvU5eqpbgjDJzDj.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كتف عاري",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3009,19 +3009,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/CZ2uVdn3D3Y9mfgUHLANRmScSCwE8ZqZOfNp8wEK.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -3041,19 +3041,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/19def930-0926-4930-969d-705038caf95f-333.33333333333x500-Qn9T5r2Sz4eq6NPTgfXK2e73qWprDQp3HptAkk5l.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -3073,19 +3073,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/ef49f386-c013-46bb-bdf8-2f23c4189736-497.30820995962x500-Qi3Jh94CBs6xefHutXwAKg2T2NI5f0zC9zXMtFxM.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربعة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -3105,19 +3105,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/nTGeUOQpXGipV5sBCUnhkaDiL5N3LASdnk5ENdI6.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "على شكل V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3169,19 +3169,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/gtFutUl6d0vVZBnYI4CD2W86YK2elw8VovEF8Pfm.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "موضة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3201,19 +3201,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/d0199d3f-76ab-4d91-b6ca-92e952ef6629-400.03348961822x500-bZJ4oh9H0u76IJyvrHUPc9HJm3ar9Ly92WHPVUMy.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير معروف",
       "embellishment": null
     },
     "special_features": {
@@ -3233,19 +3233,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/3f86e798-a7f5-461b-97fa-9f4b0d0a2802-314.16324343633x500-wOVCWm9TLinP29FZmt79HaSycSGfd0VRpqnAw72l.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -3265,19 +3265,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/7a271180-1186-4dd1-b74f-c3a08fa9e78e-400x500-gjAR5dRszRpWPQR7M5boEI4JliraJ8q0tB9arJdw.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستديرة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3297,19 +3297,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/d1f49ab1-6a23-47b6-846a-dc26c4dd9f83-333.33333333333x500-0NgPBgMq4uy50XzXdeyE2G1DAzUIaKlUVnnl3Ga6.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ثيروب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "ياقة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3329,19 +3329,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/930e025a-c09c-491c-abee-3c857d5a42f1-333.39017735334x500-Lhk7D5nTwJHZCcAqgAA7FjvcwyXMCoAvQkY1NzN0.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3393,19 +3393,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/4cd0c906-baf7-4ef9-a8ce-1ce72e98c9de-400.4199160168x500-2H7v1d125q5vHshdTdMahjnacz81b9lAMUoPgNBS.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مخططة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3425,19 +3425,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/14193e58-0f37-4ad9-a78b-3cfb33e5be85-333.49514563107x500-kAMu2WFK6wZG9IPrmijEzwCUR7pNQX3pX9w2KWg9.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "على شكل V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3457,19 +3457,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/903a901b-95ad-44e7-98e1-3c91f2d4d2d3-333.21554770318x500-ru571mjPsZvrpKZ3my2RGhY2vW4dV1E1TrUHAib8.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصير",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3489,19 +3489,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/5b9952d5-e75f-4309-a416-0361998fd769-333.251953125x500-v0cCskU9mMAcLZPMhPpyzoPBm1uRkKOdXUr81aS2.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "منفوخة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3521,19 +3521,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/0a38e52b-68bc-44e1-b4d1-cf80a3b4659c-333.33333333333x500-MAQ9oxrTvb5DTDAiPlAsG2riwjVVvXlhjmOdEaDB.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3585,19 +3585,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/e7d761c0-dab0-403c-834f-70e8629e8a44-358.51154833191x500-ayEDy0wo5hUsU1zdijVjvHv3kRpWMAQffGK5yanV.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "من دون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3617,19 +3617,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/3f983713-749e-468d-ba5c-32c28db05e0c-333.33333333333x500-T1iF1g0WxUOiQbZxV0aggNYB11agl5F8GIc2ZVvY.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصير",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3649,19 +3649,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/bSNvvLgZLOCd3B5k0vdCQ4jV9j4KonsdB6UYdSgj.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -3681,19 +3681,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/22ee5de6-6bc1-4424-9a7d-8a0768b93501-333.251953125x500-QMACgUaRBdh3PEcvYmpjNg9KbD3nGpYjgolPy4KD.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "أزرار",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3713,19 +3713,19 @@
     "image_url": "https://cdn.salla.sa/mAYYV/b5064029-6545-41ff-8952-f8ddb9a00966-400x500-6EhMiG6XRMRFpPMQD7nsAy2V7FoKN05H3uePd9N7.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -3745,13 +3745,13 @@
     "image_url": "https://cdn.salla.sa/gABdE/4f128883-96bc-427b-b300-d5c3bc3566c3-333.33333333333x500-u7hi6NOkSNaUG24HE0SmK9zomXx3E2dvmwJ0bqbh.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": "طويل"
     },
     "upper_design": {
       "neckline": "ستربلس",
       "sleeves_length": "بدون",
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
@@ -3825,7 +3825,7 @@
     "image_url": "https://cdn.salla.sa/gABdE/575ab02b-0a80-441b-9875-e467b7b568e5-333.33333333333x500-7UE7EsBvHZVeT72d3twry5YJ4yPQ5onJWofCR9dw.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
@@ -3945,19 +3945,19 @@
     "image_url": "https://cdn.salla.sa/gABdE/49946ff2-5e39-49d3-b3e1-bd15ce1d0229-333.62293657689x500-0k7I0A4RL7fxDYNx7Cs6kGe4d6WVM1oK4Crcxo84.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام كاب",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -3981,15 +3981,15 @@
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير مركب",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "ألوان هادئة",
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4061,19 +4061,19 @@
     "image_url": "https://cdn.salla.sa/gABdE/e1326a3b-a02a-41f5-88e3-97e3338a719d-333.35826477188x500-0RE2NFyrkrOu4QeWYO0JDH0lAly15W65w9My7HtC.jpg",
     "anatomy": {
       "category": "فستان قطعتين",
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أوف وايت",
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير محدد",
       "embellishment": null
     },
     "special_features": {
@@ -4149,9 +4149,9 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربوط",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "لا يوجد",
       "back_design": null
     },
     "aesthetics": {
@@ -4185,19 +4185,19 @@
     "image_url": "https://cdn.salla.sa/gABdE/e76bc42f-a02a-49d4-b26a-9f07093bad53-333.28267477204x500-0X6BfSi9ecoznTte9LSnX448Z4dCoHpGu3zAqGUx.jpg",
     "anatomy": {
       "category": "فستان ميدي",
-      "silhouette": null,
+      "silhouette": "مناسب للجسم",
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق مكشوف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كم طويل",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أسود",
       "pattern": "تفاصيل الورد",
-      "fabric": null,
+      "fabric": "غير محدد",
       "embellishment": null
     },
     "special_features": {
@@ -4225,19 +4225,19 @@
     "image_url": "https://cdn.salla.sa/gABdE/7b87e579-bd3e-4039-a4ba-8cf0f2afeea9-333.2832230908x500-IIuoEXVv7ZGTBnd1xbbRA0lq47NlHXS6uqU7fhXD.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام بدون",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أبيض",
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4266,13 +4266,13 @@
     "image_url": "https://cdn.salla.sa/gABdE/fd23d9d3-39ca-4ebc-81cb-9dc34818b671-333.33333333333x500-bymLNqR4AZLzcpO8Lz3aAwcLaFEa7qTvtfsfDXde.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
       "neckline": "مائلة",
       "sleeves_length": "طويلة",
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
@@ -4307,13 +4307,13 @@
     "image_url": "https://cdn.salla.sa/gABdE/6a6b76af-bcee-4c29-8960-1697a26c07cb-333.33333333333x500-cAmfC66vZSTyuCpIbKrwYZNnFvPTBvZX3xgm7BQJ.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "مناسب للجسم",
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
@@ -4432,15 +4432,15 @@
       "length": "ميدي"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "لن",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أحمر",
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير معروف",
       "embellishment": null
     },
     "special_features": {
@@ -4468,13 +4468,13 @@
     "image_url": "https://cdn.salla.sa/gABdE/01f49dd0-68f1-49f4-89cf-3cf902326e2c-333.18425760286x500-JlCDgNS21RG3Dm0wugkjJvSTkOU4CRBWCOGq4COj.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": "طويل"
     },
     "upper_design": {
       "neckline": "اوف شولدر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
@@ -4508,19 +4508,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/9a048b9c-d392-4b84-8496-19c16704a8ec-296.22980251347x500-nzs2QCXEpWlkb5ikw2p762GfYqJ4OZHbAh1nf9Ez.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة دائرية",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام منتفخة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4554,19 +4554,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/9a048b9c-d392-4b84-8496-19c16704a8ec-296.22980251347x500-nzs2QCXEpWlkb5ikw2p762GfYqJ4OZHbAh1nf9Ez.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربعة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "شفافة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4646,19 +4646,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/fd729e72-88dc-48b4-939f-74eff6f95554-333.33333333333x500-Sg7JA2kIRHGlQTfsAdFJgA05JM0aXNGU96qc5uYr.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "أميرة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4692,19 +4692,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/4b32f30e-4b88-44b7-af40-c61713bc26e6-333.251953125x500-wMGsJrDQpDUTbIVVFKpf1uOQ8xXazrPchXQgcu4d.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوح",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مكشوفة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4738,19 +4738,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/3503f591-49c1-4972-8a69-63c51a831b06-333.251953125x500-7IKF4gco4Pz4H4mI0fVHgNi63zfU1mf6nZ6e4kf9.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير موجود",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "Unknown",
       "embellishment": null
     },
     "special_features": {
@@ -4784,19 +4784,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/9881e00a-225a-4ab0-9720-3368a70b39c5-333.251953125x500-3sQcIoOF8xoMT5fHtFzcCNbOp5KUjrYlY2jDq9Lc.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "سترة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4876,19 +4876,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/bfa1fa6d-69dd-4946-a38e-b59e32471a5f-333.251953125x500-hmB0lA0m0kOVLUUHzzzgEaVhRRYGSqxeZN6i3eul.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام منفوشة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4922,19 +4922,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/bfc0f2bb-6ba8-44b0-a6fd-abc076da61ca-375x500-g1d7tVUy1TYQbS7W34STPiERPYbw0M3lifkEJFIU.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "فضفاض",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائرية",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام واسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -4968,19 +4968,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/83efe8ac-883f-4849-b875-e66b6a5b9e0f-374.875x500-TewrcmcQNiBKKFdyMHN5XTGy84lTVKha5Co691WP.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5014,19 +5014,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/a3c786f8-4dc2-468a-b156-ea34e4bc3bf4-375x500-22l7V6YuwOI2AIrPcQjGYX61khEkkx2ikHEEzmv1.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5152,19 +5152,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/afa0d6d4-c43b-4a78-8d63-8cb481ac7252-375x500-iGKQLwkTHQuS8ycswCjtVnxktZUoCE7CfqJvxHlg.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "أمبراطورية",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستطيل",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بلا أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "الدانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -5198,19 +5198,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/ccadc84d-f12b-4e86-bf29-c115360cf7bb-375x500-129Bh9gAZPY93qZiECbOc4gDVQCkhLV4Neeg7XaI.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "الخصر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "منفوخة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -5244,19 +5244,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/5be060a3-06ab-4e7a-a737-241840012485-375x500-EPB9aifi2fFDDFffLidlmNfwJJAsLjAoD7G0erjF.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كاب",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -5290,19 +5290,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/a4babbfe-9396-487a-b257-59921160268d-375x500-xqcULiI8GycA3EJ9XzH8TbW76UsvCgvkcImYNQVT.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "حلق",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مصنوعة من القماش المربوط",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5428,19 +5428,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/dd8ea3fc-78de-4f7e-af7b-33f617bb642f-375x500-8yOvVfV2qt6QUzbx8xRFirOCXTwp2XcR1MhHPNqN.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام واسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5474,19 +5474,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/97405839-c3b2-427e-8164-829ac3d0abc5-375x500-ZlO8sLEP9tN7IydkkbgATI4WcQvlGmVARAYwsnbk.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "طويل",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5520,19 +5520,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/5284741c-b8d7-458a-b5d0-41be143ad0c5-375x500-7VFJLyKyBBkTw1hc6VkjhJMp9p7pLK9T6XMlvX53.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مرتفع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5566,19 +5566,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/295827dd-312a-443d-a4c7-0d3d889e690d-375.09377344336x500-HY2g3kmBCCIiVZ9FlHOYglsW7ze9wKDtDaUQx7Yo.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كيمونو",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5612,19 +5612,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/f10379f2-9076-4882-a506-d1008973189d-375x500-2o7W4RXyh1jWbETp4Q7FzxyRiY4KxoCT7UYXUhlT.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "قائمة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مزينة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -5658,19 +5658,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/0180b7c1-9de7-486a-b2f2-ab6c2ffa0c9d-375x500-i8TUPcZxI2yd140JS5vauJ9p6UFI6OVbxGstpvdv.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام مرفوعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5704,19 +5704,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/a3c6a048-019c-4ec8-8679-42fb84f951eb-333.251953125x500-BAt0fm5rn0h6vnEELlmtHfR8iY1AvxahXuiCYg98.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "قصة A",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "منفوش",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5750,19 +5750,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/82fe5b47-19a4-4a1b-bdf6-af0f122455de-356.08999224205x500-WfHQ0aJG4IgFYVLYkP5Igyz0dOajBgk3gX3so37g.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام جرس",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "خاش",
       "embellishment": null
     },
     "special_features": {
@@ -5796,19 +5796,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/514e7b8b-4d76-4e43-8444-cd03efc9bcd2-354.98839907193x500-juQ6m1lj4D9a67Os8EDWuIRoPzhhLJJqyuFVGFhD.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كامل",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف الكتفين",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "حرير",
       "embellishment": null
     },
     "special_features": {
@@ -5888,19 +5888,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/a473c3c5-bfd6-4aee-9fd1-807257800541-356.22817229336x500-lppuronRpL5KzO9IX8mplpFKiXCRwMTFTWGl8mn2.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ستوارت",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "لا أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ستان",
       "embellishment": null
     },
     "special_features": {
@@ -5934,19 +5934,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/d8090955-419b-499b-90fd-357967a84078-357.75526110678x500-rYSAQHGTfhCRSSSeggMwVymHklwGGVkKJPaw4rwA.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -5980,19 +5980,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/7e7fab01-5bbe-458f-bc31-db356bcea890-361.55966916109x500-htSF8SLvkB29bDuhE4IXjpCsf8fc2hiJieIb3eLR.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "متوسطة الطول",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6026,19 +6026,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/47b225a1-96d5-45f4-b903-a17f31644a8d-475.5x500-BWQbdG6QKmPElmmPTk7z1bT8nywcqGYbzmm2DvZ2.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -6104,19 +6104,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/5bc2a05c-12ac-4978-a77c-ec3b81bccb58-281.25x500-TeKehcL7EdgFgLZh1GfRpZm7ScwkGMOsM4gKzOzj.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6150,19 +6150,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/96DXdpS3SBcRU0L7crovKVyKZquHTziGt1ebcNdo.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف الكتفين",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6234,19 +6234,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/d1a9d33a-b7e1-410a-ad78-c008dad652a4-375x500-ArfvnWppzP7Jmw1863jtEHQLZZVsJJtwXpnDtq18.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -6280,19 +6280,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/S5zayjbAZvsdMz7xfSjKArzG5VbVSqNZT4tZS5yl.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6366,19 +6366,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/c82202d5-0021-49c6-86d5-530da531cbd5-375x500-Zmw7gDc5lD9rnDEsflUUpeYOsXPYH3T0JY8HqK09.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -6654,19 +6654,19 @@
     "image_url": "https://cdn.salla.sa/PVemn/b9714b6a-518d-4ee0-a6f6-bc1dabddb8ed-375x500-utwTsXd0TDnWijQjlpEXoNrS0hHbXoKDKDt3gBVU.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف الكتفين",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -6739,19 +6739,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/f98a7a43-9faf-441d-bba5-8fe158c15434-333.33333333333x500-vZHh40PddiczD6ECsvKIJ4OCimiCen4jj3JCJOub.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "منتفخة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قماش",
       "embellishment": null
     },
     "special_features": {
@@ -6803,19 +6803,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/6e2a816e-ff56-4dfc-b82d-328656c42c79-281.25x500-CIIV7Ldwv7MI5Fb0EIiDwushBEpAdfv6529g2uu8.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كاب",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير محدد",
       "embellishment": null
     },
     "special_features": {
@@ -6835,19 +6835,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/c212ea83-4d5a-49da-99dc-89d4816e2208-275x500-94jNeHwJegIGxCxoJpDj2amYYd95I0c51XlOqUev.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "منساب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6867,19 +6867,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/dfea28d5-6388-4bd6-a851-efcc1999baf9-278.125x500-Pm6SKWMiZM2AhTxqTF8CFX4oG6b7yeoJ7QqRxXND.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مجيب",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6899,19 +6899,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/a66c574e-dbf2-456f-b523-a38a0753d483-277.5x500-K5uvsQ5INgcH0p7zm8VevpAn5MuIA5mywppShlgI.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -6963,19 +6963,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/ac13e794-a7a0-4115-bebb-ac432d1cf914-281.25x500-UoRpyclDccVUzKxA3ZB5CVmmdMkuDFUmbhwbZ41U.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "لامع",
       "embellishment": null
     },
     "special_features": {
@@ -6995,19 +6995,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/3cb347c6-0634-4212-ae7d-a8c4da922006-333.33333333333x500-ibFTLIe2lARsGNdKKBbNjg13PAtDTLanQrgYwOQv.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متوفر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -7027,19 +7027,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/b5aded3f-0eae-4bf5-8498-bae7e348c628-333.33333333333x500-wobSmJsjrWGEhZh8sEUpYE8fZBPbbzFyEJFioA68.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستديرة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بلا أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -7123,19 +7123,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/6b5d31e9-8976-4ad0-97cf-c2f2e200f7d1-333.33333333333x500-RiEFK8oBa0PyhqgcGYJJAZWIddTONkMFLNx1f8Je.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "بلوزة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7155,19 +7155,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/450156f6-3388-4faf-9037-1b03ed29b506-281.25x500-vViQVg5Ztpsatk2FC46gR7q0Y9BuB530KZwBXSf2.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7187,19 +7187,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/fd3cc3ae-80da-410a-8bf4-599d807fb711-333.33333333333x500-VYJZ7FbHxZ2vxSX7fBmDTdeqZTH4Se9JwcHH81Mg.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "محدد",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7219,19 +7219,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/4ce6aad0-5f16-4073-92d6-d3121a795f19-400x500-oEmfoxhYNKqT8qqk8LDLF1MO2tRRJTcAJqzOqgKy.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوح",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مكشوفة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7251,19 +7251,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/035eb1ec-d793-408a-83ff-262ecdb84f57-333.33333333333x500-ilj5Wov2WuKzqG5dcCB00sa3PKp8SUMStHUJo6Wi.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7283,19 +7283,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/ac12cde8-99d7-4b0e-85a4-f602985627c9-277.34375x500-UH13V5xJGYUDkUgVIOFej9dv0qR2OK678IiVRdg0.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -7315,19 +7315,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/82b3cef0-6ecd-49c6-9c2a-4d17edb73975-333.33333333333x500-277TOg0gCHHigZl9mAPePFXSxmppFQ9qdvL6Vo0u.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ضيقة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربعة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7379,19 +7379,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/6f037a9a-e85c-470d-8da3-c3406ac2ded0-333.33333333333x500-UMwGp5Etzzv177ggb0S6jSlCMJV6XBfzIRbRF05x.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق off-shoulder",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7411,19 +7411,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/a10489b9-54ab-4a59-b42b-b152c5c70c06-400x500-MtXY7POZbaqIPkT28i3ABI16i9dHzpuW4unYiluX.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مفتوح",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -7443,19 +7443,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/ab87c0f0-f3a0-42d4-a634-3f6f830901d7-282.03125x500-OiNDdp4Y60wVqPdAwMO2UYhvoDQ9s4O93rcgvrT6.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "قلبة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7475,19 +7475,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/38a148da-d6d7-49bd-b4ce-99b6d57b3bb6-333.33333333333x500-1YfSYJIH0T67iS7a3WLcECrGNJ02ybbpL5HeMOTe.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مبطن",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوح",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويل",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7507,19 +7507,19 @@
     "image_url": "https://cdn.salla.sa/GYVZBy/4e4734be-a5d8-453e-99fd-13db0c79ed47-281.5625x500-M1jAhQSNqwdiI7NMIHX9eSktsk9GkbbUd8OJuVM1.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -7539,13 +7539,13 @@
     "image_url": "https://cdn.salla.sa/EZKjvY/904aa7c4-3eb9-447e-b672-d6930bc71b00-333.2x500-rTn92NXBGbgLTDxlGLAUg8ZzCL7k6s1wcKvi6uFR.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصيرة",
       "back_design": null
     },
     "aesthetics": {
@@ -7660,13 +7660,13 @@
     "image_url": "https://cdn.salla.sa/EZKjvY/63320080-a620-48bf-af44-37aca8ed785d-333.33333333333x500-LHlfWdyNwyW5CnsiayI356VEzQv3SxidtF9TFteQ.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "أمبير",
       "length": null
     },
     "upper_design": {
       "neckline": "ياقة مربعة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
@@ -7699,13 +7699,13 @@
     "image_url": "https://cdn.salla.sa/EZKjvY/457de099-b8af-46f1-9295-c54c9549a3c2-333.19256756757x500-KqH9BErvu0KahprHzYZahBC3HC1EA7rwquU2C5Gu.jpg",
     "anatomy": {
       "category": "جلابية",
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": "مفتوح"
     },
     "aesthetics": {
@@ -7738,13 +7738,13 @@
     "image_url": "https://cdn.salla.sa/EZKjvY/76fb10e8-ceaa-4063-a49d-cc2e09775742-333.49609375x500-dcxBqUZJ6LDZQeSRpzu3zt7YhYXx8eEOvr61bXlM.jpg",
     "anatomy": {
       "category": "جلابية",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
@@ -7858,13 +7858,13 @@
     "image_url": "https://cdn.salla.sa/EZKjvY/d368c9ea-3a4c-44f8-9102-aa86c973c58b-333.3984375x500-okWJJcczY6w2Kfi6FbyKY94dHH1GTCp8Q9cidO9S.jpg",
     "anatomy": {
       "category": "فستان سهرة",
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
       "neckline": "أوف شولدر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
@@ -7900,9 +7900,9 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": "طويلة",
-      "sleeves_style": null,
+      "sleeves_style": "أكمام واسعة",
       "back_design": null
     },
     "aesthetics": {
@@ -7961,9 +7961,9 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق مأخوذ",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام عريضة",
       "back_design": null
     },
     "aesthetics": {
@@ -8002,7 +8002,7 @@
       "length": "طويل"
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": "طويلة",
       "sleeves_style": "شفافة",
       "back_design": null
@@ -8103,19 +8103,19 @@
     "image_url": "https://cdn.salla.sa/RAadxX/a5e61de0-ea43-400b-bf7b-eedd328d4444-500x500-3NupVxrKg6PQ8K6XWeaZoRtHQSLnNuRtvDBe9qE2.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "ياقة دائرية",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8135,19 +8135,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0826202422543666ccdd7c2e274.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "فضفاض",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8167,19 +8167,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0826202421390966cccbcd8aacd.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "فضفاض",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصير",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8238,19 +8238,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/06082024180542666473468d637.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "غير متوفر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متوفر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير متوفر",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أحمر",
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8279,19 +8279,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0608202419495566648bb3811b6.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "غير متوفر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متوفر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير متوفر",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": "أحمر",
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8496,19 +8496,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/040820241627526613f0d8ca970.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "كنزة",
       "embellishment": null
     },
     "special_features": {
@@ -8528,19 +8528,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/040820241222386613b75e053b1.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "منفوش",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -8569,13 +8569,13 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0828202418282866cf421cc5ea4.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "",
       "back_design": null
     },
     "aesthetics": {
@@ -8663,7 +8663,7 @@
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "صوف",
       "embellishment": null
     },
     "special_features": {
@@ -8726,19 +8726,19 @@
     "image_url": "https://cdn.salla.sa/RAadxX/b15c8b9e-f01a-4d15-83ed-09f9fcb6f20c-500x500-TXbG4RO4ZDqgIOi2S2xfAYA5QvIvXqSvBFXqPKYA.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "غير متوفر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متوفر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير متوفر",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير متوفر",
       "embellishment": null
     },
     "special_features": {
@@ -8758,19 +8758,19 @@
     "image_url": "https://cdn.salla.sa/RAadxX/b15c8b9e-f01a-4d15-83ed-09f9fcb6f20c-500x500-TXbG4RO4ZDqgIOi2S2xfAYA5QvIvXqSvBFXqPKYA.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "لا ينطبق",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "لا ينطبق",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "لا ينطبق",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "لا ينطبق",
       "embellishment": null
     },
     "special_features": {
@@ -8829,19 +8829,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/06132024124004666abe7422b4d.png",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "",
       "embellishment": null
     },
     "special_features": {
@@ -8880,19 +8880,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/06132024141730666ad54ac5a5e.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "غير متوفر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متوفر",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير متوفر",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير متوفر",
       "embellishment": null
     },
     "special_features": {
@@ -9328,19 +9328,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0316202522105767d722413b964.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "",
       "embellishment": null
     },
     "special_features": {
@@ -9366,19 +9366,19 @@
     "image_url": "https://d1gpzof0viq1mp.cloudfront.net/products/0316202522354267d7280edfe58.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "N/A",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "N/A",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "N/A",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "N/A",
       "embellishment": null
     },
     "special_features": {
@@ -9755,19 +9755,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/24305da2-1a9e-4d65-b3b6-5428ef6ed82e-290.93369418133x500-AZ8fizsU0yA3lUVcCLkPUfvXiOB1JI0LuIltYEgH.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مريحة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كيمونو",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -9787,19 +9787,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/24305da2-1a9e-4d65-b3b6-5428ef6ed82e-290.93369418133x500-AZ8fizsU0yA3lUVcCLkPUfvXiOB1JI0LuIltYEgH.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كيلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام قصيرة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -9819,19 +9819,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/5bbc6d94-92ed-44c9-8146-4cd52af0cb73-281.78243774574x500-z7vyGHo5WVH6nvGta1vrdoiwoOmtLwJekNdSnk0d.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "محدد للجسم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "على شكل V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كتف واحد",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -9883,19 +9883,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/4756e3b2-45d8-411d-910a-bb724f294880-282.77071459886x500-la93AgdaZTzvvJGB0uu9EvDVnP7H8aKPEd7aKyvE.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "واسع",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -9915,19 +9915,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/8990b21e-e402-49d8-b95a-94946e816322-366.86686686687x500-a7uYUPvIWuchRxpZJ6QmeDq3LM6rbgTlVq7AGf4u.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مدور",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير معروف",
       "embellishment": null
     },
     "special_features": {
@@ -9947,19 +9947,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/7683cbde-e5d8-42d5-8b80-3954042a3181-375x500-Yux6lBkgtn5WfDNHCXMM7eK3f6RPUe0dLlIqjKqe.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "مفتوحة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -9979,19 +9979,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/43323611-f4d1-4e7a-89c5-eeb5a7a409f6-375x500-Dy0xpRHDANBQdzs4gLANKM4nesEMHzcFSLMkMkLO.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق متدلي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام واسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10011,19 +10011,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/4f664930-aa5a-448f-9e00-f6db49479bc1-375x500-kJVXpD1xsZbM6SRmUON7SMdis7XWbDH4BYV0GeMl.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوحة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "قصة كيمونو",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10043,19 +10043,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/e053f890-fd07-47c5-917e-f7c8181ba7af-389x500-8dVa8Lg4sr6PVJcFzl2l4kcSixSZQHSqDL7joauH.webp",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "فاون",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -10139,19 +10139,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/831daca6-71e3-40c4-8990-a8fcc661b89f-375.09377344336x500-xBjmVt9tV8AmqmrPqUs8WiCnwt42g1gM3gWUP92g.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مدور",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10171,19 +10171,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/4e74a64e-5937-45b6-acc8-fdec920557e5-374.93128092358x500-dcx9vOVvESca5d0nM1fNrsKKwHqAGpsBHSMqkXsq.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10203,19 +10203,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/d8de591d-ad8c-4a5c-8c97-6e52186481c3-375.09377344336x500-E9yjUh6LXocJg9kgs1lyWFAKVYQfmXesmr1tTXeR.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10235,19 +10235,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/523e367b-e74e-4139-b2e4-6bb05fa53223-375.09377344336x500-uWOJ7kp22yNtq1UAjJsSvShH21S9aBxvneKkZ73w.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10299,19 +10299,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/51044681-c7e2-4997-8414-186b326a80b4-253.5x500-tF6aapx3NTmOSFJuEPgOYHiCo0lPn1XpMzfsCgEZ.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوح",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "واسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10331,19 +10331,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/daf3bb9f-397c-49c7-bf89-95400e6a296b-333.33333333333x500-32XSvVJEpbroUexlrE5gJ1c26pzcS3wodITrVV9I.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب للجسد",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "فتحة V",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام واسعة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "دانتيل",
       "embellishment": null
     },
     "special_features": {
@@ -10363,19 +10363,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/75e4e002-7e50-47ad-8621-7b064ea2bd49-253.5x500-ISRbsQ7D0lLB1F9ETdQFYpbpFcHjD8D4UHA6VFEC.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام فضفاضة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "قطن",
       "embellishment": null
     },
     "special_features": {
@@ -10395,19 +10395,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/baa6516e-6d13-4a47-80ef-f3b005f1ce4f-281.25x500-ycoyt9m4b4pyW4JWhlNWaQJrxnjepQt6mvGk3AEI.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستقيم",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10459,19 +10459,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/85184c3d-d30a-44fb-af2a-c8091baa4b7b-400x500-IFNcJrA9swUfO9KOzFUiBTZI064yhXEz5j4hEoAp.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كالطويل",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -10491,19 +10491,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/54b51b77-1b05-4c29-840f-baf11ec67f37-375x500-3u1hxKTZS3AalT4Qe6SUxpKmWwUf6BYeDtqTehKI.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عالي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10523,19 +10523,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/f1727292-ce70-43e2-97dd-b7bba13714ed-456.15275813296x500-ZmbtOyQnc8wB3B4HrMj5WDQ5OGZInWsd2VQ5AxdE.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكتاف عريضة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10555,19 +10555,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/f7bf82df-09b3-4c46-bd1c-8256a1a7f64a-375x500-CEQWMBgYsjOPZeEFsjlquzMrNNbMqd8HxSEwR3Pz.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عادي",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10619,19 +10619,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/27c4a018-1945-4287-a2a3-2f85712f8a95-333.33333333333x500-k2BAhTgNrwbeDLmVveMyNyIrDKX2FIhq3JkjOaOI.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "دائري",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "غير محدد",
       "embellishment": null
     },
     "special_features": {
@@ -10651,19 +10651,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/duoPHtndV1jlwBLRK5gL76ABlQATYQFM3tnjBkCi.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير مغطاة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير موجودة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -10683,19 +10683,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/c5d966aa-658b-465c-9565-7019793f988e-373.5x500-E23ELVr1dckLvv2uXSDGYjmdY7CmYVKSRHWnc4cx.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "حمالات",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10715,19 +10715,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/8d5ffcce-6bd0-48aa-9dfa-84ffefaa8dbb-375x500-WFirBu2Bwko7EsONRu7och1zNXtRWehavdsTaqFp.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستدير",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10747,19 +10747,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/cf9a4560-be2d-4c9b-b899-b5b7fb090bfc-375x500-DhgqCSM3sJUgeZrOmXLK7hv5Ptd1HuTj4DUa3DT3.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "طويل",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير محدد",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير محدد",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10779,19 +10779,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/f17c96df-7a1e-43dd-baeb-eb08e783ddc5-375x500-dMIDpu7yntEa11XvKtDnCpJWqiJZSHvzBmZEJtRZ.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مفتوح على الأكتاف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بلا أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10843,19 +10843,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/1f4d2738-8d51-4b1a-8899-9b5231e95de8-375x500-49pNrHZiuYuhi7R5mggEk3z7nqGe4KMjQ7CLAv1K.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "على شكل قلب",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "مخمل",
       "embellishment": null
     },
     "special_features": {
@@ -10875,19 +10875,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/70bf626a-6394-44c8-af5f-56dc9c0b6303-375x500-JIXblTK1bNfdmUOIaXBAdVxzrWRGgnkYawlcKWAT.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ملاصق",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مكشوف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام منفصلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "لؤلؤي",
       "embellishment": null
     },
     "special_features": {
@@ -10907,19 +10907,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/d595cbbd-9a4f-41d1-b25b-faa336a301e1-375x500-KtjA9O2KDWEoHATC3iSC4aZAEdZI2jpSxbRX9EkS.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ضيقة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق دائرية",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "كاب",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10939,19 +10939,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/5f950a11-d965-474f-a710-6eea72da08a3-375x500-yxrC4g8pfq3YGpoCQ6IkajEtn9HzePfQnXy4YmiB.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير وجوده",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -10971,19 +10971,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/a0584bf6-b062-4865-93e4-a0bd65bbb90b-375x500-NNtC1NqlShDU8VE63LwDzgKeSBfHs933UjHBi4c3.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مخصر",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "كاروه",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -11003,19 +11003,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/59f5088c-7931-430f-b745-94ca7b5df222-375x500-G9jdg6aY0UdiPcQytRSUp42sFB1BE66EzYl8fbnj.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متماثل",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "طويلة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "ساتان",
       "embellishment": null
     },
     "special_features": {
@@ -11035,19 +11035,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/47e4733d-ad10-48f0-bb76-8668c9d3197a-400x500-Yi3VnbHhvnW5QLvrjkMbFZAzgJTQv89D4GH8lC61.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "بلا أكمام",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بلا أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11067,19 +11067,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/3bd62938-fcf4-4820-9e88-f8b6849f5fbf-375x500-AIemTyuU3tBBSpBtIajWyOK4mZyZynHJqkR9GKFL.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مفصل",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "حمالات",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11099,19 +11099,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/a32fc3fe-59db-405d-8704-7e8f3836cae1-281.41025641026x500-a2IfeAFXhyvsgBJ4RoSdivpiz7AkU1cqbtKIzdyV.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "بدون حمالات",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
@@ -11131,19 +11131,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/3ebadcc7-e2dc-44d5-927b-eff92d798c0d-281.875x500-1x8IHxYBGrhUjasq8Ls7rVU9huWkAWQPBvyPXpFu.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "كلوش",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "عنق بلا حمالات",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام كشافة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11163,19 +11163,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/de5fc852-473b-4017-b2ee-f47b9939a4ff-375x500-TfMfa6PoFOaHhzZ9YrMRDrVTw8m3jidU4FnIhkBP.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مشدود",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مستقيم",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "غير قطعتين",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11195,19 +11195,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/a3bbf9b4-fbb5-4596-bc5b-aaa642b23812-400x500-Xqow8wyP5Cho2uYHz0YWK0eBEWjNTbh1YtXF15Fs.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مناسب",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "مربع",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "أكمام متساقطة",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11227,19 +11227,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/a04a6e1d-6c13-4a53-ad2b-906dc6640b6a-333.33333333333x500-RhaZoBQvGbE3IbnYcFCU2PPeVlLp4TMYYoxfGXI9.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيمة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "بدون حمالات",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11259,19 +11259,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/15a555cb-cae1-42e3-a829-a147c0869c57-428.23156225218x500-yQZnc8067F1hnJRlthF4Prtsc3b8BXhq2Y8ITU17.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "ضيقة",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "غير متماثل",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11291,19 +11291,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/009c9e5a-8d6f-4a44-949d-1da0feb37171-375x500-oCwlDka0mHGCwMVX58DV1G9aRG1gGhewaXj82VCW.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "مستقيم",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "سترة",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "شيفون",
       "embellishment": null
     },
     "special_features": {
@@ -11323,19 +11323,19 @@
     "image_url": "https://cdn.salla.sa/mQgdEW/15994fd7-c348-44dc-bf91-06d88fd16e16-400x500-atyWp3w0MKVvREs7igvp9rQUVdqswVOK5Fy2ZX2Y.jpg",
     "anatomy": {
       "category": null,
-      "silhouette": null,
+      "silhouette": "الامبراطورية",
       "length": null
     },
     "upper_design": {
-      "neckline": null,
+      "neckline": "حمالة كتف",
       "sleeves_length": null,
-      "sleeves_style": null,
+      "sleeves_style": "بدون أكمام",
       "back_design": null
     },
     "aesthetics": {
       "primary_color": null,
       "pattern": null,
-      "fabric": null,
+      "fabric": "تول",
       "embellishment": null
     },
     "special_features": {
