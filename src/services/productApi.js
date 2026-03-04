@@ -25,44 +25,44 @@ export async function fetchAndScoreProducts(prefs) {
         const dna = p.ai_dna;
 
         // النوع (Category) - 25 نقطة
-        if (prefs.clothingType && dna.category === prefs.clothingType) {
+        if (prefs.clothingType && dna.category && dna.category.includes(prefs.clothingType)) {
             score += 25;
             matchReasons.push("النوع");
         }
 
         // المناسبة (Occasion) - مصفوفة - 20 نقطة
         const occasionArray = Array.isArray(dna.occasion) ? dna.occasion : [dna.occasion];
-        if (prefs.occasion && occasionArray.includes(prefs.occasion)) {
+        if (prefs.occasion && occasionArray.some(occ => occ && occ.includes(prefs.occasion))) {
             score += 20;
             matchReasons.push("المناسبة");
         }
 
         // القصة (Silhouette) - 15 نقطة
-        if (prefs.silhouette && dna.silhouette === prefs.silhouette) {
+        if (prefs.silhouette && dna.silhouette && dna.silhouette.includes(prefs.silhouette)) {
             score += 15;
             matchReasons.push("القصة");
         }
 
         // الطول (Length) - 10 نقاط
-        if (prefs.clothingLength && dna.length === prefs.clothingLength) {
+        if (prefs.clothingLength && dna.length && dna.length.includes(prefs.clothingLength)) {
             score += 10;
             matchReasons.push("الطول");
         }
 
         // الياقة (Neckline) - 10 نقاط
-        if (prefs.neckline && dna.neckline === prefs.neckline) {
+        if (prefs.neckline && dna.neckline && dna.neckline.includes(prefs.neckline)) {
             score += 10;
             matchReasons.push("الياقة");
         }
 
         // الأكمام (Sleeves) - 10 نقاط
-        if (prefs.sleeves && dna.sleeves === prefs.sleeves) {
+        if (prefs.sleeves && dna.sleeves && dna.sleeves.includes(prefs.sleeves)) {
             score += 10;
             matchReasons.push("الأكمام");
         }
 
         // القماش (Fabric) - 10 نقاط
-        if (prefs.fabricMaterial && dna.fabric === prefs.fabricMaterial) {
+        if (prefs.fabricMaterial && dna.fabric && dna.fabric.includes(prefs.fabricMaterial)) {
             score += 10;
             matchReasons.push("القماش");
         }
