@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Sparkles, Scissors, Loader2, ArrowRight, ShoppingBag, Image as ImageIcon, Printer, RefreshCcw, Plus } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { generateMasterTechPackImage } from '../services/ai';
 import { fetchAndScoreProducts } from '../services/productApi';
 
