@@ -67,6 +67,16 @@ export async function fetchAndScoreProducts(prefs) {
             matchReasons.push("القماش");
         }
 
+        // --- التحديث الجديد: بروتوكول المطابقة المرن (Gradual Match) ---
+        // إذا كان هناك تطابق في "النوع" و "المناسبة"، نعتبره مرشحاً قوياً حتى لو لم تتطابق التفاصيل الدقيقة مثل الياقة
+        if (matchReasons.includes("النوع") && matchReasons.includes("المناسبة")) {
+            score += 30; // Bonus for core match
+        } else if (matchReasons.includes("المناسبة")) {
+            score += 10; // Fallback: At least fits the occasion
+        } else if (matchReasons.includes("النوع")) {
+            score += 5; // Fallback: At least it's the right clothing type
+        }
+
         // ضبط الروابط وأسماء المتاجر للتسويق بالعمولة (Affiliates)
         const urlDomain = (p.productUrl || "").toLowerCase();
         let storeTitle = p.store || "متجر غير محدد";
@@ -104,12 +114,9 @@ export async function fetchAndScoreProducts(prefs) {
             imageUrl: p.images && p.images.length > 0 ? p.images[0] : null
         };
     });
+    const topScorers = scoredProducts.filter(p => p.matchScore > 0);
+    const finalSelection = topScorers.length > 0 ? topScorers : validProducts.slice(0, 5).map(p => ({ ...p, match_reason: "اخترنا لكِ هذه التشكيلة الفاخرة كبدائل مقترحة مميزة.", matchScore: 1 }));
 
-    // 3. ترتيب النتائج من الأعلى للأسفل، وطرد أي منتج تحت الـ 25 نقطة (يجب أن يتطابق في قطعة واحدة على الأقل)
-    const filteredAndSorted = scoredProducts
-        .filter(p => p.matchScore >= 25)
-        .sort((a, b) => b.matchScore - a.matchScore);
-
-    console.log(`🎯 Engine Matched ${filteredAndSorted.length} high-quality products.`);
-    return filteredAndSorted;
+    console.log(`🏆 Top Match Score: ${finalSelection[0]?.matchScore || 0}`);
+    return finalSelection; // نُعيد النتائج المتدرجة
 }
