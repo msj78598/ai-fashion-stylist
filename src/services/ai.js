@@ -64,79 +64,79 @@ export const generateTechPackSpecSheet = async (userPreferences, topProduct = nu
         const avatarPref = `Skin Tone: ${skin}, Body Shape: ${shape}, Hair/Head Style: ${hair}`;
 
         const strictPrompt = `
-        You are an Elite AI Fashion Matcher and Recommendation Engine.
+        You are an Elite AI Fashion Matcher and Scientific Stylist Engine.
         
         USER PREFERENCES:
         ${JSON.stringify(userPreferences)}
         
         AVATAR PREFERENCE: ${avatarPref}
         STRICT MODE (Manual Track): ${strictMode}
-    
-        YOUR MISSION (SMART ZONING ARCHITECTURE & CROSS-STORE DISCOVERY):
-        Search the provided JSON database array. Categorize your findings into 4 STRICT ZONES with the following absolute rules:
+        
+        [PHASE 1: DESIGN DETERMINATION]
+        If STRICT MODE = true: The user has manually chosen their exact desired silhouette, neckline, and sleeves. You MUST use these exact choices to search the database.
+        
+        If STRICT MODE = false: The user has NOT chosen a design. Instead, they provided biological inputs (Body Shape, Proportions, Skin Undertone) and stylistic Goals.
+        You MUST act as a Scientific Fashion Stylist. Analyze their physiological inputs (e.g., Pear Shape, Short Legs, Cool Undertone, Goal: Elongate).
+        Based on established fashion theory, CALCULATE the mathematically optimal Silhouette, Neckline, and Colors for their specific body. 
+        For example: "Apple shape" -> requires Empire Waist or A-line. "Cool Undertone" -> requires Jewel tones or Silver.
+        USE YOUR CALCULATED, SCIENTIFICALLY OPTIMAL DESIGN to perform the database search in Phase 2.
+
+        [PHASE 2: DATABASE SEARCH & ZONING (CRITICAL)]
+        Search the provided JSON database array based on the design determined in Phase 1. Categorize your findings into 4 STRICT ZONES:
         
         CRITICAL RULE 1: ZERO-REDUNDANCY
-        - A 'product_id' can ONLY appear in ONE zone. If it is in ZONE 1, it CANNOT be in ZONE 2, 3, or 4. Every single product returned must be unique.
+        A 'product_id' can ONLY appear in ONE zone. Every single product returned must be unique.
         
-        CRITICAL RULE 2: CROSS-STORE DISCOVERY (JUSTICE DOCTRINE)
-        - You MUST NOT limit results to only one store (e.g., only Laura). You must actively search and propose items from other stores in the DB (like Joyce, Asleen, or Shumoukh) across the different zones to ensure brand diversity.
+        CRITICAL RULE 2: CROSS-STORE DISCOVERY
+        You MUST actively search and propose items from diverse stores in the DB (like Joyce, Asleen, Shumoukh) across the zones.
         
-        CRITICAL RULE 3: HANDLING NULLS
-        - Products with "null" values are NOT to be ignored. Treat them as "flexible options" that can fit into alternative zones based on their 'search_tags' and 'anatomy.category'.
+        CRITICAL RULE 3: SCIENTIFIC JUSTIFICATION
+        If STRICT MODE = false, your 'match_reason' MUST explain the scientific reasoning. E.g., "اخترنا قصة الـ A-Line لأنها توازن شكل الكمثرى، واللون الأزرق يتناسب مع الأندرتون البارد."
         
-        CRITICAL RULE 4: AI-SUGGESTED ALIGNMENT
-        - If STRICT MODE = false, prioritize selecting a primary product (for ZONE 1) that is 'Data-Rich' (has very few nulls). Then, build the "visual_prompt" based strictly on THAT product's real features to ensure the generated image matches the suggested product.
-
         SLOT FILLING STRATEGY:
-        ZONE 1: exact_match (The Closest Match - STRICT MATCHING ENABLED)
-        - The absolute closest match to User Preferences (Body type, Color, Cut). Max 1 item.
-        - STRICT MATCH RULE: You MUST NOT accept or place any product in ZONE 1 unless both its 'neckline' and 'silhouette' ACTUALLY MATCH the required design.
-        - Write a main_marketing_text in Arabic praising this choice.
+        ZONE 1: exact_match (The Closest Match)
+        - The absolute closest match to the determined design (Manual or Scientific). Max 1 item.
+        - Write a main_marketing_text in Arabic praising this choice and, if Scientific, explaining why it suits their specific body shape.
         
         ZONE 2: color_alternatives (Same Cut, Different Color)
-        - Actively look in OTHER STORES for the same Silhouette/Neckline, but a DIFFERENT color.
-        
         ZONE 3: silhouette_alternatives (Same Color/Neckline, Different Cut)
-        - Actively look in OTHER STORES for the same Color/Neckline, but an alternative cut.
-        
         ZONE 4: detail_alternatives (Same Color/Cut, Different Neckline/Sleeves)
-        - Find unique pieces from stores that haven't appeared heavily in Zones 1-3.
 
-        VISUAL PROMPT LOGIC (CRITICAL):
-        - If STRICT MODE = true (Manual Track): Build the "visual_prompt" strictly based on the User's Preferences literally (plus the Avatar Preference).
-        - If STRICT MODE = false (AI-Suggested Track): Build the "visual_prompt" based on the exact features of the best available product you found in the database, explicitly leveraging its 'neckline' and 'silhouette' fields to ensure the generated image matches the real product image in the store with >90% accuracy.
+        [PHASE 3: VISUAL PROMPT GENERATION]
+        - If STRICT MODE = true: Build a highly detailed English prompt for DALL-E based strictly on the User's explicit manual choices plus Avatar preference.
+        - If STRICT MODE = false: Build the prompt using YOUR scientifically calculated optimal design (Silhouette, Neckline, Fabric) so DALL-E draws the perfect dress for their body type. ALWAYS explicitly define the silhouette and neckline in the prompt to match your calculation.
     
         OUTPUT STRICTLY IN THIS JSON FORMAT. If a zone has no relevant products, return an empty array [] for that key:
         {
           "visual_prompt": "English prompt based on the logic rules above AND the user's Avatar preference",
-          "main_marketing_text": "Arabic text praising the choice",
+          "main_marketing_text": "Arabic text praising the choice and evaluating the body shape logic",
           "exact_match": [
             {
               "product_id": "exact id from DB",
               "direct_product_url": "the exact productUrl from DB",
               "discount_code": "code from store_info",
-              "match_reason": "Arabic text explaining the match (e.g., 'وجدنا منتج جاهز مقارب جداً لما تبحثين عنه')"
+              "match_reason": "Arabic text explaining the match or the scientific styling reasoning"
             }
           ],
           "color_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'خيار رائع مقارب لطلبك مع اختلاف بسيط في اللون')" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
           ],
           "silhouette_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'تصميم مشابه باللون المفضل مع اختلاف بسيط في القصة')" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
           ],
           "detail_alternatives": [
-            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning (e.g., 'مقترح مميز مقارب لطلبك مع اختلافات بسيطة في الياقة أو الأكمام')" }
+            { "product_id": "id", "direct_product_url": "url", "discount_code": "code", "match_reason": "Arabic reasoning" }
           ]
         }
         `;
 
         const response = await openai.chat.completions.create({
-            model: "gpt-4o-mini", // Fast, deterministic
+            model: "gpt-4o", // Upgraded to 4o for complex scientific reasoning and precise Arabic generation
             messages: [
                 { role: "system", content: strictPrompt },
                 { role: "user", content: "DATABASE: " + JSON.stringify(cleanDb) }
             ],
-            temperature: 0.1, // Very low temp to prevent hallucination
+            temperature: 0.2, // Slight increase to allow for creative styling calculations
             response_format: { type: "json_object" }
         });
 

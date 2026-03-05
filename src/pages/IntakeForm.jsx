@@ -57,6 +57,39 @@ const CATEGORIES = [
     }
 ];
 
+const AI_CATEGORIES = [
+    {
+        id: "bodyShape",
+        label: "شكل الجسم (Body Shape)",
+        icon: <Ruler className="w-5 h-5" />,
+        options: ["ساعة رملية (Hourglass)", "كمثرى (Pear)", "تفاحة (Apple)", "مستطيل (Rectangle)", "مثلث مقلوب (Inverted Triangle)"]
+    },
+    {
+        id: "proportions",
+        label: "نسب القامة (Proportions)",
+        icon: <Ruler className="w-5 h-5" />,
+        options: ["متناسق (Balanced)", "جذع طويل وأرجل قصيرة", "جذع قصير وأرجل طويلة"]
+    },
+    {
+        id: "undertone",
+        label: "أندرتون البشرة (Skin Undertone)",
+        icon: <Palette className="w-5 h-5" />,
+        options: ["دافئ (Warm)", "بارد (Cool)", "محايد (Neutral)"]
+    },
+    {
+        id: "goals",
+        label: "أهداف التصميم (Goals)",
+        icon: <Sparkles className="w-5 h-5" />,
+        options: ["إبراز الخصر", "إخفاء منطقة البطن", "إخفاء الأرداف", "إطالة القامة", "موازنة الأكتاف", "محتشم (Modest)"]
+    },
+    {
+        id: "occasion",
+        label: "المناسبة (Occasion)",
+        icon: <Sparkles className="w-5 h-5" />,
+        options: ["سهرة", "زفاف", "رسمي", "يومي", "خطوبة", "عشاء رسمي"],
+    }
+];
+
 const IntakeForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -116,7 +149,7 @@ const IntakeForm = () => {
             preferences: finalData,
             keywords: generateKeywords(processedAnswers),
             constraints: DESIGN_CONSTRAINTS,
-            strictMode: true // Architect Engine defaults to Strict Mode
+            strictMode: answers.activeTrack === "المسار اليدوي (Manual Customization)"
         };
 
         // Add a premium "Sumissura-style" delay to simulate processing before the jump
@@ -125,8 +158,12 @@ const IntakeForm = () => {
         }, 2200);
     };
 
+    const isManualTrack = answers.activeTrack === "المسار اليدوي (Manual Customization)";
+
     // Calculate if they have selected at least the core basics to proceed
-    const isReady = answers.silhouette && answers.fabricMaterial && answers.colors;
+    const isReady = isManualTrack
+        ? (answers.silhouette && answers.fabricMaterial && answers.colors)
+        : (answers.bodyShape && answers.proportions && answers.goals);
 
     // Helper to render color swatches
     const getHexForColor = (colorName) => {
@@ -166,27 +203,50 @@ const IntakeForm = () => {
                 {/* Controls Area */}
                 <div className="flex-1 overflow-y-auto px-6 py-8 custom-scrollbar space-y-10">
 
+                    {/* Track Toggle */}
+                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-2 flex relative mb-8">
+                        <div
+                            className={`absolute top-2 bottom-2 w-[calc(50%-8px)] bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300 ease-out z-0 
+                            ${!isManualTrack ? 'translate-x-full left-auto right-2' : 'left-2'}`}
+                        ></div>
+
+                        <button
+                            onClick={() => setAnswers({ ...answers, activeTrack: "المسار اليدوي (Manual Customization)" })}
+                            className={`flex-[1] py-3 text-sm font-bold z-10 transition-colors rounded-xl flex items-center justify-center gap-2 ${isManualTrack ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+                        >
+                            <Scissors className="w-4 h-4" />
+                            تصميم يدوي
+                        </button>
+                        <button
+                            onClick={() => setAnswers({ ...answers, activeTrack: "المسار العلمي (AI-Suggested Style)" })}
+                            className={`flex-[1] py-3 text-sm font-bold z-10 transition-colors rounded-xl flex items-center justify-center gap-2 ${!isManualTrack ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                        >
+                            <Sparkles className="w-4 h-4" />
+                            اقتراح علمي (AI)
+                        </button>
+                    </div>
+
+                    {/* Dynamic Header Note based on track */}
                     {!isReady && (
-                        <div className="bg-orange-50/70 border border-orange-100 rounded-xl p-4 flex items-start gap-3 text-orange-800 text-sm mb-6">
-                            <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5 text-orange-500" />
-                            <p>يجب اختيار (القصّة، القماش، واللون) على الأقل لبناء التصميم الأساسي.</p>
+                        <div className={`border rounded-xl p-4 flex items-start gap-3 text-sm mb-6 ${isManualTrack ? 'bg-orange-50/70 border-orange-100 text-orange-800' : 'bg-blue-50/70 border-blue-100 text-blue-800'}`}>
+                            <Sparkles className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isManualTrack ? 'text-orange-500' : 'text-blue-500'}`} />
+                            <p>{isManualTrack ? 'يجب اختيار (القصّة، القماش، واللون) على الأقل لبناء التصميم الأساسي.' : 'أدخلي بياناتك الجسدية (الشكل، النسب، الهدف) ليقوم الذكاء الاصطناعي ببناء التصميم العلمي المثالي لك.'}</p>
                         </div>
                     )}
 
-                    {CATEGORIES.map((category) => (
+                    {(isManualTrack ? CATEGORIES : AI_CATEGORIES).map((category) => (
                         <div key={category.id} className="border-b border-gray-50 pb-8 last:border-0 last:pb-0">
                             <div className="flex items-center gap-2 mb-5">
-                                <div className="text-gray-400">{category.icon}</div>
+                                <div className={!isManualTrack ? 'text-blue-400' : 'text-gray-400'}>{category.icon}</div>
                                 <h3 className="font-bold text-gray-800 text-lg uppercase tracking-wider text-sm">{category.label}</h3>
                                 {answers[category.id] && (
-                                    <span className="text-xs text-primary-500 font-bold bg-primary-50 px-2 py-1 rounded-md mr-auto">تم الاختيار</span>
+                                    <span className={`text-xs font-bold px-2 py-1 rounded-md mr-auto ${isManualTrack ? 'text-primary-500 bg-primary-50' : 'text-blue-500 bg-blue-50'}`}>تم الاختيار</span>
                                 )}
                             </div>
 
                             <div className="flex flex-wrap gap-3">
                                 {category.options.map((opt) => {
                                     const isSelected = answers[category.id] === opt;
-                                    // Special rendering for Colors visually
                                     const isColor = category.id === 'colors';
 
                                     return (
@@ -197,7 +257,7 @@ const IntakeForm = () => {
                                                 relative overflow-hidden transition-all duration-300 border rounded-xl flex items-center justify-center
                                                 ${isColor ? 'w-14 h-14 rounded-full' : 'px-4 py-3'}
                                                 ${isSelected
-                                                    ? 'bg-gray-900 border-gray-900 text-white shadow-md transform scale-105'
+                                                    ? (isManualTrack ? 'bg-gray-900 border-gray-900 text-white shadow-md transform scale-105' : 'bg-blue-600 border-blue-600 text-white shadow-md transform scale-105')
                                                     : 'bg-white border-gray-200 text-gray-600 hover:border-gray-400 hover:bg-gray-50'
                                                 }
                                             `}
@@ -209,9 +269,8 @@ const IntakeForm = () => {
                                                 <span className="text-sm font-medium z-10">{opt}</span>
                                             )}
 
-                                            {/* Subltle selection indicator */}
                                             {isSelected && !isColor && (
-                                                <div className="absolute inset-0 bg-gray-900 z-0"></div>
+                                                <div className={`absolute inset-0 z-0 ${isManualTrack ? 'bg-gray-900' : 'bg-blue-600'}`}></div>
                                             )}
                                             {isSelected && !isColor && (
                                                 <span className="relative z-10 text-white font-bold">{opt}</span>
@@ -274,12 +333,22 @@ const IntakeForm = () => {
                 <div className="absolute top-10 left-10 bg-white/80 backdrop-blur-md px-6 py-5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white max-w-sm z-20">
                     <h2 className="text-xs uppercase tracking-widest text-gray-400 font-bold mb-3">Current Build</h2>
                     <p className="text-xl font-bold text-gray-800 leading-snug font-arabic">
-                        {answers.clothingType} {answers.silhouette || '...'}
-                        <br />
-                        <span className="text-gray-500 font-normal text-lg">{answers.neckline ? `بياقة ${answers.neckline}` : ''} {answers.fabricMaterial ? `من الـ ${answers.fabricMaterial}` : ''}</span>
+                        {isManualTrack ? (
+                            <>
+                                {answers.clothingType} {answers.silhouette || '...'}
+                                <br />
+                                <span className="text-gray-500 font-normal text-lg">{answers.neckline ? `بياقة ${answers.neckline}` : ''} {answers.fabricMaterial ? `من الـ ${answers.fabricMaterial}` : ''}</span>
+                            </>
+                        ) : (
+                            <>
+                                تصميم علمي مخصص
+                                <br />
+                                <span className="text-blue-500 font-normal text-lg">{answers.bodyShape ? `لجسم ${answers.bodyShape}` : 'الذكاء الاصطناعي يحلل بياناتك...'}</span>
+                            </>
+                        )}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {Object.entries(answers).filter(([k, v]) => v && k !== 'clothingType' && k !== 'customDescription' && k !== 'activeTrack' && k !== 'silhouette' && k !== 'neckline' && k !== 'fabricMaterial').map(([k, v]) => (
+                        {Object.entries(answers).filter(([k, v]) => v && k !== 'clothingType' && k !== 'customDescription' && k !== 'activeTrack' && k !== 'silhouette' && k !== 'neckline' && k !== 'fabricMaterial' && k !== 'bodyShape').map(([k, v]) => (
                             <span key={k} className="text-xs font-bold text-gray-500 border border-gray-200 px-2 py-1 rounded-md">{v}</span>
                         ))}
                     </div>
@@ -295,8 +364,17 @@ const IntakeForm = () => {
                     {/* Placeholder tailored silhouette / Mannequin shadow */}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-200 to-gray-100 rounded-full blur-3xl opacity-50 transform scale-y-125 scale-x-50"></div>
 
-                    {/* Dynamic SVG Wireframe */}
-                    <WireframeMannequin answers={answers} />
+                    {isManualTrack ? (
+                        <WireframeMannequin answers={answers} />
+                    ) : (
+                        <div className="flex flex-col items-center justify-center text-center p-10 bg-white/40 backdrop-blur-md rounded-3xl border border-white/60 shadow-xl z-20">
+                            <Sparkles className="w-16 h-16 text-blue-500 mb-6 animate-pulse" />
+                            <h3 className="text-2xl font-bold text-gray-900 font-arabic mb-3">الخوارزمية العلمية قيد الاستعداد</h3>
+                            <p className="text-gray-600 font-arabic leading-relaxed">
+                                سيقوم الذكاء الاصطناعي بتحليل شكل جسمك ونسب التوازن لاختيار أفضل قصة، وياقة، وتفاصيل دقيقة تبرز جمالك حسب منهجية تصميم الأزياء الاحترافية.
+                            </p>
+                        </div>
+                    )}
                 </motion.div>
 
                 {/* Sticky Action Footer */}
