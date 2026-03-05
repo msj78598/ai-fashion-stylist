@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "date": "2026-03-05",
+  "input_fields": {
+    "body_shape": [
+      "hourglass",
+      "pear",
+      "apple",
+      "rectangle",
+      "inverted_triangle",
+      "unknown"
+    ],
+    "height_cm": "number",
+    "proportions": [
+      "balanced",
+      "short_legs",
+      "long_legs",
+      "unknown"
+    ],
+    "goals": [
+      "highlight_waist",
+      "minimize_hips",
+      "minimize_tummy",
+      "elongate",
+      "balance_shoulders",
+      "highlight_legs",
+      "modest",
+      "comfort",
+      "other"
+    ],
+    "undertone": [
+      "warm",
+      "cool",
+      "neutral",
+      "unknown"
+    ],
+    "contrast_level": [
+      "low",
+      "medium",
+      "high",
+      "unknown"
+    ],
+    "hair_length": [
+      "short",
+      "medium",
+      "long",
+      "updo",
+      "unknown"
+    ],
+    "neck_length": [
+      "short",
+      "average",
+      "long",
+      "unknown"
+    ],
+    "occasion": [
+      "work",
+      "daily",
+      "evening",
+      "wedding_formal",
+      "other"
+    ],
+    "season": [
+      "summer",
+      "winter",
+      "spring_fall",
+      "unknown"
+    ],
+    "constraints": {
+      "modesty_level": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ],
+      "sleeves": [
+        "required",
+        "optional",
+        "no_sleeves",
+        "unknown"
+      ],
+      "budget": [
+        "low",
+        "mid",
+        "high",
+        "unknown"
+      ],
+      "dislikes": "array_of_strings"
+    }
+  },
+  "decision_priority": [
+    "constraints",
+    "user_goals",
+    "body_shape + fullness_areas",
+    "height + proportions",
+    "undertone + contrast_level",
+    "hair/neck considerations",
+    "occasion + season"
+  ],
+  "output_template": {
+    "primary_recommendation": {
+      "silhouette": "",
+      "neckline": "",
+      "length": "",
+      "fabric": "",
+      "why": [
+        "",
+        ""
+      ]
+    },
+    "color_palette": [
+      "",
+      "",
+      ""
+    ],
+    "design_details": {
+      "do": [
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        ""
+      ]
+    },
+    "alternatives": [
+      {
+        "label": "more_modest_or_more_comfort",
+        "recommendation": ""
+      },
+      {
+        "label": "different_style_same_goal",
+        "recommendation": ""
+      }
+    ],
+    "assumptions": []
+  }
+}
