@@ -87,6 +87,43 @@ const noonScraperPlugin = () => ({
   }
 });
 
+const serpApiProxyPlugin = () => ({
+  name: 'serp-api-proxy',
+  configureServer(server) {
+    server.middlewares.use(async (req, res, next) => {
+      if (req.url.startsWith('/api/serp-search')) {
+        const urlParams = new URL(req.url, `http://${req.headers.host}`);
+        const query = urlParams.searchParams.get('q');
+
+        // We read it from process.env since Vite runs this in Node
+        const apiKey = process.env.VITE_SERP_API_KEY || '303a194d749e031e6e62416d9ee4f9e0e57a5b9f4a0fee892a15b8fd60c30dc0';
+
+        if (!query) {
+          res.statusCode = 400;
+          return res.end(JSON.stringify({ error: 'Query parameter "q" is required' }));
+        }
+
+        try {
+          // Check if direct_link is requested
+          const directLinkParam = urlParams.searchParams.get('direct_link') === 'true' ? '&direct_link=true' : '';
+
+          const searchUrl = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(query)}&gl=sa&hl=ar&api_key=${apiKey}${directLinkParam}`;
+          const { data } = await axios.get(searchUrl);
+
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(data));
+        } catch (error) {
+          console.error("SerpAPI Proxy error:", error.message);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: 'SerpAPI request failed' }));
+        }
+        return;
+      }
+      next();
+    });
+  }
+});
+
 export default defineConfig({
-  plugins: [react(), noonScraperPlugin()],
+  plugins: [react(), noonScraperPlugin(), serpApiProxyPlugin()],
 })

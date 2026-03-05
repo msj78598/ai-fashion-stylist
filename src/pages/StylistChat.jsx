@@ -4,6 +4,7 @@ import { Sparkles, Scissors, Loader2, ArrowRight, ShoppingBag, Image as ImageIco
 import { motion } from 'framer-motion';
 import { generateMasterTechPackImage } from '../services/ai';
 import { fetchAndScoreProducts } from '../services/productApi';
+import { deepSearchProducts } from "../services/deepSearchApi";
 
 const StylistChat = () => {
     const location = useLocation();
@@ -28,37 +29,37 @@ const StylistChat = () => {
             setLoadingText("جاري استكشاف قواعد بيانات المتاجر ومطابقة المنتجات مع الهوية الوراثية (AI DNA)...");
 
             // 1. Fetch matching products directly using our robust local matcher
-            const products = await fetchAndScoreProducts(prefs);
-            setScoredProducts(products);
-
-            if (products.length === 0) {
-                throw new Error("لم نتمكن من إيجاد تطابق في قاعدة البيانات الحالية لخياراتك. يرجى تعديل الخصائص والمحاولة مجدداً.");
+            const searchResults = await deepSearchProducts(prefs);
+            const allProducts = searchResults.allProducts || [];
+            if (allProducts.length === 0) {
+                throw new Error("لم نتمكن من إيجاد تطابق في قاعدة البيانات الحالية لخياراتك. يرجى تعديل الخصائص أو المحاولة مجدداً.");
             }
 
-            const topProduct = products[0];
-            const dna = topProduct.ai_dna;
+            setScoredProducts(allProducts);
 
-            // 2. Synthesize the Result Object to feed the UI Sketch Board
+            const topProduct = allProducts[0];
+
             const data = {
-                exact_match: [topProduct],
-                marketing_copy: dna.ai_marketing_title || topProduct.title,
+                local_matches: searchResults.localProducts || [],
+                global_matches: searchResults.globalProducts || [],
+                marketing_copy: "تصميم الأزياء الحصري المبتكر من أجلك", // Fallback text
                 tech_specs: {
-                    silhouette: dna.silhouette || 'غير محدد',
-                    neckline: dna.neckline || 'غير محدد',
-                    sleeves: dna.sleeves || 'غير محدد',
-                    waist: dna.waist || 'غير محدد',
-                    fabric: dna.fabric || 'غير محدد',
-                    embellishments: Array.isArray(dna.embellishments) ? dna.embellishments : (dna.embellishments ? [dna.embellishments] : []),
-                    textures: Array.isArray(dna.textures) ? dna.textures : (dna.textures ? [dna.textures] : []),
-                    modesty: dna.modesty || 'غير محدد',
-                    price: topProduct.price || '---',
-                    currency: topProduct.currency || 'ر.س'
+                    silhouette: prefs.silhouette || 'غير محدد',
+                    neckline: prefs.neckline || 'غير محدد',
+                    sleeves: prefs.sleeves || 'غير محدد',
+                    waist: prefs.waist || 'محدد بدقة حسب القياسات',
+                    fabric: prefs.fabricMaterial || 'غير محدد',
+                    embellishments: prefs.fabricEmbroidery ? [prefs.fabricEmbroidery] : ['بدون إضافات'],
+                    // Advanced AI Setup
+                    fabric_estimator: prefs.clothingLength?.includes('ماكسي') ? 'يحتاج تقريباً 4 إلى 5 أمتار حسب الكلوش' : 'يحتاج تقريباً 2 إلى 3 أمتار',
+                    tailoring_cost: 'التكلفة التقديرية للخياطة: 500 - 1500 ريال',
+                    body_shape_logic: `هذا التصميم يعزز قوامك بشكل مثالي. ياقة (${prefs.neckline || 'المختارة'}) تبرز النصف العلوي بأناقة.`,
+                    modesty: prefs.clothingLength === 'ماكسي (طويل)' && (!prefs.sleeves || prefs.sleeves.includes('كم منفوخ') || prefs.sleeves.includes('طويلة')) ? 'محتشم' : 'عصري',
+                    price: topProduct?.price || '---',
+                    currency: 'USD'
                 },
-                color_alternatives: products.length > 1 ? [products[1]] : [],
-                silhouette_alternatives: products.length > 2 ? [products[2]] : [],
-                detail_alternatives: products.length > 3 ? [products[3]] : [],
                 // Create a literal prompt for the master image based on the exact matched DNA
-                image_generation_prompt: `A highly realistic, ultra-detailed fashion editorial photo of a ${dna.category}. Features: ${dna.silhouette} silhouette, ${dna.neckline} neckline, ${dna.sleeves} sleeves, made of ${dna.fabric} fabric. Details: ${(Array.isArray(dna.embellishments) ? dna.embellishments : (dna.embellishments ? [dna.embellishments] : [])).join(', ')}. Occasion: ${dna.occasion}. Elegant, luxurious lighting, worn by a high-end fashion model, studio gray background, 8k resolution, photorealistic.`
+                image_generation_prompt: `A highly realistic, ultra-detailed fashion editorial photo of a dress. Features: ${prefs.silhouette || 'elegant'} silhouette, ${prefs.neckline || 'stylish'} neckline, ${prefs.sleeves || 'beautiful'} sleeves, made of ${prefs.fabricMaterial || 'luxurious'} fabric. Color: ${prefs.colors || 'designer choice'}. Details: ${prefs.fabricEmbroidery || 'clean finish'}. Style vibe: ${prefs.customDescription || 'haute couture'}. Elegant, luxurious lighting, worn by a high-end fashion model, studio gray background, 8k resolution, photorealistic.`
             };
 
             setResult(data);
@@ -236,29 +237,26 @@ const StylistChat = () => {
                                     {result.tech_specs && (
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 font-arabic" dir="rtl">
                                             {/* الهيكل الإنشائي */}
-                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm">
+                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm print:border-2 print:border-black print:shadow-none">
                                                 <h4 className="text-lg font-bold text-primary-900 mb-3 flex items-center gap-2"><Scissors className="w-5 h-5" /> الهيكل الإنشائي الأساسي (Structure)</h4>
                                                 <ul className="text-primary-800 space-y-2">
                                                     <li><span className="font-bold">القصة (Silhouette):</span> {result.tech_specs.silhouette}</li>
                                                     <li><span className="font-bold">الياقة (Neckline):</span> {result.tech_specs.neckline}</li>
                                                     <li><span className="font-bold">الأكمام (Sleeves):</span> {result.tech_specs.sleeves}</li>
-                                                    <li><span className="font-bold">تحديد الخصر (Waist):</span> {result.tech_specs.waist}</li>
+                                                    <li><span className="font-bold mb-1 block text-primary-900 border-t pt-2 mt-2"><Sparkles className="w-4 h-4 inline" /> تحليل ملاءمة الجسم (AI):</span> <span className="text-sm bg-primary-50 px-2 py-1 rounded block mt-1 leading-relaxed">{result.tech_specs.body_shape_logic}</span></li>
                                                 </ul>
                                             </div>
 
                                             {/* هوية القماش والزينة ودليل الحشمة */}
-                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm">
-                                                <h4 className="text-lg font-bold text-primary-900 mb-3 flex items-center gap-2"><Sparkles className="w-5 h-5" /> هوية القماش والحشمة (Aesthetics)</h4>
+                                            <div className="bg-white p-5 rounded-xl border border-primary-100 shadow-sm print:border-2 print:border-black print:shadow-none">
+                                                <h4 className="text-lg font-bold text-primary-900 mb-3 flex items-center gap-2"><Sparkles className="w-5 h-5" /> التفاصيل والخامات (Aesthetics)</h4>
                                                 <ul className="text-primary-800 space-y-2">
                                                     <li><span className="font-bold">القماش (Fabric):</span> {result.tech_specs.fabric}</li>
                                                     {result.tech_specs.embellishments.length > 0 && (
                                                         <li><span className="font-bold">الزينة:</span> {result.tech_specs.embellishments.join('، ')}</li>
                                                     )}
-                                                    {result.tech_specs.textures.length > 0 && (
-                                                        <li><span className="font-bold">الطبقات والكسرات:</span> {result.tech_specs.textures.join('، ')}</li>
-                                                    )}
-                                                    <li><span className="font-bold">دليل الحشمة:</span> <span className="text-green-700 bg-green-50 px-2 rounded">{result.tech_specs.modesty}</span></li>
-                                                    <li><span className="font-bold">السعر التجاري:</span> <span className="font-sans font-bold">{result.tech_specs.price} {result.tech_specs.currency}</span></li>
+                                                    <li><span className="font-bold mb-1 block text-primary-900 border-t pt-2 mt-2"><Scissors className="w-4 h-4 inline" /> حاسبة الأقمشة الذكية (AI):</span> <span className="text-sm bg-orange-50 text-orange-800 px-2 py-1 rounded block mt-1">{result.tech_specs.fabric_estimator}</span></li>
+                                                    <li><span className="text-sm bg-blue-50 text-blue-800 px-2 py-1 rounded block mt-1">{result.tech_specs.tailoring_cost}</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -330,89 +328,68 @@ const StylistChat = () => {
                                 </div>
                             </div>
 
-                            {/* Purchase CTA directly linking to Exact Match */}
-                            {result?.exact_match?.[0]?.final_affiliate_url && (
-                                <div className="mt-4 mb-12 text-center relative p-8 bg-gradient-to-l from-primary-900 to-gray-900 rounded-[3rem] overflow-hidden shadow-2xl print:hidden flex flex-col items-center">
-                                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)] pointer-events-none"></div>
-                                    <ShoppingBag className="w-12 h-12 text-white/50 mb-4" />
-                                    <h3 className="text-2xl font-bold font-arabic text-white mb-2 leading-snug">التصميم الذي طلبتِه تماماً (تطابق 100%)</h3>
-                                    <p className="text-primary-200 font-arabic text-sm mb-6 max-w-lg">{result.exact_match[0].match_reason}</p>
-                                    <a
-                                        href={result.exact_match[0].final_affiliate_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="bg-white text-primary-900 hover:bg-primary-50 px-10 py-4 rounded-full font-bold font-arabic text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:scale-105"
-                                    >
-                                        انتقلي لصفحة الشراء الآن
-                                    </a>
-                                </div>
-                            )}
-
-                            {/* Fast Regeneration / Tweak Area */}
-                            <div className="mt-12 bg-primary-50 p-6 rounded-2xl border border-primary-100 print:hidden flex flex-col items-center">
-                                <h4 className="text-xl font-bold font-arabic text-primary-900 mb-3">هل ترغبين بتعديل وتطوير هذا التصميم؟</h4>
-                                <p className="text-primary-700 font-arabic text-sm mb-4 text-center max-w-lg">اكتبي ما تودين تغييره (مثلاً: أريد الأكمام أطول ومزمومة، أضيفي فتحة من الجانب، اجعل التطريز أخف) وسيقوم المصمم بابتكار نسخة جديدة ومحسنة فوراً.</p>
-                                <textarea
-                                    value={tweakInput}
-                                    onChange={(e) => setTweakInput(e.target.value)}
-                                    placeholder="اكتبي تعديلاتك الدقيقة هنا..."
-                                    className="w-full text-right p-4 rounded-xl border border-primary-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 bg-white font-arabic text-lg resize-none min-h-[120px] shadow-inner mb-4 outline-none transition-all"
-                                    dir="rtl"
-                                />
-                                <button
-                                    onClick={handleRegenerateWithTweaks}
-                                    disabled={!tweakInput.trim()}
-                                    className={`btn-primary flex items-center gap-2 font-arabic text-lg px-8 py-3 shadow-md hover:shadow-lg transition-all ${!tweakInput.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                >
-                                    <Sparkles className="w-5 h-5" />
-                                    توليد وتحديث التصميم
-                                </button>
-                            </div>
-
                             {/* --- بداية كود عرض البلوكات الذكية --- */}
+                            <div className="product-suggestions-container mt-8 space-y-8 print:hidden flex flex-col items-center">
 
-                            <div className="product-suggestions-container mt-8 space-y-8 print:hidden">
-
-                                {/* التحقق من وجود منتج مقترح أقرب للمثالي */}
-                                {result.exact_match && result.exact_match.length > 0 && (
-                                    <div className="zone-exact bg-green-50 p-6 rounded-2xl border-2 border-green-500 shadow-lg">
-                                        <h3 className="text-2xl font-bold font-arabic text-green-800 mb-4">✨ تصميم مقترح مستوحى من طلبك</h3>
-                                        {result.exact_match.map(product => (
-                                            <div key={product.product_id} className="product-card flex flex-col items-center">
-                                                <p className="text-gray-700 font-arabic text-center mb-4">{product.match_reason}</p>
-                                                <a href={product.final_affiliate_url || product.direct_product_url} target="_blank" rel="noopener noreferrer" className="btn-buy font-arabic bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition">
-                                                    انتقلي لصفحة الشراء الآن
-                                                </a>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {/* منطقة بدائل الألوان والموديلات المشابهة */}
-                                {result.color_alternatives && result.color_alternatives.length > 0 && (
-                                    <div className="zone-color bg-blue-50 p-6 rounded-2xl border border-blue-200">
-                                        <h3 className="text-xl font-bold font-arabic text-blue-800 mb-4">🎨 خيارات متوافقة إضافية تم اختيارها لكِ بدقة</h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            {[...result.color_alternatives, ...result.silhouette_alternatives, ...result.detail_alternatives]
-                                                .filter(Boolean)
-                                                .slice(0, 3) // إظهار أفضل 3 بدائل إضافية
-                                                .map(product => (
-                                                    <div key={product.id || Math.random()} className="p-4 bg-white rounded-xl shadow-sm flex flex-col items-center">
-                                                        {product.imageUrl && <img src={product.imageUrl} alt={product.title} className="w-full h-48 object-cover rounded-lg mb-3" />}
-                                                        <p className="text-sm font-arabic font-bold text-gray-800 mb-1 text-center" dir="rtl">{product.product_id}</p>
-                                                        <p className="text-xs font-arabic text-gray-500 mb-3 text-center" dir="rtl">{product.match_reason}</p>
-                                                        <a href={product.final_affiliate_url} target="_blank" className="font-arabic text-sm bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-bold w-full text-center hover:bg-blue-200" rel="noopener noreferrer">تفاصيل الفستان</a>
+                                {/* المتاجر المحلية / الخليجية */}
+                                {result.local_matches && result.local_matches.length > 0 && (
+                                    <div className="zone-exact bg-green-50/50 p-8 w-full rounded-2xl border-2 border-green-500 shadow-xl">
+                                        <h3 className="text-2xl font-bold font-arabic text-green-900 mb-6 flex items-center gap-3">
+                                            <ShoppingBag className="w-8 h-8 text-green-600" />
+                                            متاجر التوصيل السريع للمنطقة (متاجر محلية/خليجية)
+                                        </h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {result.local_matches.slice(0, 4).map(product => (
+                                                <div key={product.id} className="bg-white p-5 rounded-2xl shadow-sm border border-green-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                                                    <div className="flex gap-5">
+                                                        <img src={product.imageUrl} className="w-28 h-36 object-cover rounded-xl" alt={product.productTitle} />
+                                                        <div className="flex flex-col flex-1">
+                                                            <span className="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded w-fit mb-2 uppercase">{product.storeName}</span>
+                                                            <h4 className="font-arabic font-bold text-gray-800 text-base mb-2 leading-tight" dir="rtl">{product.productTitle}</h4>
+                                                            <span className="font-bold text-green-700 text-lg border-t pt-2 mt-auto">{product.price}</span>
+                                                        </div>
                                                     </div>
-                                                ))}
+                                                    <a href={product.direct_product_url} target="_blank" rel="noopener noreferrer" className="mt-5 bg-green-600 hover:bg-green-700 text-white font-arabic text-center py-3 rounded-xl font-bold text-lg shadow-sm hover:shadow-md transition-all w-full block">
+                                                        تصفحي وشراء المنتج فوراً
+                                                    </a>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 )}
 
-                                {/* رسالة الخطأ (تظهر فقط إذا كانت كل البلوكات الأربعة فارغة) */}
-                                {(!result.exact_match?.length && !result.color_alternatives?.length && !result.silhouette_alternatives?.length && !result.detail_alternatives?.length) && (
-                                    <div className="bg-red-50 p-6 rounded-2xl border border-red-200 text-center">
-                                        <h3 className="text-xl font-bold font-arabic text-red-800">عذراً، لم نجد تطابقاً قريباً</h3>
-                                        <p className="text-gray-600 font-arabic mt-2">جربي تغيير بعض الخيارات (مثل اللون أو الياقة) لنتمكن من إيجاد الفستان المثالي لكِ.</p>
+                                {/* المتاجر العالمية */}
+                                {result.global_matches && result.global_matches.length > 0 && (
+                                    <div className="zone-global bg-blue-50/50 p-8 w-full rounded-2xl border border-blue-200 shadow-sm mt-8">
+                                        <h3 className="text-2xl font-bold font-arabic text-blue-900 mb-6 flex items-center gap-3">
+                                            <Sparkles className="w-7 h-7 text-blue-500" />
+                                            متاجر الماركات العالمية (Global Stores)
+                                        </h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            {result.global_matches.slice(0, 6).map(product => (
+                                                <div key={product.id} className="bg-white p-5 rounded-2xl shadow-sm border border-blue-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+                                                    <div className="flex flex-col items-center mb-4">
+                                                        <img src={product.imageUrl} className="w-full h-56 object-cover rounded-xl mb-4" alt={product.productTitle} />
+                                                        <span className="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">{product.storeName}</span>
+                                                        <h4 className="font-arabic font-bold text-gray-800 text-sm text-center leading-snug line-clamp-2" dir="rtl">{product.productTitle}</h4>
+                                                    </div>
+                                                    <div className="flex flex-col mt-auto border-t border-gray-100 pt-3">
+                                                        <span className="font-bold text-gray-900 text-center text-lg mb-3">{product.price}</span>
+                                                        <a href={product.direct_product_url} target="_blank" rel="noopener noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white font-arabic text-center py-2.5 rounded-xl font-bold transition-all w-full block shadow-sm">
+                                                            عرض في المتجر العالمي
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* رسالة الخطأ */}
+                                {(!result.local_matches?.length && !result.global_matches?.length) && (
+                                    <div className="bg-red-50 p-8 rounded-2xl border border-red-200 text-center w-full">
+                                        <h3 className="text-2xl font-bold font-arabic text-red-800">عذراً، لم نجد تطابقاً قريباً للأسف</h3>
+                                        <p className="text-gray-700 font-arabic mt-3 text-lg">جربي تقليل بعض الخيارات أو اختيار ألوان أخرى لنتمكن من إيجاد الفستان المثالي لكِ في الأسواق.</p>
                                     </div>
                                 )}
 
@@ -422,31 +399,6 @@ const StylistChat = () => {
                     </motion.div>
                 </div>
             </div>
-        </div>
-    );
-};
-
-// Reusable card component for the alternative zones
-const AlternativeCard = ({ match }) => {
-    return (
-        <div className="bg-gradient-to-br from-primary-50/50 to-white p-6 rounded-2xl border border-primary-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden">
-            <div className="mb-6 z-10">
-                <div className="flex justify-end items-center mb-4">
-                    {match.discountCode && <span className="bg-green-100 text-green-800 text-sm font-bold px-3 py-1.5 rounded-full font-arabic border border-green-200">{match.discountCode}</span>}
-                </div>
-                <h4 className="font-bold text-primary-900 text-lg mb-2 font-arabic" dir="rtl">{match.product_id}</h4>
-                <p className="font-arabic text-primary-700 text-base leading-relaxed" dir="rtl">{match.match_reason}</p>
-            </div>
-            {match.final_affiliate_url && (
-                <a
-                    href={match.final_affiliate_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-primary-100 hover:bg-primary-600 hover:text-white text-primary-800 font-arabic text-center py-3 rounded-xl transition-colors shadow-sm font-bold text-lg z-10"
-                >
-                    رؤية هذه النسخة
-                </a>
-            )}
         </div>
     );
 };

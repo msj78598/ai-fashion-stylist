@@ -119,10 +119,16 @@ const ProductCard = ({ product }) => {
                     </div>
 
                     {/* Visual Feature Enrichment */}
-                    {product.upper_design?.neckline && product.aesthetics?.fabric && (
-                        <div className="mt-3 text-[13px] text-primary-700 bg-primary-50/50 px-3 py-2 rounded-xl border border-primary-100/50 flex items-center justify-start gap-2 font-arabic">
-                            <Sparkles className="w-4 h-4 text-primary-500 shrink-0" />
-                            <span>يتميز بـ <span className="font-bold">{product.upper_design.neckline}</span> وقماش <span className="font-bold">{product.aesthetics.fabric}</span> فاخر</span>
+                    {product.ai_dna && (
+                        <div className="mt-3 text-[13px] text-primary-700 bg-primary-50/50 px-3 py-2 rounded-xl border border-primary-100/50 flex flex-col justify-start gap-1 font-arabic">
+                            <div className="flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-primary-500 shrink-0" />
+                                <span>القماش: <span className="font-bold">{product.ai_dna.fabric || 'غير محدد'}</span></span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-primary-500 shrink-0" />
+                                <span>الياقة: <span className="font-bold">{product.ai_dna.neckline || 'غير محدد'}</span></span>
+                            </div>
                         </div>
                     )}
                 </div>
