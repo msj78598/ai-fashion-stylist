@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { q, direct_link } = req.query;
+    const { q, direct_link, start } = req.query;
 
     if (!q) {
         return res.status(400).json({ error: 'Query parameter "q" is required' });
@@ -17,7 +17,8 @@ export default async function handler(req, res) {
 
     try {
         const directLinkParam = direct_link === 'true' ? '&direct_link=true' : '';
-        const searchUrl = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(q)}&gl=sa&hl=ar&api_key=${apiKey}${directLinkParam}`;
+        const startParam = start ? `&start=${start}` : '';
+        const searchUrl = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(q)}&gl=sa&hl=ar&api_key=${apiKey}${directLinkParam}${startParam}`;
 
         const { data } = await axios.get(searchUrl);
 

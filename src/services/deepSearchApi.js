@@ -12,29 +12,41 @@ export async function deepSearchProducts(prefs) {
         if (prefs.clothingType) arabicKeywords.push(prefs.clothingType);
         if (!englishKeywords.length) arabicKeywords.push("فستان");
 
-        if (prefs.customDescription) {
-            const cleanDesc = prefs.customDescription.replace(/أريد|فستان|تفصل|موديل/g, '').trim();
-            if (cleanDesc) arabicKeywords.push(cleanDesc.substring(0, 30));
-        }
+        // --- DUAL QUERY ARCHITECTURE WITH RANDOMIZATION ---
 
-        // --- DUAL QUERY ARCHITECTURE ---
-        // 1. Global High-Precision Query (Relies on English fashion terms for exact aesthetic matching)
-        const globalQuery = [...englishKeywords, ...arabicKeywords].join(" ");
+        // 1. Global High-Precision Query (Pure English)
+        // We use exclusively English keywords to avoid Google Shopping confusion.
+        const globalString = englishKeywords.length > 0 ? englishKeywords.join(" ") : "dress";
+        // Append English color if present (e.g., "Navy Blue")
+        const globalQuery = globalString;
 
-        // 2. Guaranteed Local Stores Query (Relies on pure Arabic to force Google Saudi index)
-        const localStoreBoosters = ["نمشي", "ترينديول", "نون", "شي إن", "زارا", "نكست", "أُناس"];
+        // 2. Guaranteed Local Stores Query (Pure Arabic + Local Store Booster)
+        const arabicSearchTerms = [];
+        if (prefs.clothingType) arabicSearchTerms.push(prefs.clothingType);
+        else arabicSearchTerms.push("فستان");
+
+        ['colors', 'fabricMaterial', 'silhouette', 'neckline'].forEach(key => {
+            if (prefs[key]) {
+                // Remove anything in english or after slashes/parentheses for clean arabic search
+                let term = typeof prefs[key] === 'string' ? prefs[key].split(/[\/\(]/)[0].replace(/[a-zA-Z-]/g, '').trim() : '';
+                if (term) arabicSearchTerms.push(term);
+            }
+        });
+
+        const localStoreBoosters = ["نمشي", "ترينديول", "نون", "شي إن", "زارا"];
         const randomLocal = localStoreBoosters[Math.floor(Math.random() * localStoreBoosters.length)];
+        const localQuery = [...arabicSearchTerms, randomLocal].join(" ").replace(/\s+/g, ' ').trim();
 
-        // We use just the base Arabic clothing type ("فستان سهرة") + the store name.
-        // E.g. "فستان نمشي"
-        const localQuery = [...arabicKeywords, randomLocal].join(" ");
+        // 3. Random Pagination Offset (Ensures different results on regenerate)
+        const randomStartGlobal = [0, 40, 80][Math.floor(Math.random() * 3)];
+        const randomStartLocal = [0, 20][Math.floor(Math.random() * 2)];
 
         console.log("🔎 Dual Search Triggered:");
-        console.log("   🌍 Global Precision:", globalQuery);
-        console.log("   🇸🇦 Local Guarantee:", localQuery);
+        console.log(`   🌍 Global Precision (Start: ${randomStartGlobal}):`, globalQuery);
+        console.log(`   🇸🇦 Local Guarantee (Start: ${randomStartLocal}):`, localQuery);
 
-        const globalUrl = `/api/serp-search?q=${encodeURIComponent(globalQuery)}&direct_link=true`;
-        const localUrl = `/api/serp-search?q=${encodeURIComponent(localQuery)}&direct_link=true`;
+        const globalUrl = `/api/serp-search?q=${encodeURIComponent(globalQuery)}&direct_link=true&start=${randomStartGlobal}`;
+        const localUrl = `/api/serp-search?q=${encodeURIComponent(localQuery)}&direct_link=true&start=${randomStartLocal}`;
 
         // Fetch Both CONCURRENTLY to maintain speed
         const [globalRes, localRes] = await Promise.all([
