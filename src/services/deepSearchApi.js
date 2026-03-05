@@ -117,6 +117,22 @@ export async function deepSearchProducts(prefs) {
                 }
             }
 
+            // Fix for local stores (like riyadhdress) returning homepage URLs instead of product pages
+            try {
+                if (finalUrl && !finalUrl.includes('duckduckgo')) {
+                    const u = new URL(finalUrl);
+                    // If the path is essentially just the homepage or a language toggle (e.g. '/', '/en-sa', '/ar')
+                    // and it has no query parameters indicating a specific product ID
+                    if ((u.pathname === '/' || u.pathname.length <= 8) && Array.from(u.searchParams).length === 0) {
+                        const titleQuery = encodeURIComponent(item.title.replace(/[^\w\s\u0600-\u06FF-]/gi, ' ').trim());
+                        // Use DuckDuckGo "I'm Feeling Lucky" (!ducky) restricted to the site to jump directly to the product
+                        finalUrl = `https://duckduckgo.com/?q=!ducky+site:${u.hostname}+${titleQuery}`;
+                    }
+                }
+            } catch (e) {
+                // Ignore parse errors if finalUrl is malformed
+            }
+
             return {
                 id: index,
                 productTitle: item.title,
