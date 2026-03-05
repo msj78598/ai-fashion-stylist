@@ -204,9 +204,9 @@ const IntakeForm = () => {
                 <div className="flex-1 overflow-y-auto px-6 py-8 custom-scrollbar space-y-10">
 
                     {/* Track Toggle */}
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-2 flex relative mb-8">
+                    <div className="bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-2 flex relative mb-8 shadow-inner">
                         <div
-                            className={`absolute top-2 bottom-2 w-[calc(50%-8px)] bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300 ease-out z-0 
+                            className={`absolute top-2 bottom-2 w-[calc(50%-8px)] bg-white rounded-xl shadow-md border border-gray-100 transition-all duration-300 ease-out z-0 
                             ${!isManualTrack ? 'translate-x-full left-auto right-2' : 'left-2'}`}
                         ></div>
 
@@ -219,7 +219,7 @@ const IntakeForm = () => {
                         </button>
                         <button
                             onClick={() => setAnswers({ ...answers, activeTrack: "المسار العلمي (AI-Suggested Style)" })}
-                            className={`flex-[1] py-3 text-sm font-bold z-10 transition-colors rounded-xl flex items-center justify-center gap-2 ${!isManualTrack ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                            className={`flex-[1] py-3 text-sm font-bold z-10 transition-colors rounded-xl flex items-center justify-center gap-2 ${!isManualTrack ? 'text-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
                         >
                             <Sparkles className="w-4 h-4" />
                             اقتراح علمي (AI)
@@ -228,19 +228,21 @@ const IntakeForm = () => {
 
                     {/* Dynamic Header Note based on track */}
                     {!isReady && (
-                        <div className={`border rounded-xl p-4 flex items-start gap-3 text-sm mb-6 ${isManualTrack ? 'bg-orange-50/70 border-orange-100 text-orange-800' : 'bg-blue-50/70 border-blue-100 text-blue-800'}`}>
-                            <Sparkles className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isManualTrack ? 'text-orange-500' : 'text-blue-500'}`} />
-                            <p>{isManualTrack ? 'يجب اختيار (القصّة، القماش، واللون) على الأقل لبناء التصميم الأساسي.' : 'أدخلي بياناتك الجسدية (الشكل، النسب، الهدف) ليقوم الذكاء الاصطناعي ببناء التصميم العلمي المثالي لك.'}</p>
+                        <div className={`border rounded-2xl p-5 flex items-start gap-3 text-sm mb-6 shadow-sm ${isManualTrack ? 'bg-gradient-to-r from-orange-50 to-amber-50 border-orange-100 text-orange-800' : 'bg-gradient-to-r from-indigo-50 to-blue-50 border-indigo-100 text-indigo-800'}`}>
+                            <Sparkles className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isManualTrack ? 'text-orange-500 animate-pulse' : 'text-indigo-500 animate-pulse'}`} />
+                            <p className="font-medium leading-relaxed">{isManualTrack ? 'يجب اختيار (القصّة، القماش، واللون) على الأقل لبناء التصميم الأساسي.' : 'أدخلي بياناتك الجسدية (الشكل، النسب، الهدف) ليقوم الذكاء الاصطناعي ببناء التصميم العلمي المثالي لك.'}</p>
                         </div>
                     )}
 
                     {(isManualTrack ? CATEGORIES : AI_CATEGORIES).map((category) => (
-                        <div key={category.id} className="border-b border-gray-50 pb-8 last:border-0 last:pb-0">
-                            <div className="flex items-center gap-2 mb-5">
-                                <div className={!isManualTrack ? 'text-blue-400' : 'text-gray-400'}>{category.icon}</div>
-                                <h3 className="font-bold text-gray-800 text-lg uppercase tracking-wider text-sm">{category.label}</h3>
+                        <div key={category.id} className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 mb-6">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className={`p-2 rounded-xl ${!isManualTrack ? 'bg-indigo-50 text-indigo-500' : 'bg-gray-100 text-gray-600'}`}>
+                                    {category.icon}
+                                </div>
+                                <h3 className="font-bold text-gray-800 text-lg uppercase tracking-wider">{category.label}</h3>
                                 {answers[category.id] && (
-                                    <span className={`text-xs font-bold px-2 py-1 rounded-md mr-auto ${isManualTrack ? 'text-primary-500 bg-primary-50' : 'text-blue-500 bg-blue-50'}`}>تم الاختيار</span>
+                                    <span className={`text-xs font-bold px-3 py-1 rounded-full mr-auto ${isManualTrack ? 'text-gray-700 bg-gray-100' : 'text-indigo-700 bg-indigo-100'}`}>تم الاختيار</span>
                                 )}
                             </div>
 
@@ -254,23 +256,23 @@ const IntakeForm = () => {
                                             key={opt}
                                             onClick={() => handleSelect(category.id, opt)}
                                             className={`
-                                                relative overflow-hidden transition-all duration-300 border rounded-xl flex items-center justify-center
-                                                ${isColor ? 'w-14 h-14 rounded-full' : 'px-4 py-3'}
+                                                relative overflow-hidden transition-all duration-300 border flex items-center justify-center shadow-sm
+                                                ${isColor ? 'w-16 h-16 rounded-full' : 'px-5 py-3.5 rounded-2xl'}
                                                 ${isSelected
-                                                    ? (isManualTrack ? 'bg-gray-900 border-gray-900 text-white shadow-md transform scale-105' : 'bg-blue-600 border-blue-600 text-white shadow-md transform scale-105')
-                                                    : 'bg-white border-gray-200 text-gray-600 hover:border-gray-400 hover:bg-gray-50'
+                                                    ? (isManualTrack ? 'bg-gray-900 border-gray-900 text-white transform scale-105 shadow-lg' : 'bg-gradient-to-r from-indigo-500 to-blue-600 border-transparent text-white transform scale-105 shadow-lg shadow-indigo-500/30')
+                                                    : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50'
                                                 }
                                             `}
                                             title={isColor ? opt : undefined}
                                         >
                                             {isColor ? (
-                                                <div className={`w-8 h-8 rounded-full border border-white/20 shadow-inner ${isSelected ? 'scale-110' : ''}`} style={{ backgroundColor: getHexForColor(opt) }}></div>
+                                                <div className={`w-10 h-10 rounded-full border-2 border-white shadow-inner ${isSelected ? 'scale-110' : ''}`} style={{ backgroundColor: getHexForColor(opt) }}></div>
                                             ) : (
-                                                <span className="text-sm font-medium z-10">{opt}</span>
+                                                <span className="text-sm font-bold z-10">{opt}</span>
                                             )}
 
                                             {isSelected && !isColor && (
-                                                <div className={`absolute inset-0 z-0 ${isManualTrack ? 'bg-gray-900' : 'bg-blue-600'}`}></div>
+                                                <div className={`absolute inset-0 z-0 opacity-10 ${isManualTrack ? 'bg-white' : 'bg-white'}`}></div>
                                             )}
                                             {isSelected && !isColor && (
                                                 <span className="relative z-10 text-white font-bold">{opt}</span>
@@ -283,26 +285,26 @@ const IntakeForm = () => {
                     ))}
 
                     {/* Custom Notes Section */}
-                    <div className="pt-6 border-t border-gray-100">
+                    <div className="pt-6">
                         <h3 className="font-bold text-gray-800 text-sm uppercase mb-4 flex items-center gap-2">
-                            <Sparkles className="w-4 h-4 text-gray-400" />
+                            <Scissors className="w-5 h-5 text-gray-400" />
                             ملاحظات خاصة للخياط
                         </h3>
                         <textarea
                             value={answers.customDescription || ""}
                             onChange={(e) => setAnswers({ ...answers, customDescription: e.target.value })}
                             placeholder="مثال: إضافة حزام خصر جلدي، أو جعل الأكمام أطول من المعتاد..."
-                            className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none h-28 transition-all hover:bg-white"
+                            className="w-full bg-white border border-gray-200 rounded-2xl p-4 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none h-32 transition-colors shadow-inner"
                         />
                     </div>
 
                     {/* Measurements Section */}
-                    <div className="pt-6 border-t border-gray-100 pb-20">
+                    <div className="pt-6 pb-20">
                         <h3 className="font-bold text-gray-800 text-sm uppercase mb-4 flex items-center gap-2">
-                            <Ruler className="w-4 h-4 text-gray-400" />
+                            <Ruler className="w-5 h-5 text-gray-400" />
                             القياسات (اختياري)
                         </h3>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-4">
                             {['height', 'weight', 'bust', 'waist'].map(m => (
                                 <div key={m} className="relative">
                                     <input
@@ -310,7 +312,7 @@ const IntakeForm = () => {
                                         placeholder={m === 'height' ? 'الطول (سم)' : m === 'weight' ? 'الوزن (كج)' : m === 'bust' ? 'الصدر (سم)' : 'الخصر (سم)'}
                                         value={measurements[m] || ''}
                                         onChange={(e) => setMeasurements({ ...measurements, [m]: e.target.value })}
-                                        className="bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm w-full focus:ring-2 focus:ring-gray-900 outline-none transition-all placeholder-gray-400"
+                                        className="bg-white border border-gray-200 rounded-2xl px-4 py-3 text-sm w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors shadow-inner placeholder-gray-400"
                                         dir="ltr"
                                     />
                                 </div>
@@ -359,18 +361,21 @@ const IntakeForm = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="relative z-10 w-[400px] h-[600px] flex items-center justify-center"
+                    className="relative z-10 w-[400px] h-[600px] flex items-center justify-center pt-8"
                 >
-                    {/* Placeholder tailored silhouette / Mannequin shadow */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-200 to-gray-100 rounded-full blur-3xl opacity-50 transform scale-y-125 scale-x-50"></div>
+                    {/* Glowing aura for the mannequin */}
+                    <div className={`absolute inset-0 rounded-full blur-3xl opacity-50 transform scale-y-125 scale-x-50 transition-colors duration-1000 ${isManualTrack ? 'bg-gradient-to-t from-gray-300 to-gray-100' : 'bg-gradient-to-t from-indigo-300 to-blue-200'}`}></div>
 
                     {isManualTrack ? (
                         <WireframeMannequin answers={answers} />
                     ) : (
-                        <div className="flex flex-col items-center justify-center text-center p-10 bg-white/40 backdrop-blur-md rounded-3xl border border-white/60 shadow-xl z-20">
-                            <Sparkles className="w-16 h-16 text-blue-500 mb-6 animate-pulse" />
-                            <h3 className="text-2xl font-bold text-gray-900 font-arabic mb-3">الخوارزمية العلمية قيد الاستعداد</h3>
-                            <p className="text-gray-600 font-arabic leading-relaxed">
+                        <div className="flex flex-col items-center justify-center text-center p-10 bg-white/60 backdrop-blur-xl shadow-2xl border border-white max-w-sm rounded-[2.5rem]">
+                            <div className="bg-gradient-to-br from-indigo-100 to-blue-50 p-6 rounded-full mb-6 relative">
+                                <Sparkles className="w-12 h-12 text-indigo-600 animate-pulse relative z-10" />
+                                <div className="absolute inset-0 bg-indigo-400 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                            </div>
+                            <h3 className="text-2xl font-black text-gray-900 font-arabic tracking-wide mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">الحسابات العلمية نشطة</h3>
+                            <p className="text-gray-600 font-arabic text-sm leading-relaxed font-medium">
                                 سيقوم الذكاء الاصطناعي بتحليل شكل جسمك ونسب التوازن لاختيار أفضل قصة، وياقة، وتفاصيل دقيقة تبرز جمالك حسب منهجية تصميم الأزياء الاحترافية.
                             </p>
                         </div>
@@ -379,25 +384,25 @@ const IntakeForm = () => {
 
                 {/* Sticky Action Footer */}
                 <div className="absolute bottom-10 right-0 w-full flex justify-center z-30 px-10">
-                    <div className="bg-white p-3 rounded-2xl shadow-2xl border border-gray-100 flex items-center gap-6 max-w-2xl w-full justify-between backdrop-blur-xl bg-white/90">
-                        <div className="flex flex-col px-4 text-right flex-1">
-                            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">الذكاء الاصطناعي جاهز</span>
-                            <span className="text-gray-900 font-bold font-arabic">{isReady ? 'اكتملت البيانات الأساسية لإنشاء التصميم' : 'يرجى إكمال الاختيارات الأساسية'}</span>
+                    <div className="bg-white/90 backdrop-blur-xl p-4 shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-white/50 flex items-center gap-6 max-w-3xl w-full justify-between rounded-3xl">
+                        <div className="flex flex-col px-6 text-right flex-1">
+                            <span className="text-xs text-indigo-500 font-bold uppercase tracking-wider mb-1">Status</span>
+                            <span className="text-gray-900 font-black text-lg font-arabic">{isReady ? 'اكتملت البيانات الأساسية لإنشاء التصميم' : 'يرجى إكمال الاختيارات الأساسية'}</span>
                         </div>
 
                         <button
                             onClick={handleNext}
                             disabled={!isReady || isGenerating}
-                            className={`px-10 py-4 rounded-xl font-bold font-arabic text-lg flex items-center gap-3 transition-all duration-300 transform
+                            className={`px-10 py-5 rounded-2xl font-bold font-arabic text-lg flex items-center gap-3 transition-all duration-300 transform
                                 ${(!isReady || isGenerating)
-                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed hidden sm:flex'
-                                    : 'bg-black text-white hover:bg-gray-900 hover:scale-[1.02] shadow-[0_10px_20px_rgb(0,0,0,0.15)] flex'
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed hidden sm:flex border border-transparent'
+                                    : 'bg-gradient-to-r from-indigo-900 to-black text-white hover:scale-[1.03] shadow-[0_10px_25px_rgba(0,0,0,0.2)] flex'
                                 }
                             `}
                         >
                             {isGenerating ? (
                                 <>
-                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
@@ -406,7 +411,7 @@ const IntakeForm = () => {
                             ) : (
                                 <>
                                     <Sparkles className="w-5 h-5 text-yellow-400" />
-                                    <span>تجسيد السكتش والبحث</span>
+                                    <span>تجسيد وعرض المنتجات</span>
                                 </>
                             )}
                         </button>
@@ -415,20 +420,20 @@ const IntakeForm = () => {
             </div>
 
             {/* Mobile Fixed Action Button */}
-            <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 rounded-t-3xl shadow-[0_-10px_30px_rgb(0,0,0,0.1)]">
+            <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-xl border-t border-white/50 p-5 z-50 rounded-t-[2.5rem] shadow-[0_-15px_40px_rgba(0,0,0,0.08)]">
                 <button
                     onClick={handleNext}
                     disabled={!isReady || isGenerating}
-                    className={`w-full py-4 rounded-xl font-bold font-arabic text-lg flex items-center justify-center gap-3 transition-all
+                    className={`w-full py-4 rounded-2xl font-bold font-arabic text-lg flex items-center justify-center gap-3 transition-all
                         ${(!isReady || isGenerating)
-                            ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
-                            : 'bg-black text-white shadow-lg shadow-black/20'
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-indigo-900 to-black text-white shadow-[0_10px_25px_rgba(0,0,0,0.2)]'
                         }
                     `}
                 >
                     {isGenerating ? (
                         <>
-                            <svg className="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
@@ -437,7 +442,7 @@ const IntakeForm = () => {
                     ) : (
                         <>
                             <Sparkles className="w-5 h-5 text-yellow-400" />
-                            <span>توليد وعرض المنتجات</span>
+                            <span>تجسيد وعرض المنتجات</span>
                         </>
                     )}
                 </button>
